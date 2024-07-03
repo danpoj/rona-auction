@@ -1,0 +1,1 @@
+ALTER TABLE "transaction" ADD COLUMN "additional" varchar(255) DEFAULT '' NOT NULL;

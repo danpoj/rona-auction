@@ -1,0 +1,1 @@
+ALTER TABLE "transaction" ADD COLUMN "itemName" varchar(100) NOT NULL;
