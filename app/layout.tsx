@@ -3,6 +3,7 @@ import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { QueryProvider } from '@/components/provider/query-provider';
+import { BackgroundPattern } from '@/components/background-pattern';
 
 const inter = Poppins({ subsets: ['latin'], weight: ['400', '600', '900'] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={cn(inter.className, 'overscroll-none')}>
+        <BackgroundPattern />
         <QueryProvider>
           <main className='h-full max-h-full'>{children}</main>
         </QueryProvider>

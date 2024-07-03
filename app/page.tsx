@@ -28,6 +28,7 @@ export default function Page() {
     <div className='max-w-[62rem] mx-auto p-4 pb-40'>
       <div className='flex items-center gap-4 justify-center'>
         <Image
+          priority
           src='https://maplestory.io/api/KMS/389/mob/8140555/render/stand'
           alt='로나월드 옥션'
           width={240}
@@ -66,7 +67,7 @@ export default function Page() {
         )}
       </div>
 
-      <div className='flex flex-col divide-y'>
+      <div className='flex flex-col'>
         {data.pages.map((page, i) => (
           <Fragment key={i}>
             {page.map((transaction) => (

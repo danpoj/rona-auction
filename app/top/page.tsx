@@ -55,7 +55,7 @@ export default async function Page() {
         </p>
       </div>
 
-      <div className='flex flex-col divide-y pb-40'>
+      <div className='flex flex-col pb-40'>
         {items.map((item, index) => (
           <Link
             href={`/item/${item.id}`}
