@@ -2,12 +2,12 @@ import { db } from '@/db/drizzle';
 import { ItemPage } from './item-page';
 import { itemTable, transactionTable } from '@/db/schema';
 import { ITEMS_PER_PAGE } from '@/constants';
-import { InferSelectModel, and, desc, eq, gte, sql } from 'drizzle-orm';
+import { InferSelectModel, and, count, desc, eq, gte, sql } from 'drizzle-orm';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowLeftIcon } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 
 type Props = {
   params: {
@@ -59,6 +59,7 @@ const Top = async ({
           'total_price'
         ),
       totalCount: sql<number>`SUM(${transactionTable.count})`.as('total_count'),
+      totalRows: count(),
     })
     .from(transactionTable)
     .where(
@@ -108,6 +109,27 @@ const Top = async ({
           __html: item.desc.replace(/\\r\\n|\\n|\\r/gm, '<br/>'),
         }}
       />
+      <div className='space-y-2'>
+        <p className='text-muted-foreground'>최근 3일 동안</p>
+        <p className='text-muted-foreground'>
+          <span className='text-2xl font-semibold text-primary/90'>
+            총 {result[0].totalRows || 0}건
+          </span>
+          <span className=''>
+            의 <span className='font-semibold text-primary'>{item.name}</span>가
+            거래 되었습니다.
+          </span>
+        </p>
+        <p className='text-muted-foreground'>
+          <span className='text-2xl font-semibold text-primary/90'>
+            총 {result[0].totalCount || 0}개
+          </span>
+          <span className=''>
+            의 <span className='font-semibold text-primary'>{item.name}</span>가
+            거래 되었습니다.
+          </span>
+        </p>
+      </div>
     </header>
   );
 };

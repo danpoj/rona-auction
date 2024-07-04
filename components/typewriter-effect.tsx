@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 
 export const TypewriterEffectSmooth = ({
   words,
@@ -35,7 +35,7 @@ export const TypewriterEffectSmooth = ({
                 key={`word-${idx}`}
                 target='_blank'
                 rel='noreferrer noopener'
-                className='inline-flex text-blue-500 hover:text-blue-700 underline underline-offset-8 mr-2'
+                className='inline-flex bg-gradient-to-r from-sky-500 to-violet-400 bg-clip-text text-transparent underline underline-offset-8 mr-2'
               >
                 {word.text.map((char, index) => (
                   <span
@@ -46,7 +46,7 @@ export const TypewriterEffectSmooth = ({
                   </span>
                 ))}
                 &nbsp;
-                <ArrowUpRight />
+                <ArrowUpRight className='text-indigo-600' />
               </Link>
             );
 

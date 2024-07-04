@@ -24,7 +24,7 @@ type Props = {
 };
 
 export const HomeLists = ({ initialLists }: Props) => {
-  const { data, fetchNextPage, hasNextPage, isPending, isFetching, error } =
+  const { data, fetchNextPage, hasNextPage, isFetching, error } =
     useInfiniteTransactions({ initialLists });
 
   if (error) return notFound();
@@ -52,15 +52,24 @@ export const HomeLists = ({ initialLists }: Props) => {
             </p>
           )}
         </div>
-        <Button
-          className='rounded-full'
-          variant='expandIcon'
-          Icon={ArrowRightIcon}
-          iconPlacement='right'
-          asChild
-        >
-          <Link href='/top'>거래량 순위</Link>
-        </Button>
+        <div className='relative'>
+          <Button
+            className='rounded-full'
+            variant='expandIcon'
+            Icon={ArrowRightIcon}
+            iconPlacement='right'
+            asChild
+          >
+            <Link href='/top'>거래량 순위</Link>
+          </Button>
+          <Image
+            src={'https://maplestory.io/api/KMS/389/mob/2230103/render/stand'}
+            alt='spider'
+            width={40}
+            height={200}
+            className='object-contain w-10 absolute -top-36 right-0'
+          />
+        </div>
       </div>
 
       <div className='flex flex-col divide-y'>

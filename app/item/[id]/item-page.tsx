@@ -10,7 +10,7 @@ import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
 import { ArrowLeftIcon, CandyCane, Loader } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
@@ -34,8 +34,7 @@ export const ItemPage = ({ initialLists, item, id }: Props) => {
       {data.pages.map((page, i) => (
         <Fragment key={i}>
           {page.map((transaction) => (
-            <Link
-              href={item.id ? `/item/${item.id}` : '#'}
+            <div
               key={transaction.id}
               className={cn(
                 'p-2 space-y-1',
@@ -102,7 +101,7 @@ export const ItemPage = ({ initialLists, item, id }: Props) => {
                   <div />
                 )}
               </div>
-            </Link>
+            </div>
           ))}
         </Fragment>
       ))}

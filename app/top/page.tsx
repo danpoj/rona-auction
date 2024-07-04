@@ -6,7 +6,7 @@ import { itemTable, transactionTable } from '@/db/schema';
 import { desc, sql } from 'drizzle-orm';
 import { ArrowLeftIcon, Sparkles } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 
 const BASE = process.env.NEXT_PUBLIC_API_BASE!;
 
@@ -24,7 +24,7 @@ export default async function Page() {
     )
     .groupBy(itemTable.id, itemTable.name)
     .orderBy(desc(sql`count(${transactionTable.id})`))
-    .limit(100);
+    .limit(300);
 
   return (
     <div className='max-w-[52rem] mx-auto h-full p-4'>
@@ -39,7 +39,12 @@ export default async function Page() {
           <Link href='/'>홈으로 이동</Link>
         </Button>
         <p className='text-2xl font-semibold flex items-center'>
-          <span>거래량 순위 TOP 100</span>
+          <span>
+            거래량 순위{' '}
+            <span className='font-extrabold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent'>
+              TOP 300
+            </span>
+          </span>
         </p>
       </div>
 
