@@ -4,6 +4,7 @@ import { TracingBeam } from '@/components/tracing-beam';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 
 const inter = Poppins({ subsets: ['latin'], weight: ['400', '600', '900'] });
@@ -27,6 +28,7 @@ export default function RootLayout({
             <TracingBeam>{children}</TracingBeam>
           </main>
         </QueryProvider>
+        <Analytics />
       </body>
     </html>
   );
