@@ -33,22 +33,28 @@ export const HomeLists = ({ initialLists }: Props) => {
     <>
       <div className='flex items-center justify-between pl-4 pr-2 pb-6'>
         <div className='space-y-2'>
-          <span className='text-xl sm:text-2xl font-semibold'>
-            거래 최신 순
-          </span>
+          <div className='text-xl sm:text-2xl font-semibold flex items-center gap-3'>
+            <span>거래 최신 순</span>
+            <Popover>
+              <PopoverTrigger>
+                <HelpCircle className='size-6 stroke-blue-500' />
+              </PopoverTrigger>
+              <PopoverContent className='text-sm text-muted-foreground'>
+                🚀 하루마다 업데이트 됩니다. <br />
+                7월 1일 거래내역의 시간은 정확하지 않습니다. <br />
+                <br />
+                아직 버그가 많습니다. <br />
+                아래 메일로 제보해주시면 감사하겠습니다. <br />
+                jws970306@khu.ac.kr <br />
+                <br /> 원하는 기능, 개선사항 관련으로 메일 주셔도 됩니다 :-){' '}
+                <br />
+              </PopoverContent>
+            </Popover>
+          </div>
           {data.pages[0][0].date && (
             <p className='text-sm sm:text-base space-x-2 text-muted-foreground items-center flex'>
               <span>마지막 업데이트</span>
               <span>{format(data.pages[0][0].date, 'yyyy-LL-dd HH:mm')}</span>
-              <Popover>
-                <PopoverTrigger>
-                  <HelpCircle className='size-5 hover:stroke-primary/70' />
-                </PopoverTrigger>
-                <PopoverContent className='text-sm text-muted-foreground'>
-                  🚀 하루마다 업데이트 됩니다. <br />
-                  7월 1일 데이터의 시간은 정확하지 않습니다.
-                </PopoverContent>
-              </Popover>
             </p>
           )}
         </div>
