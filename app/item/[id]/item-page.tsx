@@ -10,7 +10,7 @@ import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
 import { ArrowLeftIcon, CandyCane, Loader } from 'lucide-react';
 import Image from 'next/image';
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
@@ -24,7 +24,7 @@ type Props = {
 };
 
 export const ItemPage = ({ initialLists, item, id }: Props) => {
-  const { data, fetchNextPage, hasNextPage, isPending, isFetching, error } =
+  const { data, fetchNextPage, hasNextPage, isFetching, error } =
     useInfiniteTransactionsPerItem({ initialLists, id });
 
   if (error) return notFound();

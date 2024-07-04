@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { desc, sql } from 'drizzle-orm';
-import { ArrowLeftIcon, Sparkles } from 'lucide-react';
+import { ArrowLeftIcon } from 'lucide-react';
 import Image from 'next/image';
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 
 const BASE = process.env.NEXT_PUBLIC_API_BASE!;
 

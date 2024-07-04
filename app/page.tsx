@@ -2,21 +2,7 @@ import { fetchTransactions } from '@/actions/transactions';
 import { SearchBar } from '@/components/search-bar';
 import { TypewriterEffectSmooth } from '@/components/typewriter-effect';
 import { HomeLists } from './home-lists';
-
-const words = [
-  {
-    text: '로나월드',
-  },
-  {
-    text: '옥션',
-  },
-  {
-    text: '거래내역',
-  },
-  {
-    text: '저장소',
-  },
-];
+import { words } from '@/constants';
 
 export default function Page() {
   return (

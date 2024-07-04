@@ -1,13 +1,14 @@
-import { db } from '@/db/drizzle';
-import { ItemPage } from './item-page';
-import { itemTable, transactionTable } from '@/db/schema';
-import { ITEMS_PER_PAGE } from '@/constants';
-import { InferSelectModel, and, count, desc, eq, gte, sql } from 'drizzle-orm';
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowLeftIcon } from 'lucide-react';
-import { Link } from 'next-view-transitions';
+import { ITEMS_PER_PAGE } from '@/constants';
+import { db } from '@/db/drizzle';
+import { itemTable, transactionTable } from '@/db/schema';
+import { InferSelectModel, and, count, desc, eq, gte, sql } from 'drizzle-orm';
+import { ArrowLeftIcon, Loader } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
+import { ItemPage } from './item-page';
 
 type Props = {
   params: {
@@ -18,13 +19,11 @@ type Props = {
 export default async function Page({ params: { id } }: Props) {
   const idAsNumber = Number(id);
 
-  const item = await db.query.itemTable.findFirst({
+  const itemPromise = await db.query.itemTable.findFirst({
     where: eq(itemTable.id, idAsNumber),
   });
 
-  if (!item) notFound();
-
-  const transactions = await db
+  const transactionsPromise = await db
     .select({
       date: transactionTable.date,
       price: transactionTable.price,
@@ -37,9 +36,25 @@ export default async function Page({ params: { id } }: Props) {
     .limit(ITEMS_PER_PAGE)
     .where(eq(transactionTable.itemId, idAsNumber));
 
+  const [item, transactions] = await Promise.all([
+    itemPromise,
+    transactionsPromise,
+  ]);
+
+  if (!item) notFound();
+
   return (
     <div className='max-w-[52rem] mx-auto pb-40'>
-      <Top id={idAsNumber} item={item} />
+      <Suspense
+        key={id}
+        fallback={
+          <header className='px-4 py-10 space-y-6 flex items-center justify-center h-80'>
+            <Loader className='animate-spin w-5 h-5' />
+          </header>
+        }
+      >
+        <Top id={idAsNumber} item={item} />
+      </Suspense>
       <ItemPage initialLists={transactions} item={item} id={idAsNumber} />
     </div>
   );

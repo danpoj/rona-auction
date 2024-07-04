@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 
 export const TypewriterEffectSmooth = ({
   words,

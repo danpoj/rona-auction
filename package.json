@@ -21,7 +21,6 @@
     "framer-motion": "^11.2.12",
     "lucide-react": "^0.400.0",
     "next": "14.2.4",
-    "next-view-transitions": "^0.2.0",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.3.0",

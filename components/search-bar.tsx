@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { useQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
 import Image from 'next/image';
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { useDebounceValue, useOnClickOutside } from 'usehooks-ts';
 import { NoImage } from './no-image';

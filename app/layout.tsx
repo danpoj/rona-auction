@@ -4,7 +4,6 @@ import { TracingBeam } from '@/components/tracing-beam';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
-import { ViewTransitions } from 'next-view-transitions';
 import './globals.css';
 
 const inter = Poppins({ subsets: ['latin'], weight: ['400', '600', '900'] });
@@ -20,17 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
-      <html lang='en'>
-        <body className={cn(inter.className, 'overscroll-none')}>
-          <BackgroundPattern />
-          <QueryProvider>
-            <main className='h-full max-h-full'>
-              <TracingBeam>{children}</TracingBeam>
-            </main>
-          </QueryProvider>
-        </body>
-      </html>
-    </ViewTransitions>
+    <html lang='en'>
+      <body className={cn(inter.className, 'overscroll-none')}>
+        <BackgroundPattern />
+        <QueryProvider>
+          <main className='h-full max-h-full'>
+            <TracingBeam>{children}</TracingBeam>
+          </main>
+        </QueryProvider>
+      </body>
+    </html>
   );
 }
