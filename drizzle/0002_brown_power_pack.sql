@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS "item_id_idx" ON "transaction" USING btree ("item_id");

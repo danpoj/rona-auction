@@ -15,6 +15,13 @@
       "when": 1720086320178,
       "tag": "0001_lazy_robin_chapel",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1720090198244,
+      "tag": "0002_brown_power_pack",
+      "breakpoints": true
     }
   ]
 }

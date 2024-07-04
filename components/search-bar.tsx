@@ -7,14 +7,16 @@ import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
-import { useDebounceValue } from 'usehooks-ts';
+import { useDebounceValue, useOnClickOutside } from 'usehooks-ts';
 import { NoImage } from './no-image';
 
 export const SearchBar = () => {
   const [value, setValue] = useState('');
   const [show, setShow] = useState(false);
   const [debouncedValue] = useDebounceValue(value, 100);
-  const inputRef = useRef<HTMLInputElement>(null!);
+  const ref = useRef<HTMLDivElement>(null!);
+
+  useOnClickOutside(ref, () => show && setShow(false));
 
   const { data: items } = useQuery({
     enabled: !!debouncedValue.trim(),
@@ -24,14 +26,12 @@ export const SearchBar = () => {
 
   return (
     <div className='px-4 pb-8'>
-      <div className='max-w-[24rem] relative'>
+      <div ref={ref} className='max-w-[24rem] relative'>
         <Input
           onKeyDown={(e) => {
             if (e.key === 'Enter' && !show) setShow(true);
             else if (e.key === 'Escape') setShow(false);
           }}
-          onBlur={() => setShow(false)}
-          ref={inputRef}
           value={value}
           onChange={(e) => {
             setValue(e.target.value);

@@ -178,7 +178,9 @@ export const saveItemsAction = async () => {
 export const updateItemsAction = async () => {
   console.log('saving...');
 
-  const allItems = await db.select().from(itemTable);
+  const allItems = await db.query.transactionTable.findMany({
+    where: eq(transactionTable.itemId, 2049158),
+  });
 
   const batchSize = 100; // Adjust this value based on your database limits
   for (let i = 0; i < allItems.length; i += batchSize) {
@@ -188,11 +190,11 @@ export const updateItemsAction = async () => {
     await Promise.all(
       batch.map((item) =>
         db
-          .update(itemTable)
+          .update(transactionTable)
           .set({
-            trimmedName: item.name.replace(/\s+/g, ''),
+            itemId: 2049100,
           })
-          .where(eq(itemTable.id, item.id))
+          .where(eq(transactionTable.id, item.id))
       )
     );
 
