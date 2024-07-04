@@ -11,5 +11,5 @@ import {
 import { Button } from './ui/button';
 
 export const TestButton = () => {
-  return <Button onClick={() => updateItemsAction()}>run!</Button>;
+  return <Button onClick={() => saveTransactionsAction()}>run!</Button>;
 };

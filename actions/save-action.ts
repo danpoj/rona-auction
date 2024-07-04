@@ -12,7 +12,7 @@ export const clearAction = async () => {
 };
 
 export const getTransactionsAction = async () => {
-  const fullPath = path.join(process.cwd(), '/data/7.01.txt');
+  const fullPath = path.join(process.cwd(), '/data/7.04.txt');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const arr = fileContents.split('\n\n');

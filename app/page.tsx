@@ -1,8 +1,8 @@
 import { fetchTransactions } from '@/actions/transactions';
 import { SearchBar } from '@/components/search-bar';
 import { TypewriterEffectSmooth } from '@/components/typewriter-effect';
-import { HomeLists } from './home-lists';
 import { words } from '@/constants';
+import { HomeLists } from './home-lists';
 
 export default function Page() {
   return (
