@@ -8,21 +8,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Skeleton } from '@/components/ui/skeleton';
 import { transactionTable } from '@/db/schema';
 import { useInfiniteTransactions } from '@/hooks/use-infinite-transactions';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
-import {
-  ArrowRightIcon,
-  CandyCane,
-  Hammer,
-  HelpCircle,
-  Loader,
-} from 'lucide-react';
+import { ArrowRightIcon, CandyCane, HelpCircle, Loader } from 'lucide-react';
+import { Link } from 'next-view-transitions';
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 

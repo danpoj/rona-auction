@@ -8,7 +8,7 @@ import { useInfiniteTransactionsPerItem } from '@/hooks/use-infinite-transaction
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
-import { CandyCane, Loader } from 'lucide-react';
+import { ArrowLeftIcon, CandyCane, Loader } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -121,6 +121,16 @@ export const ItemPage = ({ initialLists, item, id }: Props) => {
           </Button>
         </div>
       )}
+
+      <Button
+        variant='expandIcon'
+        Icon={ArrowLeftIcon}
+        iconPlacement='left'
+        asChild
+        className='rounded-full w-fit mx-2 mt-10'
+      >
+        <Link href='/'>홈으로 이동</Link>
+      </Button>
     </div>
   );
 };

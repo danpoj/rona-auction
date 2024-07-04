@@ -178,28 +178,39 @@ export const saveItemsAction = async () => {
 export const updateItemsAction = async () => {
   console.log('saving...');
 
-  const allItems = await db.query.transactionTable.findMany({
-    where: eq(transactionTable.itemId, 2049158),
+  const allItems = await db.query.transactionTable.findMany();
+  const allRealItems = await db.query.itemTable.findMany();
+
+  let obj: Record<string, boolean> = {};
+  let obj2: Record<string, boolean> = {};
+
+  allItems.forEach((item) => {
+    obj[item.itemId!] = true;
   });
 
-  const batchSize = 100; // Adjust this value based on your database limits
-  for (let i = 0; i < allItems.length; i += batchSize) {
-    console.log(`${i} ~ ${i + 100} start...`);
-    const batch = allItems.slice(i, i + batchSize);
+  allRealItems.forEach((item) => {
+    obj2[item.id] = true;
+  });
 
-    await Promise.all(
-      batch.map((item) =>
-        db
-          .update(transactionTable)
-          .set({
-            itemId: 2049100,
-          })
-          .where(eq(transactionTable.id, item.id))
-      )
-    );
+  const ids = Object.keys(obj);
+  const ids2 = Object.keys(obj2);
 
-    console.log(`${i} ~ ${i + 100} success!`);
+  for await (const id of ids) {
+    if (!obj2[id]) {
+      const data = await fetch(
+        `https://maplestory.io/api/kms/389/item/${id}`
+      ).then((res) => res.json());
+
+      if (!data || !data.description) continue;
+
+      // await db.insert(itemTable).values({
+      //   desc: data.description.description,
+      //   id,
+      //   name: data.description.name,
+      //   trimmedName: data.description.name.trim().replace(/\s+/g, ''),
+      // });
+
+      console.log(id);
+    }
   }
-
-  console.log('items saved! 🎉');
 };
