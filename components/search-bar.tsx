@@ -13,7 +13,7 @@ import { NoImage } from './no-image';
 export const SearchBar = () => {
   const [value, setValue] = useState('');
   const [show, setShow] = useState(false);
-  const [debouncedValue] = useDebounceValue(value, 100);
+  const [debouncedValue] = useDebounceValue(value, 200);
   const ref = useRef<HTMLDivElement>(null!);
 
   useOnClickOutside(ref, () => show && setShow(false));
