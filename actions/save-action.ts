@@ -3,7 +3,7 @@
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { parseString } from '@/lib/parse-string';
-import { InferSelectModel, and, eq, isNull, sql } from 'drizzle-orm';
+import { InferSelectModel, eq, isNull, sql } from 'drizzle-orm';
 import fs from 'fs';
 import path from 'path';
 
@@ -76,6 +76,7 @@ export const query = async () => {
     await db.insert(itemTable).values({
       id: itemId,
       name: entrie[0],
+      trimmedName: entrie[0].replace(/\s+/g, ''),
       desc: '',
     });
 
@@ -163,11 +164,39 @@ export const saveItemsAction = async () => {
       batch.map((item) => ({
         id: item.id,
         name: item.name.trim(),
+        trimmedName: item.name.trim().replace(/\s+/g, ''),
         desc: item.desc || '',
       }))
     );
 
     console.log(`${i} ~ ${i + 1000} success!`);
+  }
+
+  console.log('items saved! 🎉');
+};
+
+export const updateItemsAction = async () => {
+  console.log('saving...');
+
+  const allItems = await db.select().from(itemTable);
+
+  const batchSize = 100; // Adjust this value based on your database limits
+  for (let i = 0; i < allItems.length; i += batchSize) {
+    console.log(`${i} ~ ${i + 100} start...`);
+    const batch = allItems.slice(i, i + batchSize);
+
+    await Promise.all(
+      batch.map((item) =>
+        db
+          .update(itemTable)
+          .set({
+            trimmedName: item.name.replace(/\s+/g, ''),
+          })
+          .where(eq(itemTable.id, item.id))
+      )
+    );
+
+    console.log(`${i} ~ ${i + 100} success!`);
   }
 
   console.log('items saved! 🎉');

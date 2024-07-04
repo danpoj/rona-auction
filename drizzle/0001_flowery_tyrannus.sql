@@ -1,1 +1,0 @@
-ALTER TABLE "item" ALTER COLUMN "desc" SET NOT NULL;

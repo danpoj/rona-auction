@@ -11,7 +11,7 @@ export const fetchItems = async (name: string) => {
       name: itemTable.name,
     })
     .from(itemTable)
-    .where(like(itemTable.name, `%${name}%`))
+    .where(like(itemTable.trimmedName, `${name}%`))
     .limit(10);
 
   return items;

@@ -1,5 +1,5 @@
 {
-  "id": "e9db1c38-6628-4331-b55f-181cef0cede3",
+  "id": "9d12f9a0-c340-40aa-8f61-18cb88756f5e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -20,11 +20,18 @@
           "primaryKey": false,
           "notNull": true
         },
+        "trimmed_name": {
+          "name": "trimmed_name",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        },
         "desc": {
           "name": "desc",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -46,7 +53,7 @@
           "name": "date",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "count": {
           "name": "count",
@@ -56,15 +63,28 @@
         },
         "price": {
           "name": "price",
-          "type": "integer",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
+        },
+        "additional": {
+          "name": "additional",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
         },
         "item_id": {
           "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "itemName": {
+          "name": "itemName",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},

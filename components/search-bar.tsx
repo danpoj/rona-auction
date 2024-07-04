@@ -8,17 +8,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { useDebounceValue } from 'usehooks-ts';
+import { NoImage } from './no-image';
 
 export const SearchBar = () => {
   const [value, setValue] = useState('');
   const [show, setShow] = useState(false);
-  const [debouncedValue] = useDebounceValue(value, 250);
+  const [debouncedValue] = useDebounceValue(value, 100);
   const inputRef = useRef<HTMLInputElement>(null!);
 
   const { data: items } = useQuery({
     enabled: !!debouncedValue.trim(),
-    queryKey: ['itemName', debouncedValue],
-    queryFn: () => fetchItems(debouncedValue),
+    queryKey: ['itemName', debouncedValue.replace(/\s+/g, '')],
+    queryFn: () => fetchItems(debouncedValue.replace(/\s+/g, '')),
   });
 
   return (
@@ -49,14 +50,18 @@ export const SearchBar = () => {
                 key={item.id}
                 className='flex gap-2 items-center p-3 hover:bg-primary/5'
               >
-                <Image
-                  priority
-                  src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=2`}
-                  alt={item.name}
-                  width={40}
-                  height={40}
-                  className='size-7 object-contain'
-                />
+                {item.id >= 666666660 ? (
+                  <NoImage className='size-7 sm:size-7' />
+                ) : (
+                  <Image
+                    priority
+                    src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=2`}
+                    alt={item.name}
+                    width={40}
+                    height={40}
+                    className='size-7 object-contain'
+                  />
+                )}
                 <p className='text-sm font-semibold text-primary/80'>
                   {item.name}
                 </p>

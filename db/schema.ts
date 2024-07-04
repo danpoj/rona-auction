@@ -1,5 +1,6 @@
-import { relations } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import {
+  index,
   integer,
   pgTable,
   serial,
@@ -8,11 +9,18 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-export const itemTable = pgTable('item', {
-  id: integer('id').primaryKey(),
-  name: varchar('name', { length: 100 }).notNull(),
-  desc: text('desc').notNull(),
-});
+export const itemTable = pgTable(
+  'item',
+  {
+    id: integer('id').primaryKey(),
+    name: varchar('name', { length: 100 }).notNull(),
+    trimmedName: varchar('trimmed_name', { length: 100 }).notNull(),
+    desc: text('desc').notNull(),
+  },
+  (table) => ({
+    trimmedNameIndex: index('trimmed_name_idx').on(table.trimmedName),
+  })
+);
 
 export const transactionTable = pgTable('transaction', {
   id: serial('id').primaryKey(),

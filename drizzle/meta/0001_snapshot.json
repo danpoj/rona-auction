@@ -1,6 +1,6 @@
 {
-  "id": "1f9b6f1f-e8ab-4a56-a503-f8c7ca43cd9a",
-  "prevId": "e9db1c38-6628-4331-b55f-181cef0cede3",
+  "id": "f3fadf5c-dba6-4091-9b12-bdbe8f0adfca",
+  "prevId": "9d12f9a0-c340-40aa-8f61-18cb88756f5e",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -20,6 +20,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "trimmed_name": {
+          "name": "trimmed_name",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
         "desc": {
           "name": "desc",
           "type": "text",
@@ -27,7 +33,23 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "trimmed_name_idx": {
+          "name": "trimmed_name_idx",
+          "columns": [
+            {
+              "expression": "trimmed_name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
@@ -46,7 +68,7 @@
           "name": "date",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "count": {
           "name": "count",
@@ -56,15 +78,28 @@
         },
         "price": {
           "name": "price",
-          "type": "integer",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
+        },
+        "additional": {
+          "name": "additional",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
         },
         "item_id": {
           "name": "item_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "itemName": {
+          "name": "itemName",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},

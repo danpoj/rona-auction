@@ -1,3 +1,4 @@
+import { NoImage } from '@/components/no-image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { db } from '@/db/drizzle';
@@ -53,13 +54,17 @@ export default async function Page() {
               #{index + 1}
             </span>
             <Badge>{item.transactionCount}건</Badge>
-            <Image
-              src={`${BASE}/item/${item.id}/icon?resize=2`}
-              alt={item.name}
-              width={50}
-              height={50}
-              className='size-10 object-contain'
-            />
+            {item.id >= 666666660 ? (
+              <NoImage />
+            ) : (
+              <Image
+                src={`${BASE}/item/${item.id}/icon?resize=2`}
+                alt={item.name}
+                width={50}
+                height={50}
+                className='size-10 object-contain'
+              />
+            )}
             <p>{item.name}</p>
           </Link>
         ))}

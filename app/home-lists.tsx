@@ -1,5 +1,6 @@
 'use client';
 
+import { NoImage } from '@/components/no-image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,7 +14,13 @@ import { useInfiniteTransactions } from '@/hooks/use-infinite-transactions';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
-import { ArrowRightIcon, CandyCane, HelpCircle, Loader } from 'lucide-react';
+import {
+  ArrowRightIcon,
+  CandyCane,
+  Hammer,
+  HelpCircle,
+  Loader,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -78,13 +85,17 @@ export const HomeLists = ({ initialLists }: Props) => {
                 <div className='flex items-center justify-between'>
                   <div className='flex items-center gap-2'>
                     {transaction.itemId ? (
-                      <Image
-                        src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${transaction.itemId}/icon?resize=2`}
-                        alt={transaction.itemName}
-                        width={100}
-                        height={100}
-                        className='size-8 sm:size-10 object-contain'
-                      />
+                      transaction.itemId >= 666666660 ? (
+                        <NoImage />
+                      ) : (
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${transaction.itemId}/icon?resize=2`}
+                          alt={transaction.itemName}
+                          width={100}
+                          height={100}
+                          className='size-8 sm:size-10 object-contain'
+                        />
+                      )
                     ) : (
                       <div className='size-8 sm:size-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center'>
                         <CandyCane className='size-4 sm:size-5' />
