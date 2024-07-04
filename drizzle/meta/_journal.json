@@ -50,6 +50,13 @@
       "when": 1720024229503,
       "tag": "0006_past_red_hulk",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1720066942838,
+      "tag": "0007_gigantic_blue_shield",
+      "breakpoints": true
     }
   ]
 }

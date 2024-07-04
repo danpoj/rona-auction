@@ -13,6 +13,7 @@ export function parseString({
   addi?: string;
   index: number;
 }) {
+  // const regex = /\[(.+)\] (\d+)개 총합 ([\d,]+) 메소(?:\n(.+))?/;
   const regex =
     /(\d{4}\.\d{1,2}\.\d{1,2}\/\d{1,2}:\d{1,2}:\d{1,2}) \[(.+)\] (\d+)개 총합 ([\d,]+) 메소(?:\n(.+))?/;
   const match = str.match(regex);
@@ -38,6 +39,5 @@ export function parseString({
     }
   } else {
     console.log({ str, addi, index });
-    throw new Error('hello world');
   }
 }

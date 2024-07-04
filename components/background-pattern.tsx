@@ -1,6 +1,6 @@
 export const BackgroundPattern = () => (
   <svg
-    className='absolute inset-0 -z-10 h-full w-full stroke-gray-100 dark:stroke-gray-900 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]'
+    className='absolute inset-0 -z-10 h-[40%] w-full stroke-gray-100 dark:stroke-gray-900 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]'
     aria-hidden='true'
   >
     <defs>

@@ -18,7 +18,7 @@ export const transactionTable = pgTable('transaction', {
   id: serial('id').primaryKey(),
   date: timestamp('date', { mode: 'date' }),
   count: integer('count').notNull(),
-  price: integer('price').notNull(),
+  price: varchar('price', { length: 100 }).notNull(),
   additional: varchar('additional', { length: 255 }).default('').notNull(),
   itemId: integer('item_id'),
   itemName: varchar('itemName', { length: 100 }).notNull(),

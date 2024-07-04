@@ -3,15 +3,16 @@
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { parseString } from '@/lib/parse-string';
+import { InferSelectModel, and, eq, isNull, sql } from 'drizzle-orm';
 import fs from 'fs';
 import path from 'path';
 
 export const clearAction = async () => {
-  await db.delete(transactionTable);
+  await db.delete(itemTable);
 };
 
 export const getTransactionsAction = async () => {
-  const fullPath = path.join(process.cwd(), '/data/6.30.txt');
+  const fullPath = path.join(process.cwd(), '/data/7.01.txt');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const arr = fileContents.split('\n\n');
@@ -39,8 +40,58 @@ export const getTransactionsAction = async () => {
   return newArr;
 };
 
+export const updateDate = async () => {
+  await db
+    .update(transactionTable)
+    .set({
+      date: sql`'2024-07-01 15:00:00'::timestamp at time zone 'Asia/Seoul' at time zone 'UTC'`,
+    })
+    .where(
+      sql`${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul' = '2024-07-04 03:00:00'::timestamp`
+    );
+};
+
+export const query = async () => {
+  const items = await db.query.transactionTable.findMany({
+    where: isNull(transactionTable.itemId),
+  });
+
+  let obj: Record<string, InferSelectModel<typeof transactionTable>[]> = {};
+
+  items.forEach((item) => {
+    if (obj[item.itemName]) {
+      obj[item.itemName].push(item);
+    } else {
+      obj[item.itemName] = [item];
+    }
+  });
+
+  const entries = Object.entries(obj);
+
+  let itemId = 666666663;
+
+  for await (const entrie of entries) {
+    console.log(entrie[0]);
+
+    await db.insert(itemTable).values({
+      id: itemId,
+      name: entrie[0],
+      desc: '',
+    });
+
+    await db
+      .update(transactionTable)
+      .set({
+        itemId: itemId,
+      })
+      .where(eq(transactionTable.itemName, entrie[0]));
+
+    itemId += 1;
+  }
+};
+
 export const saveTransactionsAction = async () => {
-  const items = await fetch('https://maplestory.io/api/kms/389/item')
+  const items = await fetch('https://maplestory.io/api/kms/384/item')
     .then((res) => res.json())
     .then((is) => {
       const temp = is.reduce(
@@ -65,7 +116,7 @@ export const saveTransactionsAction = async () => {
       count: b?.count,
       date: b?.date && new Date(b?.date),
       name: b?.name.trim(),
-      price: b?.price,
+      price: String(b?.price),
       additional: b?.additional || '',
       itemName: b?.name.trim(),
       ...(items[b?.name.trim()!] && { itemId: items[b?.name.trim()!] }),
@@ -86,13 +137,23 @@ type Item = {
 export const saveItemsAction = async () => {
   console.log('saving...');
 
-  const items = (await fetch('https://maplestory.io/api/kms/389/item').then(
+  const items = (await fetch('https://maplestory.io/api/kms/384/item').then(
     (res) => res.json()
   )) as Item[];
 
-  const validItems = items.filter(
-    (item) => item.name && typeof item.name === 'string' && !!item.name.trim()
-  );
+  const obj: Record<string, boolean> = {};
+
+  const validItems = items.filter((item) => {
+    if (!(item.name && typeof item.name === 'string' && !!item.name.trim()))
+      return false;
+
+    if (obj[item.name.trim()]) {
+      return false;
+    } else {
+      obj[item.name.trim()] = true;
+      return true;
+    }
+  });
 
   const batchSize = 1000; // Adjust this value based on your database limits
   for (let i = 0; i < validItems.length; i += batchSize) {
@@ -101,7 +162,7 @@ export const saveItemsAction = async () => {
     await db.insert(itemTable).values(
       batch.map((item) => ({
         id: item.id,
-        name: item.name,
+        name: item.name.trim(),
         desc: item.desc || '',
       }))
     );

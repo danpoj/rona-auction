@@ -4,6 +4,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { QueryProvider } from '@/components/provider/query-provider';
 import { BackgroundPattern } from '@/components/background-pattern';
+import { TracingBeam } from '@/components/tracing-beam';
 
 const inter = Poppins({ subsets: ['latin'], weight: ['400', '600', '900'] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
       <body className={cn(inter.className, 'overscroll-none')}>
         <BackgroundPattern />
         <QueryProvider>
-          <main className='h-full max-h-full'>{children}</main>
+          <main className='h-full max-h-full'>
+            <TracingBeam>{children}</TracingBeam>
+          </main>
         </QueryProvider>
       </body>
     </html>
