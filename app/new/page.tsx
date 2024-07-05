@@ -18,13 +18,15 @@ export default function Page() {
         </Button>
       </div>
 
-      <article className='prose'>
+      <article className='prose dark:prose-invert'>
         <h1>7/5(금) 업데이트</h1>
         <ul>
           <li>7/4(목) 거래내역 추가</li>
           <li>옥션 거래내역에 있는 아이템들만 검색되도록 수정</li>
           <li>검색속도 개선</li>
           <li>검색내용과 매칭되는 모든 아이템이 보여지도록 수정</li>
+          <li>모바일 브라우저 사용성 개선</li>
+          <li>다크모드 추가 (홈페이지 우측상단)</li>
           <li>
             <span>og image 추가</span>
             <Image

@@ -5,12 +5,14 @@ import { words } from '@/constants';
 import { Suspense } from 'react';
 import { HomeLists } from './home-lists';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ThemeButton } from '@/components/theme-button';
 
 export default function Page() {
   return (
     <div className='max-w-[52rem] mx-auto pb-40'>
-      <div className='p-4 pb-0'>
+      <div className='p-4 pb-0 flex items-center justify-between'>
         <TypewriterEffectSmooth words={words} />
+        <ThemeButton />
       </div>
 
       <Suspense fallback={<SearchBarLoading />}>

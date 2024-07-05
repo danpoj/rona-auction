@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from '@/components/provider/theme-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -70,12 +71,19 @@ export default function RootLayout({
       />
 
       <body className={cn(inter.className, 'overscroll-none')}>
-        <BackgroundPattern />
-        <QueryProvider>
-          <main className='h-full max-h-full'>
-            <TracingBeam>{children}</TracingBeam>
-          </main>
-        </QueryProvider>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <BackgroundPattern />
+          <QueryProvider>
+            <main className='h-full max-h-full dark:text-primary/80'>
+              <TracingBeam>{children}</TracingBeam>
+            </main>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

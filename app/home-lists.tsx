@@ -81,7 +81,7 @@ export const HomeLists = ({ initialLists }: Props) => {
             alt='spider'
             width={40}
             height={200}
-            className='object-contain w-10 absolute -top-36 right-0'
+            className='object-contain w-10 absolute -top-16 right-0 pointer-events-none'
           />
         </div>
       </div>
