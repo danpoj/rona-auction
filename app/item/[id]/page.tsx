@@ -12,6 +12,8 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { ItemPage } from './item-page';
 import { LineCharts } from './line-charts';
+import { Metadata } from 'next';
+import { siteConfig } from '@/config';
 
 type Props = {
   params: {
@@ -29,41 +31,46 @@ export async function generateStaticParams() {
   }));
 }
 
-// export async function generateMetadata({ params }: Props): Promise<Metadata> {
-//   const id = params.id;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = params.id;
 
-//   const item = await fetch(`https://maplestory.io/api/kms/384/item/${id}`).then(
-//     (res) => res.json()
-//   );
+  const item = await fetch(`https://maplestory.io/api/kms/384/item/${id}`).then(
+    (res) => res.json()
+  );
 
-//   return {
-//     title: item?.description?.name || '',
-//     description: item?.description?.description || '',
-//     openGraph: {
-//       type: 'website',
-//       locale: 'ko_KR',
-//       url: siteConfig.url,
-//       title: siteConfig.name,
-//       description: siteConfig.description,
-//       siteName: siteConfig.name,
-//       images: [
-//         {
-//           url: `https://maplestory.io/api/kms/384/item/${id}/icon?resize=10`,
-//           width: 600,
-//           height: 600,
-//           alt: siteConfig.name,
-//         },
-//       ],
-//     },
-//     twitter: {
-//       card: 'summary_large_image',
-//       title: siteConfig.name,
-//       description: siteConfig.description,
-//       images: [`https://maplestory.io/api/kms/384/item/${id}/icon?resize=10`],
-//       creator: '@danpoj',
-//     },
-//   };
-// }
+  if (!item)
+    return {
+      title: 'not found',
+    };
+
+  return {
+    title: item?.description?.name || '',
+    description: item?.description?.description || '',
+    openGraph: {
+      type: 'website',
+      locale: 'ko_KR',
+      url: siteConfig.url,
+      title: siteConfig.name,
+      description: siteConfig.description,
+      siteName: siteConfig.name,
+      images: [
+        {
+          url: `https://maplestory.io/api/kms/384/item/${id}/icon?resize=10`,
+          width: 600,
+          height: 600,
+          alt: siteConfig.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: siteConfig.name,
+      description: siteConfig.description,
+      images: [`https://maplestory.io/api/kms/384/item/${id}/icon?resize=10`],
+      creator: '@danpoj',
+    },
+  };
+}
 
 export default async function Page({ params: { id } }: Props) {
   const idAsNumber = Number(id);

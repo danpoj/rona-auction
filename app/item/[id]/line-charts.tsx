@@ -11,14 +11,14 @@ type Props = {
 export const LineCharts = ({ datas }: Props) => {
   const countData = datas
     .map((data) => ({
-      date: format(data.date, 'LL/dd', { locale: ko }),
+      date: format(data.date, 'L.d', { locale: ko }),
       거래량: Number(data.totalCount),
     }))
     .reverse();
 
   const priceData = datas
     .map((data) => ({
-      date: format(data.date, 'LL/dd', { locale: ko }),
+      date: format(data.date, 'L.d', { locale: ko }),
       시세: Math.round(Number(data.averagePrice)),
     }))
     .reverse();
