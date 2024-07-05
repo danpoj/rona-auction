@@ -1,3 +1,4 @@
+import { NoImage } from '@/components/no-image';
 import { Button } from '@/components/ui/button';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { db } from '@/db/drizzle';
@@ -5,17 +6,14 @@ import { itemTable, transactionTable } from '@/db/schema';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { InferSelectModel, and, desc, eq, gte, sql } from 'drizzle-orm';
-import { ArrowLeftIcon, Loader, Star } from 'lucide-react';
+import { ArrowLeftIcon, Loader } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { ItemPage } from './item-page';
 import { LineCharts } from './line-charts';
-import { Metadata } from 'next';
-import { siteConfig } from '@/config';
-import { NoImage } from '@/components/no-image';
-import dynamic from 'next/dynamic';
 
 const Heart = dynamic(() => import('@/components/heart'), { ssr: false });
 
@@ -35,49 +33,49 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const id = params.id;
+// export async function generateMetadata({ params }: Props): Promise<Metadata> {
+//   const id = params.id;
 
-  const item = await fetch(`https://maplestory.io/api/kms/384/item/${id}`).then(
-    (res) => res.json()
-  );
+//   const item = await fetch(`https://maplestory.io/api/kms/384/item/${id}`).then(
+//     (res) => res.json()
+//   );
 
-  if (!item) {
-    const dbItem = await db.query.itemTable.findFirst({
-      where: eq(itemTable.id, Number(id)),
-    });
-    return {
-      title: dbItem?.name,
-    };
-  }
-  return {
-    title: item?.description?.name || '',
-    description: item?.description?.description || '',
-    openGraph: {
-      type: 'website',
-      locale: 'ko_KR',
-      url: siteConfig.url,
-      title: siteConfig.name,
-      description: siteConfig.description,
-      siteName: siteConfig.name,
-      images: [
-        {
-          url: `https://maplestory.io/api/kms/384/item/${id}/icon?resize=10`,
-          width: 600,
-          height: 600,
-          alt: siteConfig.name,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: siteConfig.name,
-      description: siteConfig.description,
-      images: [`https://maplestory.io/api/kms/384/item/${id}/icon?resize=10`],
-      creator: '@danpoj',
-    },
-  };
-}
+//   if (!item) {
+//     const dbItem = await db.query.itemTable.findFirst({
+//       where: eq(itemTable.id, Number(id)),
+//     });
+//     return {
+//       title: dbItem?.name,
+//     };
+//   }
+//   return {
+//     title: item?.description?.name || '',
+//     description: item?.description?.description || '',
+//     openGraph: {
+//       type: 'website',
+//       locale: 'ko_KR',
+//       url: siteConfig.url,
+//       title: siteConfig.name,
+//       description: siteConfig.description,
+//       siteName: siteConfig.name,
+//       images: [
+//         {
+//           url: `https://maplestory.io/api/kms/384/item/${id}/icon?resize=10`,
+//           width: 600,
+//           height: 600,
+//           alt: siteConfig.name,
+//         },
+//       ],
+//     },
+//     twitter: {
+//       card: 'summary_large_image',
+//       title: siteConfig.name,
+//       description: siteConfig.description,
+//       images: [`https://maplestory.io/api/kms/384/item/${id}/icon?resize=10`],
+//       creator: '@danpoj',
+//     },
+//   };
+// }
 
 export default async function Page({ params: { id } }: Props) {
   const idAsNumber = Number(id);
