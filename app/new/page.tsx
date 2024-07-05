@@ -1,12 +1,17 @@
 import { Button } from '@/components/ui/button';
-import { ArrowLeftIcon } from 'lucide-react';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { ArrowLeftIcon, HelpCircle, Settings } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Page() {
   return (
     <div className='max-w-[52rem] mx-auto h-full p-4'>
-      <div className='flex flex-col  gap-6 pt-[5.8rem] pb-10'>
+      <div className='flex gap-4 pt-[5.8rem] pb-10'>
         <Button
           variant='expandIcon'
           Icon={ArrowLeftIcon}
@@ -16,6 +21,19 @@ export default function Page() {
         >
           <Link href='/'>홈으로 이동</Link>
         </Button>
+
+        <Popover>
+          <PopoverTrigger>
+            <Settings className='size-8 stroke-primary/60 hover:stroke-primary/70' />
+          </PopoverTrigger>
+          <PopoverContent className='text-sm text-muted-foreground'>
+            ⚙️ 작업중... <br />
+            <br />
+            1. 장비 아이템 옵션 별 필터링 <br />
+            2. 날짜별 가격, 거래량 - chart <br />
+            3. 즐겨찾기 <br />
+          </PopoverContent>
+        </Popover>
       </div>
 
       <article className='prose dark:prose-invert'>
