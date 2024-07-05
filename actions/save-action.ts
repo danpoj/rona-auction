@@ -172,7 +172,7 @@ export const saveTransactionsAction = async () => {
   const items = await db.query.itemTable.findMany();
 
   const obj = items.reduce((acc, item) => {
-    acc[item.trimmedName] = { ...item };
+    // acc[item.trimmedName] = { ...item };
     return acc;
   }, {});
 
@@ -191,12 +191,12 @@ export const saveTransactionsAction = async () => {
       price: String(b?.price),
       additional: b?.additional || '',
       itemName: b?.name.trim(),
-      ...(obj[b?.name.trim()?.replace(/\s+/g, '')] && {
-        itemId: obj[b?.name.trim()?.replace(/\s+/g, '')].id,
-      }),
+      // ...(obj[b?.name.trim()?.replace(/\s+/g, '')] && {
+      //   itemId: obj[b?.name.trim()?.replace(/\s+/g, '')].id,
+      // }),
     }));
 
-    await db.insert(transactionTable).values(batchWithItemId);
+    // await db.insert(transactionTable).values(batchWithItemId);
 
     console.log(`${i} ~ ${i + 1000} success!`);
   }
