@@ -30,8 +30,7 @@ export default function Page() {
             ⚙️ 작업중... <br />
             <br />
             1. 장비 아이템 옵션 별 필터링 <br />
-            2. 날짜별 가격, 거래량 - chart <br />
-            3. 즐겨찾기 <br />
+            2. 날짜별 가격, 거래량 - chart ✅ <br /> 3. 즐겨찾기 <br />
           </PopoverContent>
         </Popover>
       </div>
@@ -46,6 +45,7 @@ export default function Page() {
           <li>모바일 브라우저 사용성 개선</li>
           <li>다크모드 추가 (홈페이지 우측상단)</li>
           <li>아이템 상세페이지 로딩속도 개선</li>
+          <li>날짜별 가격, 거래량 + 차트 추가</li>
           <li>
             <span>og image 추가</span>
             <Image

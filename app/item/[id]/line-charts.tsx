@@ -9,15 +9,19 @@ type Props = {
 };
 
 export const LineCharts = ({ datas }: Props) => {
-  const countData = datas.map((data) => ({
-    date: format(data.date, 'LL/dd', { locale: ko }),
-    거래량: Number(data.totalCount),
-  }));
+  const countData = datas
+    .map((data) => ({
+      date: format(data.date, 'LL/dd', { locale: ko }),
+      거래량: Number(data.totalCount),
+    }))
+    .reverse();
 
-  const priceData = datas.map((data) => ({
-    date: format(data.date, 'LL/dd', { locale: ko }),
-    시세: Math.round(Number(data.averagePrice)),
-  }));
+  const priceData = datas
+    .map((data) => ({
+      date: format(data.date, 'LL/dd', { locale: ko }),
+      시세: Math.round(Number(data.averagePrice)),
+    }))
+    .reverse();
 
   return (
     <div className='flex flex-col sm:flex-row sm:divide-x'>
