@@ -1,9 +1,11 @@
 import { Button } from '@/components/ui/button';
+import { siteConfig } from '@/config';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { InferSelectModel, and, count, desc, eq, gte, sql } from 'drizzle-orm';
 import { ArrowLeftIcon, Loader } from 'lucide-react';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -15,6 +17,42 @@ type Props = {
     id: string;
   };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = params.id;
+
+  const item = await fetch(`https://maplestory.io/api/kms/384/item/${id}`).then(
+    (res) => res.json()
+  );
+
+  return {
+    title: item?.description?.name || '',
+    description: item?.description?.description || '',
+    openGraph: {
+      type: 'website',
+      locale: 'ko_KR',
+      url: siteConfig.url,
+      title: siteConfig.name,
+      description: siteConfig.description,
+      siteName: siteConfig.name,
+      images: [
+        {
+          url: `https://maplestory.io/api/kms/384/item/${id}/icon?resize=10`,
+          width: 600,
+          height: 600,
+          alt: siteConfig.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: siteConfig.name,
+      description: siteConfig.description,
+      images: [`https://maplestory.io/api/kms/384/item/${id}/icon?resize=10`],
+      creator: '@danpoj',
+    },
+  };
+}
 
 export default async function Page({ params: { id } }: Props) {
   const idAsNumber = Number(id);

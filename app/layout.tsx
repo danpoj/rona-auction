@@ -1,21 +1,59 @@
 import { BackgroundPattern } from '@/components/background-pattern';
+import AdsenseScript from '@/components/google-adsense/adsense-script';
 import { QueryProvider } from '@/components/provider/query-provider';
 import { TracingBeam } from '@/components/tracing-beam';
+import { siteConfig } from '@/config';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import dynamic from 'next/dynamic';
-const AdsenseScript = dynamic(
-  () => import('@/components/google-adsense/adsense-script'),
-  { ssr: false }
-);
 
 const inter = Poppins({ subsets: ['latin'], weight: ['400', '600', '900'] });
 
 export const metadata: Metadata = {
-  title: '로나월드 옥션',
-  description: '로나월드 옥션 거래내역 저장소입니다.',
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  metadataBase: new URL(siteConfig.url),
+  description: siteConfig.description,
+  keywords: ['로나월드', '거래내역', '옥션', '메이플월드'],
+  authors: [
+    {
+      name: 'danpoj',
+      url: 'https://ronaoff.com',
+    },
+  ],
+  creator: 'danpoj',
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    creator: '@danpoj',
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: `${siteConfig.url}/site.webmanifest`,
 };
 
 export default function RootLayout({
@@ -26,11 +64,10 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <AdsenseScript />
-
-      {/* <meta
-          name='google-adsense-account'
-          content={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
-        ></meta> */}
+      <meta
+        name='google-adsense-account'
+        content={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+      />
 
       <body className={cn(inter.className, 'overscroll-none')}>
         <BackgroundPattern />

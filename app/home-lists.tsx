@@ -66,7 +66,7 @@ export const HomeLists = ({ initialLists }: Props) => {
             iconPlacement='right'
             asChild
           >
-            <Link href='/top'>거래량 순위</Link>
+            <Link href='/top'>TOP 300</Link>
           </Button>
           <Image
             src={'https://maplestory.io/api/KMS/389/mob/2230103/render/stand'}

@@ -5,8 +5,13 @@ import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { desc, sql } from 'drizzle-orm';
 import { ArrowLeftIcon } from 'lucide-react';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: '인기매물',
+};
 
 const BASE = process.env.NEXT_PUBLIC_API_BASE!;
 
@@ -40,7 +45,7 @@ export default async function Page() {
         </Button>
         <p className='text-2xl font-semibold flex items-center'>
           <span>
-            거래량 순위{' '}
+            인기 매물{' '}
             <span className='font-extrabold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent'>
               TOP 300
             </span>
