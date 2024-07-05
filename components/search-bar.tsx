@@ -1,28 +1,34 @@
 'use client';
 
-import { fetchItems } from '@/actions/items';
 import { Input } from '@/components/ui/input';
-import { useQuery } from '@tanstack/react-query';
+import { itemTable } from '@/db/schema';
+import { InferSelectModel } from 'drizzle-orm';
 import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useDebounceValue, useOnClickOutside } from 'usehooks-ts';
 import { NoImage } from './no-image';
 
-export const SearchBar = () => {
+type Props = {
+  items: InferSelectModel<typeof itemTable>[];
+};
+
+export const SearchBar = ({ items }: Props) => {
   const [value, setValue] = useState('');
+  const [debouncedValue] = useDebounceValue(value, 100);
   const [show, setShow] = useState(false);
-  const [debouncedValue] = useDebounceValue(value, 200);
   const ref = useRef<HTMLDivElement>(null!);
 
-  useOnClickOutside(ref, () => show && setShow(false));
+  const matchedLists = useMemo(() => {
+    if (debouncedValue.trim() === '') return [];
 
-  const { data: items } = useQuery({
-    enabled: !!debouncedValue.trim(),
-    queryKey: ['itemName', debouncedValue.replace(/\s+/g, '')],
-    queryFn: () => fetchItems(debouncedValue.replace(/\s+/g, '')),
-  });
+    return items.filter((item) =>
+      item.trimmedName.includes(debouncedValue.replace(/\s+/g, ''))
+    );
+  }, [debouncedValue, items]);
+
+  useOnClickOutside(ref, () => show && setShow(false));
 
   return (
     <div className='px-4 pb-8'>
@@ -42,9 +48,9 @@ export const SearchBar = () => {
         />
         <Search className='absolute left-4 size-5 stroke-primary/70 top-1/2 -translate-y-1/2' />
 
-        {items && items.length !== 0 && show && (
+        {matchedLists && matchedLists.length !== 0 && show && (
           <div className='absolute border border-primary/30 bg-background z-10 rounded-xl flex flex-col divide-y divide-primary/30 w-full top-[4.4rem] max-h-[24rem] overflow-y-scroll'>
-            {items.map((item) => (
+            {matchedLists.map((item) => (
               <Link
                 href={`/item/${item.id}`}
                 key={item.id}

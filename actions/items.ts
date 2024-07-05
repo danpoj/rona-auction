@@ -16,3 +16,9 @@ export const fetchItems = async (name: string) => {
 
   return items;
 };
+
+export const fetchAllItems = async () => {
+  const items = await db.query.itemTable.findMany();
+
+  return items;
+};

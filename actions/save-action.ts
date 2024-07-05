@@ -3,7 +3,7 @@
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { parseString } from '@/lib/parse-string';
-import { InferSelectModel, eq, isNull, sql } from 'drizzle-orm';
+import { InferSelectModel, count, eq, isNull, sql } from 'drizzle-orm';
 import fs from 'fs';
 import path from 'path';
 
@@ -89,6 +89,53 @@ export const query = async () => {
 
     itemId += 1;
   }
+};
+
+export const deleteItemsWithoutTransactions = async () => {
+  console.log('deleting... ');
+  const deleteItemsWithoutTransactions = await db.execute(sql`
+    DELETE FROM ${itemTable}
+    WHERE ${itemTable.id} NOT IN (
+      SELECT DISTINCT ${transactionTable.itemId}
+      FROM ${transactionTable}
+      WHERE ${transactionTable.itemId} IS NOT NULL
+    )
+  `);
+
+  console.log('success!');
+};
+
+export const getItemsWithoutTransactions = async () => {
+  const itemsWithTransactionCount = await db
+    .select({
+      id: itemTable.id,
+      transactionCount: sql<number>`cast(count(${transactionTable.id}) as integer)`,
+    })
+    .from(itemTable)
+    .leftJoin(transactionTable, eq(itemTable.id, transactionTable.itemId))
+    .groupBy(itemTable.id);
+
+  console.log(itemsWithTransactionCount);
+
+  // const itemsLength = await db
+  //   .select({
+  //     count: count(),
+  //   })
+  //   .from(itemTable);
+
+  // console.log(itemsLength);
+
+  // const transactions = await db.select().from(transactionTable);
+
+  // const obj: Record<string, boolean> = {};
+
+  // transactions.forEach((t) => {
+  //   if (t.itemId) {
+  //     obj[t.itemId] = true;
+  //   }
+  // });
+
+  // console.log(Object.keys(obj).length);
 };
 
 export const saveTransactionsAction = async () => {
