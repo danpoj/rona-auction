@@ -1,11 +1,11 @@
 import { fetchTransactions } from '@/actions/transactions';
 import { SearchBarWrapper } from '@/components/search-bar-wrapper';
+import { ThemeButton } from '@/components/theme-button';
 import { TypewriterEffectSmooth } from '@/components/typewriter-effect';
+import { Skeleton } from '@/components/ui/skeleton';
 import { words } from '@/constants';
 import { Suspense } from 'react';
 import { HomeLists } from './home-lists';
-import { Skeleton } from '@/components/ui/skeleton';
-import { ThemeButton } from '@/components/theme-button';
 
 export default function Page() {
   return (

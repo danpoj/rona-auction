@@ -24,7 +24,7 @@ export default function Page() {
 
         <Popover>
           <PopoverTrigger>
-            <Settings className='size-8 stroke-primary/60 hover:stroke-primary/70' />
+            <Settings className='size-8 stroke-primary/60 hover:stroke-primary/70 hover:animate-spin' />
           </PopoverTrigger>
           <PopoverContent className='text-sm text-muted-foreground'>
             ⚙️ 작업중... <br />
@@ -45,6 +45,7 @@ export default function Page() {
           <li>검색내용과 매칭되는 모든 아이템이 보여지도록 수정</li>
           <li>모바일 브라우저 사용성 개선</li>
           <li>다크모드 추가 (홈페이지 우측상단)</li>
+          <li>아이템 상세페이지 로딩속도 개선</li>
           <li>
             <span>og image 추가</span>
             <Image

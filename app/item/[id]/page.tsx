@@ -16,6 +16,16 @@ type Props = {
   };
 };
 
+export async function generateStaticParams() {
+  const items = await db.query.itemTable.findMany({
+    columns: { id: true },
+  });
+
+  return items.map((item) => ({
+    id: String(item.id),
+  }));
+}
+
 // export async function generateMetadata({ params }: Props): Promise<Metadata> {
 //   const id = params.id;
 
