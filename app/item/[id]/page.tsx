@@ -38,11 +38,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     (res) => res.json()
   );
 
-  if (!item)
+  if (!item) {
+    const dbItem = await db.query.itemTable.findFirst({
+      where: eq(itemTable.id, Number(id)),
+    });
     return {
-      title: 'not found',
+      title: dbItem?.name,
     };
-
+  }
   return {
     title: item?.description?.name || '',
     description: item?.description?.description || '',
