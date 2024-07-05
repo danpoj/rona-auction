@@ -33,7 +33,7 @@ export const HomeLists = ({ initialLists }: Props) => {
     <>
       <div className='flex items-center justify-between pl-4 pr-2 pb-6'>
         <div className='space-y-2'>
-          <div className='text-xl sm:text-2xl font-semibold flex items-center gap-3'>
+          <div className='text-xl sm:text-2xl font-semibold flex items-center gap-2'>
             <span>거래 최신 순</span>
             <Popover>
               <PopoverTrigger>
@@ -50,6 +50,14 @@ export const HomeLists = ({ initialLists }: Props) => {
                 <br />
               </PopoverContent>
             </Popover>
+            <Button
+              size='sm'
+              variant='shine'
+              className='rounded-full h-7'
+              asChild
+            >
+              <Link href='/new'>New ✨</Link>
+            </Button>
           </div>
           {data.pages[0][0].date && (
             <p className='text-sm sm:text-base space-x-2 text-muted-foreground items-center flex'>

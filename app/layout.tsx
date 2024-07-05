@@ -5,10 +5,10 @@ import { TracingBeam } from '@/components/tracing-beam';
 import { siteConfig } from '@/config';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
 
-const inter = Poppins({ subsets: ['latin'], weight: ['400', '600', '900'] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
