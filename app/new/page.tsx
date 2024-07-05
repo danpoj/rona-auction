@@ -4,7 +4,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { ArrowLeftIcon, HelpCircle, Settings } from 'lucide-react';
+import { ArrowLeftIcon, Settings } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -40,6 +40,23 @@ export default function Page() {
           <h1>7/6(토) 업데이트</h1>
           <ul>
             <li>7/5(금) 거래내역 추가</li>
+            <li>폰트 변경 GoThic_A1</li>
+            <li>
+              즐겨찾기 추가 <b>- /liked</b>
+            </li>
+            <li>
+              <h2>아이템 페이지로 넘어가지않는 일부 아이템들 수정</h2>
+              <pre>
+                {`
+- 뱃지 공격력 주문서 30%
+- 투구 민첩성 주문서 60%
+- 하의 민첩성 주문서 10%
+- 하의 민첩성 주문서 60%
+- 백의 주문서 1%
+- 글로벌 포션
+- ...`.trim()}
+              </pre>
+            </li>
           </ul>
         </article>
 
