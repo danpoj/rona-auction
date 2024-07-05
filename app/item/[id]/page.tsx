@@ -139,16 +139,16 @@ const Top = async ({
           alt={`${item.name} - ${item.desc}`}
           width={140}
           height={140}
-          className='size-[140px] object-contain'
+          className='size-[100px] sm:size-[140px] object-contain'
         />
         <div className='flex flex-col justify-between'>
-          <h1 className='text-3xl font-black'>{item.name}</h1>
+          <h1 className='text-2xl sm:text-3xl font-black'>{item.name}</h1>
 
           <p className='flex flex-col gap-2'>
-            <span className='text-xl text-muted-foreground'>
+            <span className='text-lg sm:text-xl text-muted-foreground'>
               최근 3일 평균 거래가
             </span>
-            <span className='font-black text-4xl bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent drop-shadow-sm'>
+            <span className='font-black text-3xl sm:text-4xl bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent drop-shadow-sm'>
               {Math.round(averagePrice).toLocaleString('ko-KR')} 메소
             </span>
           </p>
@@ -163,7 +163,7 @@ const Top = async ({
       <div className='space-y-2'>
         <p className='text-muted-foreground'>최근 3일 동안</p>
         <p className='text-muted-foreground'>
-          <span className='text-2xl font-semibold text-primary/90'>
+          <span className='text-xl sm:text-2xl font-semibold text-primary/90'>
             총 {result[0].totalRows || 0}건
           </span>
           <span className=''>
@@ -172,7 +172,7 @@ const Top = async ({
           </span>
         </p>
         <p className='text-muted-foreground'>
-          <span className='text-2xl font-semibold text-primary/90'>
+          <span className='text-xl sm:text-2xl font-semibold text-primary/90'>
             총 {result[0].totalCount || 0}개
           </span>
           <span className=''>
