@@ -5,11 +5,14 @@ import { TracingBeam } from '@/components/tracing-beam';
 import { siteConfig } from '@/config';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Gothic_A1 } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/provider/theme-provider';
 
-const inter = Inter({ subsets: ['latin'] });
+const gothic_A1 = Gothic_A1({
+  subsets: ['latin'],
+  weight: ['500', '700'],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -70,7 +73,7 @@ export default function RootLayout({
         content={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
       />
 
-      <body className={cn(inter.className, 'overscroll-none')}>
+      <body className={cn(gothic_A1.className, 'overscroll-none')}>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
