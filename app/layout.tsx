@@ -8,6 +8,7 @@ import type { Metadata } from 'next';
 import { Gothic_A1 } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/provider/theme-provider';
+import Script from 'next/script';
 
 const gothic_A1 = Gothic_A1({
   subsets: ['latin'],
@@ -86,6 +87,12 @@ export default function RootLayout({
             </main>
           </QueryProvider>
         </ThemeProvider>
+
+        <Script
+          defer
+          src='https://static.cloudflareinsights.com/beacon.min.js'
+          data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN}"}`}
+        />
       </body>
     </html>
   );
