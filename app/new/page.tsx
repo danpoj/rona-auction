@@ -35,29 +35,38 @@ export default function Page() {
         </Popover>
       </div>
 
-      <article className='prose dark:prose-invert'>
-        <h1>7/5(금) 업데이트</h1>
-        <ul>
-          <li>7/4(목) 거래내역 추가</li>
-          <li>옥션 거래내역에 있는 아이템들만 검색되도록 수정</li>
-          <li>검색속도 개선</li>
-          <li>검색내용과 매칭되는 모든 아이템이 보여지도록 수정</li>
-          <li>모바일 브라우저 사용성 개선</li>
-          <li>다크모드 추가 (홈페이지 우측상단)</li>
-          <li>아이템 상세페이지 로딩속도 개선</li>
-          <li>날짜별 가격, 거래량 + 차트 추가</li>
-          <li>
-            <span>og image 추가</span>
-            <Image
-              src='/og.png'
-              alt='og image'
-              width={400}
-              height={200}
-              className='w-full rounded-xl max-w-[400px]'
-            />
-          </li>
-        </ul>
-      </article>
+      <div className='space-y-20'>
+        <article className='prose dark:prose-invert'>
+          <h1>7/6(토) 업데이트</h1>
+          <ul>
+            <li>7/5(금) 거래내역 추가</li>
+          </ul>
+        </article>
+
+        <article className='prose dark:prose-invert'>
+          <h1>7/5(금) 업데이트</h1>
+          <ul>
+            <li>7/4(목) 거래내역 추가</li>
+            <li>옥션 거래내역에 있는 아이템들만 검색되도록 수정</li>
+            <li>검색속도 개선</li>
+            <li>검색내용과 매칭되는 모든 아이템이 보여지도록 수정</li>
+            <li>모바일 브라우저 사용성 개선</li>
+            <li>다크모드 추가 (홈페이지 우측상단)</li>
+            <li>아이템 상세페이지 로딩속도 개선</li>
+            <li>날짜별 가격, 거래량 + 차트 추가</li>
+            <li>
+              <span>og image 추가</span>
+              <Image
+                src='/og.png'
+                alt='og image'
+                width={400}
+                height={200}
+                className='w-full rounded-xl max-w-[400px]'
+              />
+            </li>
+          </ul>
+        </article>
+      </div>
     </div>
   );
 }

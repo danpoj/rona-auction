@@ -7,37 +7,23 @@ import { InferSelectModel, count, eq, isNull, sql } from 'drizzle-orm';
 import fs from 'fs';
 import path from 'path';
 
-export const clearAction = async () => {
-  await db.delete(itemTable);
+export const updateTransactionsWithoutItemId = async () => {
+  const items = await db.query.itemTable.findMany();
+
+  const obj = items.reduce((acc: Record<string, number>, item) => {
+    acc[item.trimmedName] = item.id;
+    return acc;
+  }, {});
+
+  console.log(obj);
+
+  // await db.update(transactionTable).set({
+  //   itemId:
+  // })
 };
 
-export const getTransactionsAction = async () => {
-  const fullPath = path.join(process.cwd(), '/data/7.04.txt');
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-  const arr = fileContents.split('\n\n');
-
-  const newArr = arr
-    .map((item, index) => {
-      if (item.trim().length === 0) return;
-      const temp = item.split('\n');
-
-      if (temp.length === 1) {
-        return parseString({
-          str: temp[0],
-          index,
-        });
-      } else if (temp.length === 2) {
-        return parseString({
-          str: temp[0],
-          index,
-          addi: temp[1],
-        });
-      }
-    })
-    .filter((i) => i?.count && i.date && i.name && i.price);
-
-  return newArr;
+export const clearAction = async () => {
+  await db.delete(transactionTable);
 };
 
 export const updateDate = async () => {
@@ -138,21 +124,59 @@ export const getItemsWithoutTransactions = async () => {
   // console.log(Object.keys(obj).length);
 };
 
-export const saveTransactionsAction = async () => {
-  const items = await fetch('https://maplestory.io/api/kms/384/item')
-    .then((res) => res.json())
-    .then((is) => {
-      const temp = is.reduce(
-        (acc: Record<string, number>, item: { name: string; id: number }) => {
-          if (!item.name) return acc;
-          acc[item.name] = item.id;
-          return acc;
-        },
-        {}
-      );
+export const getTransactionsAction = async () => {
+  const fullPath = path.join(process.cwd(), '/data/7.01.txt');
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-      return temp;
-    });
+  const arr = fileContents.split('\n\n');
+
+  const newArr = arr
+    .map((item, index) => {
+      if (item.trim().length === 0) return;
+      const temp = item.split('\n');
+
+      if (temp.length === 1) {
+        return parseString({
+          str: temp[0],
+          index,
+        });
+      } else if (temp.length === 2) {
+        return parseString({
+          str: temp[0],
+          index,
+          addi: temp[1],
+        });
+      }
+    })
+    .filter((i) => i?.count && i.date && i.name && i.price);
+
+  return newArr;
+};
+
+export const saveTransactionsAction = async () => {
+  // const items = await fetch('https://maplestory.io/api/kms/384/item')
+  //   .then((res) => res.json())
+  //   .then((is) => {
+  //     const temp = is.reduce(
+  //       (acc: Record<string, number>, item: { name: string; id: number }) => {
+  //         if (!item.name) return acc;
+  //         acc[item.name] = item.id;
+  //         return acc;
+  //       },
+  //       {}
+  //     );
+
+  //     return temp;
+  //   });
+
+  const items = await db.query.itemTable.findMany();
+
+  const obj = items.reduce((acc, item) => {
+    acc[item.trimmedName] = { ...item };
+    return acc;
+  }, {});
+
+  // console.log(obj);
 
   const transactions = await getTransactionsAction();
 
@@ -167,7 +191,9 @@ export const saveTransactionsAction = async () => {
       price: String(b?.price),
       additional: b?.additional || '',
       itemName: b?.name.trim(),
-      ...(items[b?.name.trim()!] && { itemId: items[b?.name.trim()!] }),
+      ...(obj[b?.name.trim()?.replace(/\s+/g, '')] && {
+        itemId: obj[b?.name.trim()?.replace(/\s+/g, '')].id,
+      }),
     }));
 
     await db.insert(transactionTable).values(batchWithItemId);
