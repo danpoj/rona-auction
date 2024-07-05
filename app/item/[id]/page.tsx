@@ -2,13 +2,16 @@ import { Button } from '@/components/ui/button';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
-import { InferSelectModel, and, count, desc, eq, gte, sql } from 'drizzle-orm';
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import { InferSelectModel, and, desc, eq, gte, sql } from 'drizzle-orm';
 import { ArrowLeftIcon, Loader } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { ItemPage } from './item-page';
+import { LineCharts } from './line-charts';
 
 type Props = {
   params: {
@@ -113,24 +116,44 @@ const Top = async ({
   id: number;
   item: InferSelectModel<typeof itemTable>;
 }) => {
-  const result = await db
+  const oneWeekAgo = new Date();
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+  const datas = await db
     .select({
-      totalPrice:
-        sql<string>`SUM(CAST(${transactionTable.price} AS DECIMAL(38,2)))`.as(
-          'total_price'
+      date: sql<string>`DATE(${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul')`.as(
+        'date'
+      ),
+      averagePrice: sql<number>`
+      ROUND(
+        AVG(
+          CAST(${transactionTable.price} AS DECIMAL(16,2)) / 
+          NULLIF(${transactionTable.count}, 0)
         ),
-      totalCount: sql<number>`SUM(${transactionTable.count})`.as('total_count'),
-      totalRows: count(),
+        2
+      )
+    `.as('average_price'),
+      totalCount:
+        sql<number>`CAST(SUM(${transactionTable.count}) AS INTEGER)`.as(
+          'total_count'
+        ),
     })
     .from(transactionTable)
     .where(
       and(
-        gte(transactionTable.date, sql`DATE(NOW() - INTERVAL '3 days')`),
-        eq(transactionTable.itemId, Number(id))
+        eq(transactionTable.itemId, id),
+        gte(
+          sql`${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul'`,
+          sql`DATE(NOW() AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul' - INTERVAL '7 days')`
+        )
       )
+    )
+    .groupBy(
+      sql`DATE(${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul')`
+    )
+    .orderBy(
+      sql`DATE(${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul')` as any
     );
-
-  const averagePrice = parseFloat(result[0].totalPrice) / result[0].totalCount;
 
   return (
     <header className='px-4 py-10 space-y-6'>
@@ -151,46 +174,44 @@ const Top = async ({
           height={140}
           className='size-[100px] sm:size-[140px] object-contain'
         />
-        <div className='flex flex-col justify-between'>
+        <div className='flex flex-col justify-between gap-4'>
           <h1 className='text-2xl sm:text-3xl font-black'>{item.name}</h1>
 
-          <p className='flex flex-col gap-2'>
-            <span className='text-lg sm:text-xl text-muted-foreground'>
-              최근 3일 평균 거래가
-            </span>
-            <span className='font-black text-3xl sm:text-4xl bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent drop-shadow-sm'>
-              {Math.round(averagePrice).toLocaleString('ko-KR')} 메소
-            </span>
-          </p>
+          <div className='divide-y text-sm sm:text-base'>
+            <div className='flex items-center font-semibold px-2 py-1.5'>
+              <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-14'>
+                날짜
+              </p>
+              <p className='w-24'>거래개수</p>
+              <p>시세</p>
+            </div>
+            {datas.reverse().map((data) => (
+              <div key={data.date} className='flex items-center p-2'>
+                <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-14'>
+                  {format(data.date, 'L/d', { locale: ko })}
+                </p>
+                <p className='w-24'>
+                  {data.totalCount.toLocaleString('ko-KR')}
+                </p>
+                <p>
+                  {Math.round(Number(data.averagePrice)).toLocaleString(
+                    'ko-KR'
+                  )}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
+      <LineCharts datas={datas} />
+
       <h2
         className='text-muted-foreground'
         dangerouslySetInnerHTML={{
           __html: item.desc.replace(/\\r\\n|\\n|\\r/gm, '<br/>'),
         }}
       />
-      <div className='space-y-2'>
-        <p className='text-muted-foreground'>최근 3일 동안</p>
-        <p className='text-muted-foreground'>
-          <span className='text-xl sm:text-2xl font-semibold text-primary/90'>
-            총 {result[0].totalRows || 0}건
-          </span>
-          <span className=''>
-            의 <span className='font-semibold text-primary'>{item.name}</span>가
-            거래 되었습니다.
-          </span>
-        </p>
-        <p className='text-muted-foreground'>
-          <span className='text-xl sm:text-2xl font-semibold text-primary/90'>
-            총 {result[0].totalCount || 0}개
-          </span>
-          <span className=''>
-            의 <span className='font-semibold text-primary'>{item.name}</span>가
-            거래 되었습니다.
-          </span>
-        </p>
-      </div>
     </header>
   );
 };
