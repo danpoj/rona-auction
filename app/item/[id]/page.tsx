@@ -5,7 +5,7 @@ import { itemTable, transactionTable } from '@/db/schema';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { InferSelectModel, and, desc, eq, gte, sql } from 'drizzle-orm';
-import { ArrowLeftIcon, Loader } from 'lucide-react';
+import { ArrowLeftIcon, Loader, Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -15,6 +15,9 @@ import { LineCharts } from './line-charts';
 import { Metadata } from 'next';
 import { siteConfig } from '@/config';
 import { NoImage } from '@/components/no-image';
+import dynamic from 'next/dynamic';
+
+const Heart = dynamic(() => import('@/components/heart'), { ssr: false });
 
 type Props = {
   params: {
@@ -178,17 +181,25 @@ const Top = async ({
         <Link href='/'>홈으로 이동</Link>
       </Button>
       <div className='flex gap-4'>
-        {item.id && item.id >= 666666660 ? (
-          <NoImage className='size-[100px] sm:size-[140px]' />
-        ) : (
-          <Image
-            src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=3`}
-            alt={`${item.name} - ${item.desc}`}
-            width={140}
-            height={140}
-            className='size-[100px] sm:size-[140px] object-contain'
+        <div className='flex flex-col items-center gap-4'>
+          {item.id && item.id >= 666666660 ? (
+            <NoImage className='size-[100px] sm:size-[140px]' />
+          ) : (
+            <Image
+              src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=3`}
+              alt={`${item.name} - ${item.desc}`}
+              width={140}
+              height={140}
+              className='size-[100px] sm:size-[140px] object-contain'
+            />
+          )}
+          <Heart
+            item={{
+              id: item.id,
+              name: item.name,
+            }}
           />
-        )}
+        </div>
         <div className='flex flex-col justify-between gap-4'>
           <h1 className='text-2xl sm:text-3xl font-black'>{item.name}</h1>
 
@@ -197,7 +208,7 @@ const Top = async ({
               <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-14'>
                 날짜
               </p>
-              <p className='w-24'>거래개수</p>
+              <p className='w-24'>거래량</p>
               <p>시세</p>
             </div>
             {datas.reverse().map((data) => (

@@ -67,21 +67,32 @@ export const HomeLists = ({ initialLists }: Props) => {
           )}
         </div>
         <div className='relative'>
-          <Button
-            className='rounded-full'
-            variant='expandIcon'
-            Icon={ArrowRightIcon}
-            iconPlacement='right'
-            asChild
-          >
-            <Link href='/top'>TOP 300</Link>
-          </Button>
+          <div className='flex flex-col items-end gap-2'>
+            <Button
+              className='rounded-full w-fit'
+              variant='expandIcon'
+              Icon={ArrowRightIcon}
+              iconPlacement='right'
+              asChild
+            >
+              <Link href='/liked'>즐겨찾기</Link>
+            </Button>
+            <Button
+              className='rounded-full w-fit'
+              variant='expandIcon'
+              Icon={ArrowRightIcon}
+              iconPlacement='right'
+              asChild
+            >
+              <Link href='/top'>TOP 300</Link>
+            </Button>
+          </div>
           <Image
             src={'https://maplestory.io/api/KMS/389/mob/2230103/render/stand'}
             alt='spider'
             width={40}
             height={200}
-            className='object-contain w-10 absolute -top-16 right-0 pointer-events-none'
+            className='object-contain w-10 absolute -top-40 -right-16 pointer-events-none'
           />
         </div>
       </div>
