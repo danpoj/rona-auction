@@ -14,6 +14,7 @@ import { ItemPage } from './item-page';
 import { LineCharts } from './line-charts';
 import { Metadata } from 'next';
 import { siteConfig } from '@/config';
+import { NoImage } from '@/components/no-image';
 
 type Props = {
   params: {
@@ -154,7 +155,7 @@ const Top = async ({
         eq(transactionTable.itemId, id),
         gte(
           sql`${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul'`,
-          sql`DATE(NOW() AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul' - INTERVAL '7 days')`
+          sql`DATE(NOW() AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul' - INTERVAL '10 days')`
         )
       )
     )
@@ -177,13 +178,17 @@ const Top = async ({
         <Link href='/'>홈으로 이동</Link>
       </Button>
       <div className='flex gap-4'>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=3`}
-          alt={`${item.name} - ${item.desc}`}
-          width={140}
-          height={140}
-          className='size-[100px] sm:size-[140px] object-contain'
-        />
+        {item.id && item.id >= 666666660 ? (
+          <NoImage className='size-[100px] sm:size-[140px]' />
+        ) : (
+          <Image
+            src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=3`}
+            alt={`${item.name} - ${item.desc}`}
+            width={140}
+            height={140}
+            className='size-[100px] sm:size-[140px] object-contain'
+          />
+        )}
         <div className='flex flex-col justify-between gap-4'>
           <h1 className='text-2xl sm:text-3xl font-black'>{item.name}</h1>
 
