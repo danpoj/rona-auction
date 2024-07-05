@@ -5,7 +5,11 @@ import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import { AdsenseScript } from '@/components/google-adsense/adsense-script';
+import dynamic from 'next/dynamic';
+const AdsenseScript = dynamic(
+  () => import('@/components/google-adsense/adsense-script'),
+  { ssr: false }
+);
 
 const inter = Poppins({ subsets: ['latin'], weight: ['400', '600', '900'] });
 
