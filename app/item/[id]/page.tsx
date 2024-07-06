@@ -195,7 +195,7 @@ const Top = async ({
 
           <div className='divide-y text-sm sm:text-base'>
             <div className='flex items-center font-semibold px-2 py-1.5'>
-              <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-14'>
+              <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-16'>
                 날짜
               </p>
               <p className='w-24'>거래량</p>
@@ -203,16 +203,23 @@ const Top = async ({
             </div>
             {datas.reverse().map((data) => (
               <div key={data.date} className='flex items-center p-2'>
-                <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-14'>
-                  {format(data.date, 'L/d', { locale: ko })}
+                <p className='text-xs sm:text-sm text-muted-foreground tracking-tight w-16'>
+                  {format(data.date, 'L/d(iii)', { locale: ko })}
                 </p>
                 <p className='w-24'>
-                  {data.totalCount.toLocaleString('ko-KR')}
+                  {data.totalCount.toLocaleString('ko-KR')}개
                 </p>
-                <p>
+                <p className='flex items-center gap-1.5'>
                   {Math.round(Number(data.averagePrice)).toLocaleString(
                     'ko-KR'
                   )}
+                  <Image
+                    src='/meso.png'
+                    alt='meso image'
+                    width={20}
+                    height={20}
+                    className='size-4 object-contain'
+                  />
                 </p>
               </div>
             ))}

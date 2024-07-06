@@ -7,6 +7,7 @@ import { siteConfig } from '@/config';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Gothic_A1 } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 
 const gothic_A1 = Gothic_A1({
@@ -87,6 +88,7 @@ export default function RootLayout({
           </QueryProvider>
         </ThemeProvider>
       </body>
+      <GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_GAID!} />
     </html>
   );
 }
