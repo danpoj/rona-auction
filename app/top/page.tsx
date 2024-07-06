@@ -1,3 +1,4 @@
+import { GoToHome } from '@/components/go-to-home';
 import { NoImage } from '@/components/no-image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -34,15 +35,7 @@ export default async function Page() {
   return (
     <div className='max-w-[52rem] mx-auto h-full p-4'>
       <div className='flex flex-col  gap-6 pt-[5.8rem] pb-10'>
-        <Button
-          variant='expandIcon'
-          Icon={ArrowLeftIcon}
-          iconPlacement='left'
-          asChild
-          className='rounded-full w-fit'
-        >
-          <Link href='/'>홈으로 이동</Link>
-        </Button>
+        <GoToHome />
         <p className='text-2xl font-semibold flex items-center'>
           <span>
             인기 매물{' '}
@@ -63,7 +56,7 @@ export default async function Page() {
             <span className='font-semibold justify-center text-sm'>
               #{index + 1}
             </span>
-            <Badge>{item.transactionCount}건</Badge>
+            <Badge variant='secondary'>{item.transactionCount}건</Badge>
             {item.id >= 666666660 ? (
               <NoImage />
             ) : (
@@ -80,15 +73,7 @@ export default async function Page() {
         ))}
 
         <div className='pt-10'>
-          <Button
-            variant='expandIcon'
-            Icon={ArrowLeftIcon}
-            iconPlacement='left'
-            asChild
-            className='rounded-full'
-          >
-            <Link href='/'>홈으로 이동</Link>
-          </Button>
+          <GoToHome />
         </div>
       </div>
     </div>

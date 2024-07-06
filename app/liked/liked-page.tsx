@@ -1,11 +1,10 @@
 'use client';
 
+import { GoToHome } from '@/components/go-to-home';
 import Heart from '@/components/heart';
 import { NoImage } from '@/components/no-image';
 import { TypewriterEffectSmooth } from '@/components/typewriter-effect';
-import { Button } from '@/components/ui/button';
 import { words } from '@/constants';
-import { ArrowLeftIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLocalStorage } from 'usehooks-ts';
@@ -23,15 +22,7 @@ export default function NotFound() {
   return (
     <div className='max-w-[52rem] mx-auto h-full p-4'>
       <div className='flex flex-col  gap-6 pt-[5.8rem] pb-10'>
-        <Button
-          variant='expandIcon'
-          Icon={ArrowLeftIcon}
-          iconPlacement='left'
-          asChild
-          className='rounded-full w-fit'
-        >
-          <Link href='/'>홈으로 이동</Link>
-        </Button>
+        <GoToHome />
         <p className='text-2xl font-semibold flex items-center'>
           <span>즐겨찾기</span>
         </p>
@@ -63,22 +54,13 @@ export default function NotFound() {
                 <p>{item.name}</p>
               </div>
             </Link>
-            <div className='relative hover:hue-rotate-90'>
-              <Heart item={item} />
-            </div>
+
+            <Heart item={item} />
           </div>
         ))}
 
         <div className='pt-10'>
-          <Button
-            variant='expandIcon'
-            Icon={ArrowLeftIcon}
-            iconPlacement='left'
-            asChild
-            className='rounded-full'
-          >
-            <Link href='/'>홈으로 이동</Link>
-          </Button>
+          <GoToHome />
         </div>
       </div>
     </div>
@@ -94,15 +76,7 @@ const NoLikedPlaceHolder = () => {
         <p className='text-xl text-muted-foreground'>
           자주 조회하는 아이템을 즐겨찾기 해보세요
         </p>
-        <Button
-          variant='expandIcon'
-          Icon={ArrowLeftIcon}
-          iconPlacement='left'
-          asChild
-          className='rounded-full w-fit'
-        >
-          <Link href='/'>홈으로 이동</Link>
-        </Button>
+        <GoToHome />
       </div>
       <Image
         src='https://maplestory.io/api/GMS/62/mob/8180000/render/stand'

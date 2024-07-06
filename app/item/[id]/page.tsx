@@ -1,15 +1,14 @@
+import { GoToHome } from '@/components/go-to-home';
 import { NoImage } from '@/components/no-image';
-import { Button } from '@/components/ui/button';
 import { ITEMS_PER_PAGE } from '@/constants';
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { InferSelectModel, and, desc, eq, gte, sql } from 'drizzle-orm';
-import { ArrowLeftIcon, Loader } from 'lucide-react';
+import { Loader } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { ItemPage } from './item-page';
@@ -169,15 +168,7 @@ const Top = async ({
 
   return (
     <header className='px-4 py-10 space-y-6'>
-      <Button
-        variant='expandIcon'
-        Icon={ArrowLeftIcon}
-        iconPlacement='left'
-        asChild
-        className='rounded-full w-fit'
-      >
-        <Link href='/'>홈으로 이동</Link>
-      </Button>
+      <GoToHome />
       <div className='flex gap-4'>
         <div className='flex flex-col items-center gap-4'>
           {item.id && item.id >= 666666660 ? (
@@ -191,6 +182,7 @@ const Top = async ({
               className='size-[100px] sm:size-[140px] object-contain'
             />
           )}
+
           <Heart
             item={{
               id: item.id,

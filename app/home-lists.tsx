@@ -1,21 +1,17 @@
 'use client';
 
 import { NoImage } from '@/components/no-image';
+import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import { transactionTable } from '@/db/schema';
 import { useInfiniteTransactions } from '@/hooks/use-infinite-transactions';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
-import { ArrowRightIcon, CandyCane, HelpCircle, Loader } from 'lucide-react';
-import Link from 'next/link';
+import { ArrowRightIcon, CandyCane, Loader, Star } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
@@ -35,28 +31,14 @@ export const HomeLists = ({ initialLists }: Props) => {
         <div className='space-y-2'>
           <div className='text-xl sm:text-2xl font-semibold flex items-center gap-2'>
             <span>거래 최신 순</span>
-            <Popover>
-              <PopoverTrigger>
-                <HelpCircle className='size-6 stroke-blue-500' />
-              </PopoverTrigger>
-              <PopoverContent className='text-sm text-muted-foreground'>
-                🚀 하루마다 업데이트 됩니다. <br />
-                7월 1일 거래내역의 시간은 정확하지 않습니다. <br />
-                <br />
-                아직 버그가 많습니다. <br />
-                아래 메일로 제보해주시면 감사하겠습니다. <br />
-                jws970306@khu.ac.kr <br />
-                <br /> 원하는 기능, 개선사항 관련으로 메일 주셔도 됩니다 :-){' '}
-                <br />
-              </PopoverContent>
-            </Popover>
+
             <Button
               size='sm'
-              variant='shine'
-              className='rounded-full h-7'
+              variant='ringHover'
+              className='rounded-full h-6 text-xs bg-secondary text-primary hover:text-primary-foreground'
               asChild
             >
-              <Link href='/new'>New ✨</Link>
+              <Link href='/new'>New</Link>
             </Button>
           </div>
           {data.pages[0][0].date && (
@@ -66,34 +48,30 @@ export const HomeLists = ({ initialLists }: Props) => {
             </p>
           )}
         </div>
-        <div className='relative'>
-          <div className='flex flex-col items-end gap-2'>
-            <Button
-              className='rounded-full w-fit'
-              variant='expandIcon'
-              Icon={ArrowRightIcon}
-              iconPlacement='right'
-              asChild
-            >
-              <Link href='/liked'>즐겨찾기</Link>
-            </Button>
-            <Button
-              className='rounded-full w-fit'
-              variant='expandIcon'
-              Icon={ArrowRightIcon}
-              iconPlacement='right'
-              asChild
-            >
-              <Link href='/top'>TOP 300</Link>
-            </Button>
-          </div>
-          <Image
-            src={'https://maplestory.io/api/KMS/389/mob/2230103/render/stand'}
-            alt='spider'
-            width={40}
-            height={200}
-            className='object-contain w-10 absolute -top-40 -right-16 pointer-events-none'
-          />
+
+        <div className='flex flex-col items-end gap-2'>
+          <Button
+            size='sm'
+            className='rounded-full w-fit text-xs font-semibold px-4 h-8'
+            variant='shine'
+            Icon={ArrowRightIcon}
+            iconPlacement='right'
+            asChild
+          >
+            <Link href='/top'>TOP 300 ✨</Link>
+          </Button>
+          <Button
+            className='rounded-full w-fit'
+            variant='linkHover2'
+            Icon={ArrowRightIcon}
+            iconPlacement='right'
+            asChild
+          >
+            <Link href='/liked'>
+              즐겨찾기
+              <Star className='size-4 stroke-yellow-400 fill-yellow-400 ml-1' />
+            </Link>
+          </Button>
         </div>
       </div>
 
@@ -157,7 +135,7 @@ export const HomeLists = ({ initialLists }: Props) => {
                         .map((addi) => addi.split(':'))
                         .map(([key, value]) => (
                           <Badge
-                            variant='outline'
+                            variant='secondary'
                             key={`${key}-${value}`}
                             className='rounded'
                           >
@@ -188,6 +166,8 @@ export const HomeLists = ({ initialLists }: Props) => {
             </Button>
           </div>
         )}
+
+        <ScrollTop />
       </div>
     </>
   );

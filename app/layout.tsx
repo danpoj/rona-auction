@@ -1,14 +1,13 @@
 import { BackgroundPattern } from '@/components/background-pattern';
 import AdsenseScript from '@/components/google-adsense/adsense-script';
 import { QueryProvider } from '@/components/provider/query-provider';
+import { ThemeProvider } from '@/components/provider/theme-provider';
 import { TracingBeam } from '@/components/tracing-beam';
 import { siteConfig } from '@/config';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Gothic_A1 } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/components/provider/theme-provider';
-import Script from 'next/script';
 
 const gothic_A1 = Gothic_A1({
   subsets: ['latin'],

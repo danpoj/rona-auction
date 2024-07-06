@@ -1,26 +1,17 @@
-import { Button } from '@/components/ui/button';
+import { GoToHome } from '@/components/go-to-home';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { ArrowLeftIcon, Settings } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function Page() {
   return (
     <div className='max-w-[52rem] mx-auto h-full p-4'>
       <div className='flex gap-4 pt-[5.8rem] pb-10'>
-        <Button
-          variant='expandIcon'
-          Icon={ArrowLeftIcon}
-          iconPlacement='left'
-          asChild
-          className='rounded-full w-fit'
-        >
-          <Link href='/'>홈으로 이동</Link>
-        </Button>
+        <GoToHome />
 
         <Popover>
           <PopoverTrigger>
@@ -30,7 +21,7 @@ export default function Page() {
             ⚙️ 작업중... <br />
             <br />
             1. 장비 아이템 옵션 별 필터링 <br />
-            2. 날짜별 가격, 거래량 - chart ✅ <br /> 3. 즐겨찾기 <br />
+            2. 날짜별 가격, 거래량 - chart ✅ <br /> 3. 즐겨찾기 ✅ <br />
           </PopoverContent>
         </Popover>
       </div>
@@ -39,13 +30,9 @@ export default function Page() {
         <article className='prose dark:prose-invert'>
           <h1>7/6(토) 업데이트</h1>
           <ul>
-            <li>7/5(금) 거래내역 추가</li>
-            <li>폰트 변경 GoThic_A1</li>
+            <li>즐겨찾기 추가</li>
             <li>
-              즐겨찾기 추가 <b>- /liked</b>
-            </li>
-            <li>
-              <h2>아이템 페이지로 넘어가지않는 일부 아이템들 수정</h2>
+              아이템 페이지로 넘어가지않는 일부 아이템들 수정
               <pre>
                 {`
 - 뱃지 공격력 주문서 30%
@@ -63,7 +50,6 @@ export default function Page() {
         <article className='prose dark:prose-invert'>
           <h1>7/5(금) 업데이트</h1>
           <ul>
-            <li>7/4(목) 거래내역 추가</li>
             <li>옥션 거래내역에 있는 아이템들만 검색되도록 수정</li>
             <li>검색속도 개선</li>
             <li>검색내용과 매칭되는 모든 아이템이 보여지도록 수정</li>
