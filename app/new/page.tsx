@@ -15,12 +15,12 @@ export default function Page() {
 
         <Popover>
           <PopoverTrigger>
-            <Settings className='size-8 stroke-primary/60 hover:stroke-primary/70 hover:animate-spin' />
+            <Settings className='size-7 stroke-primary/60 hover:stroke-primary/70 hover:animate-spin' />
           </PopoverTrigger>
           <PopoverContent className='text-sm text-muted-foreground'>
             ⚙️ 작업중... <br />
             <br />
-            1. 장비 아이템 옵션 별 필터링 <br />
+            1. 장비 아이템 옵션 별 필터링 ✅ <br />
             2. 날짜별 가격, 거래량 - chart ✅ <br /> 3. 즐겨찾기 ✅ <br />
           </PopoverContent>
         </Popover>
@@ -30,7 +30,10 @@ export default function Page() {
         <article className='prose dark:prose-invert'>
           <h1>7/6(토) 업데이트</h1>
           <ul>
-            <li>즐겨찾기 추가</li>
+            <li className='font-black bg-gradient-to-r from-blue-600 via-teal-300 to-teal-400 bg-clip-text text-transparent'>
+              장비아이템 옵션검색 ✨
+            </li>
+            <li>즐겨찾기</li>
             <li>
               아이템 페이지로 넘어가지않는 일부 아이템들 수정
               <pre>

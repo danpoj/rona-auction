@@ -6,6 +6,7 @@ import { Loader } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { ItemPage } from './item-page';
+import { ItemPageWithFilteringWrapper } from './item-page-with-filtering-wrapper';
 import { Top } from './top';
 
 type Props = {
@@ -27,11 +28,11 @@ export async function generateStaticParams() {
 export default async function Page({ params: { id } }: Props) {
   const idAsNumber = Number(id);
 
-  const item = await db.query.itemTable.findFirst({
+  const itemPromise = db.query.itemTable.findFirst({
     where: eq(itemTable.id, idAsNumber),
   });
 
-  const transactions = await db
+  const transactionsPromise = db
     .select({
       date: transactionTable.date,
       price: transactionTable.price,
@@ -43,6 +44,11 @@ export default async function Page({ params: { id } }: Props) {
     .orderBy(desc(transactionTable.date))
     .limit(ITEMS_PER_PAGE)
     .where(eq(transactionTable.itemId, idAsNumber));
+
+  const [item, transactions] = await Promise.all([
+    itemPromise,
+    transactionsPromise,
+  ]);
 
   if (!item) notFound();
 
@@ -59,7 +65,11 @@ export default async function Page({ params: { id } }: Props) {
         <Top id={idAsNumber} item={item} />
       </Suspense>
 
-      <ItemPage initialLists={transactions} item={item} id={idAsNumber} />
+      {!!transactions[0].additional ? (
+        <ItemPageWithFilteringWrapper id={idAsNumber} item={item} />
+      ) : (
+        <ItemPage initialLists={transactions} item={item} id={idAsNumber} />
+      )}
     </div>
   );
 }

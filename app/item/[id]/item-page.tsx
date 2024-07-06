@@ -10,9 +10,8 @@ import { useInfiniteTransactionsPerItem } from '@/hooks/use-infinite-transaction
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
-import { ArrowLeftIcon, CandyCane, Loader } from 'lucide-react';
+import { CandyCane, Loader } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
