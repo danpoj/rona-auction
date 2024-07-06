@@ -4,6 +4,7 @@ import {
   clearAction,
   deleteItemsWithoutTransactions,
   getItemsWithoutTransactions,
+  getTransactionsAction,
   query,
   saveItemsAction,
   saveTransactionsAction,
@@ -13,5 +14,5 @@ import {
 import { Button } from './ui/button';
 
 export const TestButton = () => {
-  return <Button onClick={() => deleteItemsWithoutTransactions()}>run!</Button>;
+  return <Button onClick={() => getTransactionsAction()}>run!</Button>;
 };

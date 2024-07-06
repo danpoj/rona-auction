@@ -3,12 +3,12 @@ import AdsenseScript from '@/components/google-adsense/adsense-script';
 import { QueryProvider } from '@/components/provider/query-provider';
 import { ThemeProvider } from '@/components/provider/theme-provider';
 import { TracingBeam } from '@/components/tracing-beam';
+import { Toaster } from '@/components/ui/sonner';
 import { siteConfig } from '@/config';
 import { cn } from '@/lib/utils';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { Gothic_A1 } from 'next/font/google';
-import { GoogleAnalytics } from '@next/third-parties/google';
-import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
 const gothic_A1 = Gothic_A1({

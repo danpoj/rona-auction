@@ -3,10 +3,13 @@
 import { GoToHome } from '@/components/go-to-home';
 import Heart from '@/components/heart';
 import { NoImage } from '@/components/no-image';
+import { SearchBarLoading } from '@/components/search-bar-loading';
+import { SearchBarWrapper } from '@/components/search-bar-wrapper';
 import { TypewriterEffectSmooth } from '@/components/typewriter-effect';
 import { words } from '@/constants';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 type Item = {
@@ -23,6 +26,11 @@ export default function NotFound() {
     <div className='max-w-[52rem] mx-auto h-full p-4'>
       <div className='flex flex-col  gap-6 pt-[5.8rem] pb-10'>
         <GoToHome />
+
+        <Suspense fallback={<SearchBarLoading />}>
+          <SearchBarWrapper />
+        </Suspense>
+
         <p className='text-2xl font-semibold flex items-center'>
           <span>즐겨찾기</span>
         </p>

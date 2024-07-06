@@ -8,6 +8,9 @@ import { InferSelectModel, and, eq, gte, sql } from 'drizzle-orm';
 import Image from 'next/image';
 import { LineCharts } from './line-charts';
 import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+import { SearchBarLoading } from '@/components/search-bar-loading';
+import { SearchBarWrapper } from '@/components/search-bar-wrapper';
 const Heart = dynamic(() => import('@/components/heart'), { ssr: false });
 
 export const Top = async ({
@@ -59,6 +62,11 @@ export const Top = async ({
   return (
     <header className='px-4 py-10 space-y-6'>
       <GoToHome />
+
+      <Suspense fallback={<SearchBarLoading />}>
+        <SearchBarWrapper />
+      </Suspense>
+
       <div className='flex gap-4'>
         <div className='flex flex-col items-center gap-4'>
           {item.id && item.id >= 666666660 ? (

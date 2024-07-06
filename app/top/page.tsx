@@ -1,14 +1,15 @@
 import { GoToHome } from '@/components/go-to-home';
 import { NoImage } from '@/components/no-image';
+import { SearchBarLoading } from '@/components/search-bar-loading';
+import { SearchBarWrapper } from '@/components/search-bar-wrapper';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { desc, sql } from 'drizzle-orm';
-import { ArrowLeftIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: '인기매물',
@@ -36,6 +37,11 @@ export default async function Page() {
     <div className='max-w-[52rem] mx-auto h-full p-4'>
       <div className='flex flex-col  gap-6 pt-[5.8rem] pb-10'>
         <GoToHome />
+
+        <Suspense fallback={<SearchBarLoading />}>
+          <SearchBarWrapper />
+        </Suspense>
+
         <p className='text-2xl font-semibold flex items-center'>
           <span>
             인기 매물{' '}
