@@ -3,6 +3,7 @@
 import { db } from '@/db/drizzle';
 import { itemTable } from '@/db/schema';
 import { like } from 'drizzle-orm';
+import { cache } from 'react';
 
 export const fetchItems = async (name: string) => {
   const items = await db
@@ -17,8 +18,8 @@ export const fetchItems = async (name: string) => {
   return items;
 };
 
-export const fetchAllItems = async () => {
+export const fetchAllItems = cache(async () => {
   const items = await db.query.itemTable.findMany();
 
   return items;
-};
+});

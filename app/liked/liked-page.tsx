@@ -14,16 +14,14 @@ type Item = {
   id: number;
 };
 
-export default function NotFound() {
+export default function LikedPage() {
   const [likedArray] = useLocalStorage<Item[]>('liked', []);
 
   if (likedArray.length === 0) return NoLikedPlaceHolder();
 
   return (
     <div className='max-w-[52rem] mx-auto h-full p-4'>
-      <div className='flex flex-col  gap-6 pt-[5.8rem] pb-10'>
-        <GoToHome />
-
+      <div className='flex flex-col  gap-6 pb-10'>
         <p className='text-2xl font-semibold flex items-center'>
           <span>즐겨찾기</span>
         </p>
@@ -70,7 +68,7 @@ export default function NotFound() {
 
 const NoLikedPlaceHolder = () => {
   return (
-    <div className='flex flex-col gap-10 md:flex-row md:gap-0 items-center justify-center pt-20'>
+    <div className='flex flex-col gap-10 md:flex-row md:gap-0 items-center justify-center p-4'>
       <div className='space-y-4'>
         <TypewriterEffectSmooth words={words} />
         <h1 className='text-4xl font-bold'>즐겨찾기 목록이 없습니다</h1>
@@ -84,7 +82,7 @@ const NoLikedPlaceHolder = () => {
         alt='not found image'
         width={600}
         height={600}
-        className='size-[320px] object-contain'
+        className='max-w-[260px] object-contain'
       />
     </div>
   );

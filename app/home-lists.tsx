@@ -9,7 +9,13 @@ import { useInfiniteTransactions } from '@/hooks/use-infinite-transactions';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
-import { ArrowRightIcon, CandyCane, Loader, Star } from 'lucide-react';
+import {
+  ArrowRightIcon,
+  ArrowUpRight,
+  CandyCane,
+  Loader,
+  Star,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -40,6 +46,21 @@ export const HomeLists = ({ initialLists }: Props) => {
             >
               <Link href='/new'>New</Link>
             </Button>
+
+            <Button
+              size='sm'
+              variant='ringHover'
+              className='rounded-full h-6 text-xs bg-secondary text-primary hover:text-primary-foreground'
+              asChild
+            >
+              <Link
+                href='https://tally.so/r/wg4M74'
+                target='_blank'
+                rel='noreferrer noopener'
+              >
+                문의 <ArrowUpRight className='size-3 ml-0.5' />
+              </Link>
+            </Button>
           </div>
           {data.pages[0][0].date && (
             <p className='text-sm sm:text-base space-x-2 text-muted-foreground items-center flex'>
@@ -58,7 +79,7 @@ export const HomeLists = ({ initialLists }: Props) => {
             iconPlacement='right'
             asChild
           >
-            <Link href='/top'>TOP 300 ✨</Link>
+            <Link href='/top'>인기 매물 ✨</Link>
           </Button>
           <Button
             className='rounded-full w-fit'
@@ -109,15 +130,24 @@ export const HomeLists = ({ initialLists }: Props) => {
                     <p className='text-sm sm:text-base font-semibold'>
                       {transaction.itemName}
                     </p>
-                    <p className='text-sm flex gap-2'>
+                    <div className='text-sm flex gap-2'>
                       <span>{transaction.count}개</span>
-                      <span>
-                        개당{' '}
-                        {Math.round(
-                          Number(transaction.price) / transaction.count
-                        ).toLocaleString('ko-KR')}
-                      </span>
-                    </p>
+                      <p className='flex gap-1 items-center'>
+                        <span>개당</span>
+                        <span className='font-bold'>
+                          {Math.round(
+                            Number(transaction.price) / transaction.count
+                          ).toLocaleString('ko-KR')}
+                        </span>
+                        <Image
+                          src='/meso.png'
+                          alt='meso image'
+                          width={20}
+                          height={20}
+                          className='size-4 object-contain'
+                        />
+                      </p>
+                    </div>
                   </div>
 
                   {transaction.date && (

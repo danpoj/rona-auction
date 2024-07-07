@@ -176,15 +176,24 @@ export const ItemPageWithFiltering = ({
                   <p className='text-sm sm:text-base font-semibold'>
                     {item.name}
                   </p>
-                  <p className='text-sm flex gap-2'>
+                  <div className='text-sm flex gap-2'>
                     <span>{transaction.count}개</span>
-                    <span>
-                      개당{' '}
-                      {Math.round(
-                        Number(transaction.price) / transaction.count
-                      ).toLocaleString('ko-KR')}
-                    </span>
-                  </p>
+                    <p className='flex gap-1 items-center'>
+                      <span>개당</span>
+                      <span className='font-bold'>
+                        {Math.round(
+                          Number(transaction.price) / transaction.count
+                        ).toLocaleString('ko-KR')}
+                      </span>
+                      <Image
+                        src='/meso.png'
+                        alt='meso image'
+                        width={20}
+                        height={20}
+                        className='size-4 object-contain'
+                      />
+                    </p>
+                  </div>
                 </div>
 
                 {transaction.date && (

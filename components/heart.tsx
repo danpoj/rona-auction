@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MouseEvent } from 'react';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 type Item = {
   name: string;
@@ -15,6 +17,7 @@ const Heart = ({ item }: { item: Item }) => {
   const [likedArray, setLikedArray] = useLocalStorage<Item[]>('liked', [], {
     initializeWithValue: false,
   });
+  const router = useRouter();
 
   const likedIndex = likedArray.findIndex(
     (localStorageItem) => localStorageItem.id === item.id
@@ -29,6 +32,14 @@ const Heart = ({ item }: { item: Item }) => {
         ...prev.slice(likedIndex + 1),
       ]);
     } else {
+      toast(`${item.name}`, {
+        description: `즐겨찾기 되었습니다.`,
+        position: 'top-right',
+        action: {
+          label: '즐겨찾기 →',
+          onClick: () => router.push('/liked'),
+        },
+      });
       setLikedArray((prev) => [item, ...prev]);
     }
 

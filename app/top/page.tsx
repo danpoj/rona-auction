@@ -5,6 +5,7 @@ import { SearchBarWrapper } from '@/components/search-bar-wrapper';
 import { Badge } from '@/components/ui/badge';
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
+import { cn } from '@/lib/utils';
 import { desc, sql } from 'drizzle-orm';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -43,12 +44,7 @@ export default async function Page() {
         </Suspense>
 
         <p className='text-2xl font-semibold flex items-center'>
-          <span>
-            인기 매물{' '}
-            <span className='font-extrabold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent'>
-              TOP 300
-            </span>
-          </span>
+          <span>인기 매물</span>
         </p>
       </div>
 
@@ -57,7 +53,15 @@ export default async function Page() {
           <Link
             href={`/item/${item.id}`}
             key={item.id}
-            className='flex items-center gap-2 py-2 hover:bg-primary/5'
+            className={cn(
+              'flex items-center gap-2 py-2 hover:bg-primary/5',
+              index === 0 &&
+                'bg-gradient-to-r from-blue-600 via-violet-600 to-violet-300 bg-clip-text text-transparent font-black',
+              index === 1 &&
+                'bg-gradient-to-r from-green-600 via-teal-500 to-emerald-200 bg-clip-text text-transparent font-black',
+              index === 2 &&
+                'bg-gradient-to-r from-red-600 via-amber-500 to-yellow-300 bg-clip-text text-transparent font-black'
+            )}
           >
             <span className='font-semibold justify-center text-sm'>
               #{index + 1}
