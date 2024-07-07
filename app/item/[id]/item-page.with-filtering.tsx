@@ -11,7 +11,7 @@ import { itemTable, transactionTable } from '@/db/schema';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
-import { CandyCane } from 'lucide-react';
+import { CandyCane, Grid2x2, Rows3 } from 'lucide-react';
 import Image from 'next/image';
 import { FormEvent, useRef, useState } from 'react';
 import { toast } from 'sonner';
@@ -37,6 +37,7 @@ export const ItemPageWithFiltering = ({
   const [filteredTransactions, setFilteredTransactions] =
     useState(transactions);
   const [page, setPage] = useState(1);
+  const [shape, setShape] = useState<'list' | 'item'>('list');
 
   const options = useRef(
     Object.entries(addiOptions).reduce(
@@ -68,11 +69,9 @@ export const ItemPageWithFiltering = ({
 
     const newTransactions = transactions.filter((t) => {
       for (const [key] of ops) {
-        if (!t.additional[key]) t.additional[key] = 0;
-
         if (
-          t.additional[key] < values[key].min ||
-          t.additional[key] > values[key].max
+          (t.additional[key] || 0) < values[key].min ||
+          (t.additional[key] || 0) > values[key].max
         ) {
           return false;
         }
@@ -136,50 +135,173 @@ export const ItemPageWithFiltering = ({
         </form>
       </div>
 
-      <div className='flex flex-col divide-y'>
-        {filteredTransactions.length === 0 ? (
-          <p className='text-2xl p-4 font-bold'>검색 결과가 없습니다</p>
-        ) : (
-          <p className='p-4 pt-0 text-2xl font-bold'>
-            총 {filteredTransactions.length}개의 내역이 검색되었습니다
+      {filteredTransactions.length === 0 ? (
+        <p className='text-2xl p-4 font-bold'>검색 결과가 없습니다</p>
+      ) : (
+        <div className='flex items-center p-4 pt-0 pb-6 gap-4'>
+          <p className='text-xl font-bold'>
+            총 {filteredTransactions.length}개
           </p>
-        )}
-        {filteredTransactions
-          .slice(0, page * ITEMS_PER_PAGE)
-          .map((transaction) => (
-            <div
-              key={transaction.id}
+
+          <div className='rounded-lg overflow-hidden'>
+            <Button
+              onClick={() => setShape('list')}
+              variant={shape === 'list' ? 'default' : 'ghost'}
               className={cn(
-                'p-2 space-y-1',
-                item.id ? 'hover:bg-primary/5' : 'cursor-default'
+                'p-0 h-9 w-10 rounded-none transition-none border border-r-0'
               )}
             >
-              <div className='flex items-center justify-between'>
-                <div className='flex items-center gap-2'>
-                  {item.id ? (
-                    item.id >= 666666660 ? (
-                      <NoImage />
-                    ) : (
-                      <Image
-                        src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=2`}
-                        alt={item.name}
-                        width={100}
-                        height={100}
-                        className='size-8 sm:size-10 object-contain'
-                      />
-                    )
-                  ) : (
-                    <div className='size-8 sm:size-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center'>
-                      <CandyCane className='size-4 sm:size-5' />
+              <Rows3 className='size-4' />
+            </Button>
+            <Button
+              onClick={() => setShape('item')}
+              variant={shape === 'item' ? 'default' : 'ghost'}
+              className={cn(
+                'p-0 h-9 w-10 rounded-none transition-none border border-l-0'
+              )}
+            >
+              <Grid2x2 className='size-4' />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      <div
+        className={cn(
+          'grid',
+          shape === 'list'
+            ? 'grid-cols-1 divide-y'
+            : 'grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1.5'
+        )}
+      >
+        {filteredTransactions
+          .slice(0, page * ITEMS_PER_PAGE)
+          .map((transaction) => {
+            if (shape === 'list') {
+              return (
+                <div key={transaction.id} className={cn('p-2 space-y-1')}>
+                  <div className='flex items-center justify-between'>
+                    <div className='flex items-center gap-2'>
+                      {item.id ? (
+                        item.id >= 666666660 ? (
+                          <NoImage />
+                        ) : (
+                          <Image
+                            src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=2`}
+                            alt={item.name}
+                            width={100}
+                            height={100}
+                            className='size-8 sm:size-10 object-contain'
+                          />
+                        )
+                      ) : (
+                        <div className='size-8 sm:size-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center'>
+                          <CandyCane className='size-4 sm:size-5' />
+                        </div>
+                      )}
+                      <p className='text-sm sm:text-base font-semibold'>
+                        {item.name}
+                      </p>
+                      <div className='text-sm flex gap-2'>
+                        <span>{transaction.count}개</span>
+                        <p className='flex gap-1 items-center'>
+                          <span>개당</span>
+                          <span className='font-bold'>
+                            {Math.round(
+                              Number(transaction.price) / transaction.count
+                            ).toLocaleString('ko-KR')}
+                          </span>
+                          <Image
+                            src='/meso.png'
+                            alt='meso image'
+                            width={20}
+                            height={20}
+                            className='size-4 object-contain'
+                          />
+                        </p>
+                      </div>
                     </div>
-                  )}
-                  <p className='text-sm sm:text-base font-semibold'>
-                    {item.name}
-                  </p>
+
+                    {transaction.date && (
+                      <p className='text-sm hidden sm:block text-muted-foreground'>
+                        {format(transaction.date, 'LL-dd HH:mm')}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className='flex justify-between'>
+                    {transaction.additional ? (
+                      <div className='space-x-1 mt-1'>
+                        {Object.entries(transaction.additional).map(
+                          ([key, value]) => (
+                            <Badge
+                              variant='secondary'
+                              key={`${key}-${value}`}
+                              className='rounded'
+                            >
+                              {key} {value}
+                            </Badge>
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <div
+                  key={transaction.id}
+                  className='p-2 space-y-1 border bg-gray-50 dark:bg-gray-900 flex flex-col items-center py-4'
+                >
+                  <div>
+                    <div>
+                      <div className='flex items-center gap-2'>
+                        {item.id ? (
+                          item.id >= 666666660 ? (
+                            <NoImage />
+                          ) : (
+                            <Image
+                              src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=2`}
+                              alt={item.name}
+                              width={100}
+                              height={100}
+                              className='size-7 sm:size-7 object-contain'
+                            />
+                          )
+                        ) : (
+                          <div className='size-8 sm:size-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center'>
+                            <CandyCane className='size-4 sm:size-5' />
+                          </div>
+                        )}
+                        <p className='text-xs font-semibold'>{item.name}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='py-2'>
+                    {transaction.additional ? (
+                      <div className='flex flex-col'>
+                        {Object.entries(transaction.additional).map(
+                          ([key, value]) => (
+                            <span
+                              key={`${key}-${value}`}
+                              className='text-xs font-semibold text-primary/90 dark:text-primary/80'
+                            >
+                              {key} {value}
+                            </span>
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
+
                   <div className='text-sm flex gap-2'>
-                    <span>{transaction.count}개</span>
                     <p className='flex gap-1 items-center'>
-                      <span>개당</span>
                       <span className='font-bold'>
                         {Math.round(
                           Number(transaction.price) / transaction.count
@@ -194,36 +316,16 @@ export const ItemPageWithFiltering = ({
                       />
                     </p>
                   </div>
+
+                  {transaction.date && (
+                    <p className='text-xs text-muted-foreground'>
+                      {format(transaction.date, 'LL-dd HH:mm')}
+                    </p>
+                  )}
                 </div>
-
-                {transaction.date && (
-                  <p className='text-sm hidden sm:block text-muted-foreground'>
-                    {format(transaction.date, 'LL-dd HH:mm')}
-                  </p>
-                )}
-              </div>
-
-              <div className='flex justify-between'>
-                {transaction.additional ? (
-                  <div className='space-x-1 mt-1'>
-                    {Object.entries(transaction.additional).map(
-                      ([key, value]) => (
-                        <Badge
-                          variant='secondary'
-                          key={`${key}-${value}`}
-                          className='rounded'
-                        >
-                          {key} {value}
-                        </Badge>
-                      )
-                    )}
-                  </div>
-                ) : (
-                  <div />
-                )}
-              </div>
-            </div>
-          ))}
+              );
+            }
+          })}
       </div>
 
       {ITEMS_PER_PAGE * page <= filteredTransactions.length && (

@@ -28,6 +28,14 @@ export default function Page() {
 
       <div className='space-y-20'>
         <article className='prose dark:prose-invert'>
+          <h1>7/5(금) 업데이트</h1>
+          <ul>
+            <li>장비아이템 보기 옵션 (리스트, 그리드) 추가</li>
+            <li>검색바 유지</li>
+          </ul>
+        </article>
+
+        <article className='prose dark:prose-invert'>
           <h1>7/6(토) 업데이트</h1>
           <ul>
             <li className='font-black bg-gradient-to-r from-blue-600 via-teal-300 to-teal-400 bg-clip-text text-transparent'>

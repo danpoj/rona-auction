@@ -26,6 +26,9 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        xs: '500px',
+      },
       fontSize: {
         'tremor-label': ['0.75rem', { lineHeight: '1rem' }],
         'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
