@@ -8,12 +8,47 @@ import { Suspense } from 'react';
 import { ItemPage } from './item-page';
 import { ItemPageWithFilteringWrapper } from './item-page-with-filtering-wrapper';
 import { Top } from './top';
+import { siteConfig } from '@/config';
 
 type Props = {
   params: {
     id: string;
   };
 };
+
+export async function generateMetadata({ params }: Props) {
+  const item = await db.query.itemTable.findFirst({
+    where: eq(itemTable.id, Number(params.id)),
+  });
+
+  return {
+    title: item?.name || '',
+    description: item?.desc || siteConfig.description,
+    openGraph: {
+      type: 'website',
+      locale: 'ko_KR',
+      url: `${siteConfig.url}item/${item?.id}`,
+      title: `${item?.name}-${siteConfig.name}`,
+      description: item?.desc || siteConfig.description,
+      siteName: `${item?.name}-${siteConfig.name}`,
+      images: [
+        {
+          url: 'https://maplestory.io/api/kms/384/item/2040301/icon?resize=10',
+          width: 630,
+          height: 630,
+          alt: `${item?.name}-${siteConfig.name}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${item?.name}-${siteConfig.name}`,
+      description: item?.desc || siteConfig.description,
+      images: ['https://maplestory.io/api/kms/384/item/2040301/icon?resize=10'],
+      creator: '@danpoj',
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const items = await db.query.itemTable.findMany({
