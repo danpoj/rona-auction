@@ -4,7 +4,16 @@ import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 import { transactionTable } from '@/db/schema';
+import { useCountdown } from '@/hooks/use-count-down';
 import { useInfiniteTransactions } from '@/hooks/use-infinite-transactions';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
@@ -14,12 +23,15 @@ import {
   ArrowUpRight,
   CandyCane,
   Loader,
+  Pause,
+  RotateCcw,
   Star,
+  Triangle,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 type Props = {
   initialLists: InferSelectModel<typeof transactionTable>[];
@@ -35,9 +47,9 @@ export const HomeLists = ({ initialLists }: Props) => {
     <>
       <div className='flex items-center justify-between pl-4 pr-2 pb-6'>
         <div className='space-y-2'>
+          <CounterModal />
           <div className='text-xl sm:text-2xl font-semibold flex items-center gap-2'>
             <span>거래 최신 순</span>
-
             <Button
               size='sm'
               variant='ringHover'
@@ -82,7 +94,7 @@ export const HomeLists = ({ initialLists }: Props) => {
             <Link href='/top'>인기 매물 ✨</Link>
           </Button>
           <Button
-            className='rounded-full w-fit'
+            className='rounded-full w-fit font-semibold'
             variant='linkHover2'
             Icon={ArrowRightIcon}
             iconPlacement='right'
@@ -90,7 +102,7 @@ export const HomeLists = ({ initialLists }: Props) => {
           >
             <Link href='/liked'>
               즐겨찾기
-              <Star className='size-4 stroke-yellow-400 fill-yellow-400 ml-1' />
+              <Star className='size-3 stroke-yellow-400 fill-yellow-400 ml-1' />
             </Link>
           </Button>
         </div>
@@ -202,3 +214,178 @@ export const HomeLists = ({ initialLists }: Props) => {
     </>
   );
 };
+
+function CounterModal() {
+  const [countStart, setCountStart] = useState(0);
+  const [count, { startCountdown, stopCountdown, resetCountdown, setCount }] =
+    useCountdown({
+      countStart: countStart,
+      intervalMs: 1000,
+    });
+  const [isCounting, setIsCounting] = useState(false);
+
+  const hour = Math.floor(count / 3600);
+  const minute = Math.floor((count % 3600) / 60);
+  const second = count % 60;
+
+  const [start, setStart] = useState('');
+  const [end, setEnd] = useState('');
+
+  useEffect(() => {
+    if (count === 0) {
+      setIsCounting(false);
+    }
+  }, [count]);
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          size='sm'
+          className='rounded-full w-fit text-xs font-semibold px-4 h-8'
+          variant='gooeyRight'
+        >
+          경험치 계산기 🗿
+        </Button>
+      </DialogTrigger>
+      <DialogContent
+        className={cn(
+          isCounting && count < 10 && 'bg-red-200 dark:bg-red-950',
+          isCounting &&
+            count >= 10 &&
+            count < 30 &&
+            'bg-yellow-200 dark:bg-yellow-950'
+        )}
+      >
+        <DialogHeader className='sr-only'>
+          <DialogTitle>경험치 계산기</DialogTitle>
+        </DialogHeader>
+        <div className='flex flex-col pt-6 gap-8'>
+          <div className='space-y-2'>
+            <p
+              className={cn(
+                'text-4xl font-bold flex gap-2',
+                isCounting && count >= 30 && 'text-blue-600'
+              )}
+            >
+              {hour > 0 && <span>{String(hour).padStart(2, '0')}시간</span>}
+              <span>{String(minute).padStart(2, '0')}분</span>
+              <span>{String(second).padStart(2, '0')}초</span>
+            </p>
+
+            <div className='flex gap-1'>
+              <Button
+                onClick={() => {
+                  setCountStart(count + 3600);
+                }}
+                variant='secondary'
+                className='hover:bg-primary/10 font-semibold transition-none'
+              >
+                +1시간
+              </Button>
+              <Button
+                onClick={() => {
+                  setCountStart(count + 300);
+                }}
+                variant='secondary'
+                className='hover:bg-primary/10 font-semibold transition-none'
+              >
+                +5분
+              </Button>
+              <Button
+                onClick={() => {
+                  setCountStart(count + 60);
+                }}
+                variant='secondary'
+                className='hover:bg-primary/10 font-semibold transition-none'
+              >
+                +1분
+              </Button>
+            </div>
+          </div>
+
+          <div className='space-y-4'>
+            <div className='flex gap-2'>
+              <div className='space-y-2 flex-1'>
+                <span
+                  className={cn('text-muted-foreground text-lg font-semibold')}
+                >
+                  시작 경험치
+                </span>
+                <Input
+                  value={start}
+                  onChange={(e) => {
+                    if (Number.isNaN(Number(e.target.value))) return;
+                    setStart(e.target.value);
+                  }}
+                />
+              </div>
+              <div className='space-y-2 flex-1'>
+                <span
+                  className={cn('text-muted-foreground text-lg font-semibold')}
+                >
+                  종료 경험치
+                </span>
+                <Input
+                  value={end}
+                  onChange={(e) => {
+                    if (Number.isNaN(Number(e.target.value))) return;
+                    setEnd(e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+
+            {start && end && (
+              <>
+                {Number(end) < Number(start) ? (
+                  <p className='text-destructive font-semibold'>
+                    시작 경험치가 더 높습니다.
+                  </p>
+                ) : (
+                  <p className='text-2xl font-bold'>
+                    + {(Number(end) - Number(start)).toLocaleString('ko-KR')}
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+
+          <div className='flex self-end gap-2'>
+            <Button
+              disabled={count === 0}
+              onClick={() => {
+                if (isCounting) {
+                  stopCountdown();
+                } else {
+                  startCountdown();
+                }
+
+                setIsCounting((prev) => !prev);
+              }}
+              className='p-0 size-12'
+              variant='outline'
+            >
+              {isCounting ? (
+                <Pause className='size-5 fill-primary stroke-primary' />
+              ) : (
+                <Triangle className='rotate-[90deg] size-4 stroke-[3px] fill-primary stroke-primary ' />
+              )}
+            </Button>
+            <Button
+              className='size-12 p-0'
+              variant='outline'
+              onClick={() => {
+                setIsCounting(false);
+                resetCountdown();
+                setCount(0);
+              }}
+            >
+              <RotateCcw className='stroke-[3px]' />
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}

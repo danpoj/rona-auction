@@ -28,15 +28,17 @@ export async function generateMetadata({ params }: Props) {
       type: 'website',
       locale: 'ko_KR',
       url: `${siteConfig.url}item/${item?.id}`,
-      title: `${item?.name}-${siteConfig.name}`,
-      description: item?.desc || siteConfig.description,
-      siteName: `${item?.name}-${siteConfig.name}`,
+      title: `${item?.name} - ${siteConfig.name}`,
+      description: item?.desc
+        ? `${item.desc} - ${siteConfig.description}`
+        : siteConfig.description,
+      siteName: `${item?.name} - ${siteConfig.name}`,
       images: [
         {
           url:
             Number(item?.id) >= 666666660
               ? siteConfig.ogImage
-              : `https://maplestory.io/api/kms/384/item/${item?.id}/icon?resize=10`,
+              : `https://maplestory.io/api/kms/384/item/${item?.id}/icon?resize=3`,
           width: 1200,
           height: 630,
           alt: `${item?.name}-${siteConfig.name}`,
@@ -46,11 +48,13 @@ export async function generateMetadata({ params }: Props) {
     twitter: {
       card: 'summary_large_image',
       title: `${item?.name}-${siteConfig.name}`,
-      description: item?.desc || siteConfig.description,
+      description: item?.desc
+        ? `${item.desc} - ${siteConfig.description}`
+        : siteConfig.description,
       images: [
         Number(item?.id) >= 666666660
           ? siteConfig.ogImage
-          : `https://maplestory.io/api/kms/384/item/${item?.id}/icon?resize=10`,
+          : `https://maplestory.io/api/kms/384/item/${item?.id}/icon?resize=3`,
       ],
       creator: '@danpoj',
     },
