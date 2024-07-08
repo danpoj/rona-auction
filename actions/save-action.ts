@@ -3,7 +3,7 @@
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { parseString } from '@/lib/parse-string';
-import { InferSelectModel, count, eq, isNull, sql } from 'drizzle-orm';
+import { InferSelectModel, and, eq, gte, isNull, lt, sql } from 'drizzle-orm';
 import fs from 'fs';
 import path from 'path';
 
@@ -291,8 +291,24 @@ export const getItemsWithoutTransactions = async () => {
   // console.log(Object.keys(obj).length);
 };
 
+export const delete7_7_transactions = async () => {
+  const startDate = new Date('2024-07-07T00:00:00+09:00'); // 한국 시간 7월 7일 00:00:00
+  const endDate = new Date('2024-07-08T00:00:00+09:00'); // 한국 시간 7월 8일 00:00:00
+
+  const result = await db
+    .delete(transactionTable)
+    .where(
+      and(
+        gte(transactionTable.date, startDate),
+        lt(transactionTable.date, endDate)
+      )
+    );
+
+  console.log(`Deleted ${result.rowCount} rows`);
+};
+
 export const getTransactionsAction = async () => {
-  const fullPath = path.join(process.cwd(), '/data/07.07.txt');
+  const fullPath = path.join(process.cwd(), '/data/07.08.txt');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const arr = fileContents.split('\n\n');
@@ -330,7 +346,7 @@ export const saveTransactionsAction = async () => {
 
   const transactions = await getTransactionsAction();
 
-  console.log(transactions);
+  // console.log(transactions);
 
   const batchSize = 1000;
   for (let i = 0; i < transactions.length; i += batchSize) {
