@@ -292,7 +292,7 @@ export const getItemsWithoutTransactions = async () => {
 };
 
 export const getTransactionsAction = async () => {
-  const fullPath = path.join(process.cwd(), '/data/7.06.txt');
+  const fullPath = path.join(process.cwd(), '/data/07.07.txt');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const arr = fileContents.split('\n\n');
@@ -321,21 +321,6 @@ export const getTransactionsAction = async () => {
 };
 
 export const saveTransactionsAction = async () => {
-  // const items = await fetch('https://maplestory.io/api/kms/384/item')
-  //   .then((res) => res.json())
-  //   .then((is) => {
-  //     const temp = is.reduce(
-  //       (acc: Record<string, number>, item: { name: string; id: number }) => {
-  //         if (!item.name) return acc;
-  //         acc[item.name] = item.id;
-  //         return acc;
-  //       },
-  //       {}
-  //     );
-
-  //     return temp;
-  //   });
-
   const items = await db.query.itemTable.findMany();
 
   const obj = items.reduce((acc, item) => {
@@ -343,11 +328,11 @@ export const saveTransactionsAction = async () => {
     return acc;
   }, {});
 
-  console.log(obj);
-
   const transactions = await getTransactionsAction();
 
-  const batchSize = 1000; // Adjust this value based on your database limits
+  console.log(transactions);
+
+  const batchSize = 1000;
   for (let i = 0; i < transactions.length; i += batchSize) {
     console.log(`${i} ~ ${i + 1000} start...`);
     const batch = transactions.slice(i, i + batchSize);
