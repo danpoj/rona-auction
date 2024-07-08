@@ -245,7 +245,7 @@ function CounterModal() {
           className='rounded-full w-fit text-xs font-semibold px-4 h-8'
           variant='gooeyRight'
         >
-          경험치 계산기 🗿
+          경험치 계산기
         </Button>
       </DialogTrigger>
       <DialogContent

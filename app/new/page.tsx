@@ -28,6 +28,14 @@ export default function Page() {
 
       <div className='space-y-20'>
         <article className='prose dark:prose-invert'>
+          <h1>7/9(화) 업데이트</h1>
+          <ul>
+            <li>인기매물 ✨ 날짜별로 변경</li>
+            <li>경험치 계산기 추가</li>
+          </ul>
+        </article>
+
+        <article className='prose dark:prose-invert'>
           <h1>7/7(일) 업데이트</h1>
           <ul>
             <li>장비아이템 보기 옵션 (리스트, 그리드) 추가</li>
