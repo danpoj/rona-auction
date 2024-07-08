@@ -33,8 +33,11 @@ export async function generateMetadata({ params }: Props) {
       siteName: `${item?.name}-${siteConfig.name}`,
       images: [
         {
-          url: 'https://maplestory.io/api/kms/384/item/2040301/icon?resize=10',
-          width: 630,
+          url:
+            Number(item?.id) >= 666666660
+              ? siteConfig.ogImage
+              : `https://maplestory.io/api/kms/384/item/${item?.id}/icon?resize=10`,
+          width: 1200,
           height: 630,
           alt: `${item?.name}-${siteConfig.name}`,
         },
@@ -44,7 +47,11 @@ export async function generateMetadata({ params }: Props) {
       card: 'summary_large_image',
       title: `${item?.name}-${siteConfig.name}`,
       description: item?.desc || siteConfig.description,
-      images: ['https://maplestory.io/api/kms/384/item/2040301/icon?resize=10'],
+      images: [
+        Number(item?.id) >= 666666660
+          ? siteConfig.ogImage
+          : `https://maplestory.io/api/kms/384/item/${item?.id}/icon?resize=10`,
+      ],
       creator: '@danpoj',
     },
   };
