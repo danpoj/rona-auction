@@ -10,20 +10,19 @@ import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export const Lists = ({
   itemsOBJ,
 }: {
-  itemsOBJ: Record<
-    string,
-    { date: string; id: number; name: string; transactionCount: number }[]
-  >;
+  itemsOBJ: Record<string, { id: number; name: string; value: number }[]>;
 }) => {
   const [currentDate, setCurrentDate] = useState(
     Object.keys(itemsOBJ).sort().reverse()[0]
   );
   const [page, setPage] = useState(1);
+  const router = useRouter();
 
   return (
     <div className='flex flex-col pb-40'>
@@ -49,29 +48,27 @@ export const Lists = ({
       {Object.entries(itemsOBJ).map(([date, items]) => (
         <div
           key={date}
-          className={cn(date === currentDate ? 'block' : 'hidden')}
+          className={cn('mt-10', date === currentDate ? 'block' : 'hidden')}
         >
-          <p className='text-4xl font-black mb-4 mt-10'>
+          <h3 className='text-2xl font-bold text-tremor-content-strong dark:text-dark-tremor-content-strong mb-6'>
             {format(date, 'LL.dd (E)', { locale: ko })}
-          </p>
+          </h3>
+
           {items.slice(0, 100 * page).map((item, index) => (
             <Link
               href={`/item/${item.id}`}
               key={item.id}
               className={cn(
                 'flex items-center gap-2 py-2 hover:bg-primary/5',
-                index === 0 &&
-                  'bg-gradient-to-r from-blue-600 via-violet-600 to-violet-300 bg-clip-text text-transparent font-black',
-                index === 1 &&
-                  'bg-gradient-to-r from-green-600 via-teal-500 to-emerald-200 bg-clip-text text-transparent font-black',
-                index === 2 &&
-                  'bg-gradient-to-r from-red-600 via-amber-500 to-yellow-300 bg-clip-text text-transparent font-black'
+                index === 0 && 'font-black text-amber-500',
+                index === 1 && 'font-black text-violet-500',
+                index === 2 && 'font-black text-blue-500'
               )}
             >
               <span className='font-semibold justify-center text-sm'>
                 #{index + 1}
               </span>
-              <Badge variant='secondary'>{item.transactionCount}건</Badge>
+              <Badge variant='secondary'>{item.value}건</Badge>
               {item.id >= 666666660 ? (
                 <NoImage />
               ) : (

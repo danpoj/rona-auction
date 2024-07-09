@@ -40,19 +40,29 @@ export default async function Page() {
 
   const itemsOBJ: Record<
     string,
-    { date: string; id: number; name: string; transactionCount: number }[]
+    { id: number; name: string; value: number }[]
   > = {};
 
   for (const item of result) {
     if (itemsOBJ[item.date]) {
-      itemsOBJ[item.date].push(item);
+      itemsOBJ[item.date].push({
+        name: item.name,
+        value: item.transactionCount,
+        id: item.id,
+      });
     } else {
-      itemsOBJ[item.date] = [item];
+      itemsOBJ[item.date] = [
+        {
+          name: item.name,
+          value: item.transactionCount,
+          id: item.id,
+        },
+      ];
     }
   }
 
   for (const items of Object.values(itemsOBJ)) {
-    items.sort((a, b) => b.transactionCount - a.transactionCount);
+    items.sort((a, b) => b.value - a.value);
   }
 
   return (

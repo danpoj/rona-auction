@@ -1,6 +1,6 @@
 'use client';
 
-import { LineChart } from '@tremor/react';
+import { AreaChart } from '@tremor/react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
@@ -25,7 +25,7 @@ export const LineCharts = ({ datas }: Props) => {
 
   return (
     <div className='flex flex-col sm:flex-row sm:divide-x'>
-      <LineChart
+      <AreaChart
         className='mt-4 h-60 w-full'
         data={priceData}
         index='date'
@@ -37,7 +37,7 @@ export const LineCharts = ({ datas }: Props) => {
         animationDuration={700}
       />
 
-      <LineChart
+      <AreaChart
         className='mt-4 h-60'
         data={countData}
         index='date'
