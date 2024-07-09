@@ -32,12 +32,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
+import { TransactionsLineChart } from './charts';
 
 type Props = {
   initialLists: InferSelectModel<typeof transactionTable>[];
+  transactionsCountPerDay: { date: string; count: number }[];
 };
 
-export const HomeLists = ({ initialLists }: Props) => {
+export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
   const { data, fetchNextPage, hasNextPage, isFetching, error } =
     useInfiniteTransactions({ initialLists });
 
@@ -45,66 +47,61 @@ export const HomeLists = ({ initialLists }: Props) => {
 
   return (
     <>
-      <div className='flex items-center justify-between pl-4 pr-2 pb-6'>
-        <div className='space-y-2'>
-          <CounterModal />
-          <div className='text-xl sm:text-2xl font-semibold flex items-center gap-2'>
-            <span>거래 최신 순</span>
-            <Button
-              size='sm'
-              variant='ringHover'
-              className='rounded-full h-6 text-xs bg-secondary text-primary hover:text-primary-foreground'
-              asChild
-            >
-              <Link href='/new'>New</Link>
-            </Button>
+      <div className='flex flex-col gap-10 pl-4 pr-2 pb-6'>
+        <TransactionsLineChart
+          transactionsCountPerDay={transactionsCountPerDay}
+        />
 
-            <Button
-              size='sm'
-              variant='ringHover'
-              className='rounded-full h-6 text-xs bg-secondary text-primary hover:text-primary-foreground'
-              asChild
-            >
-              <Link
-                href='https://tally.so/r/wg4M74'
-                target='_blank'
-                rel='noreferrer noopener'
+        <div className='flex items-center justify-between'>
+          <div className='space-y-2'>
+            <div className='flex items-center'>
+              <CounterModal />
+              <Button
+                className='rounded-full w-fit font-semibold'
+                variant='linkHover2'
+                Icon={ArrowRightIcon}
+                iconPlacement='right'
+                asChild
               >
-                문의 <ArrowUpRight className='size-3 ml-0.5' />
-              </Link>
-            </Button>
-          </div>
-          {data.pages[0][0].date && (
-            <p className='text-sm sm:text-base space-x-2 text-muted-foreground items-center flex'>
-              <span>마지막 업데이트</span>
-              <span>{format(data.pages[0][0].date, 'yyyy-LL-dd HH:mm')}</span>
-            </p>
-          )}
-        </div>
+                <Link href='/liked'>
+                  즐겨찾기
+                  <Star className='size-3 stroke-yellow-400 fill-yellow-400 ml-1' />
+                </Link>
+              </Button>
+            </div>
+            <div className='text-xl sm:text-2xl font-semibold flex items-center gap-2'>
+              <span>거래 최신 순</span>
+              <Button
+                size='sm'
+                variant='ringHover'
+                className='rounded-full h-6 text-xs bg-secondary text-primary hover:text-primary-foreground'
+                asChild
+              >
+                <Link href='/new'>New</Link>
+              </Button>
 
-        <div className='flex flex-col items-end gap-2'>
-          <Button
-            size='sm'
-            className='rounded-full w-fit text-xs font-semibold px-4 h-8'
-            variant='shine'
-            Icon={ArrowRightIcon}
-            iconPlacement='right'
-            asChild
-          >
-            <Link href='/top'>인기 매물 ✨</Link>
-          </Button>
-          <Button
-            className='rounded-full w-fit font-semibold'
-            variant='linkHover2'
-            Icon={ArrowRightIcon}
-            iconPlacement='right'
-            asChild
-          >
-            <Link href='/liked'>
-              즐겨찾기
-              <Star className='size-3 stroke-yellow-400 fill-yellow-400 ml-1' />
-            </Link>
-          </Button>
+              <Button
+                size='sm'
+                variant='ringHover'
+                className='rounded-full h-6 text-xs bg-secondary text-primary hover:text-primary-foreground'
+                asChild
+              >
+                <Link
+                  href='https://tally.so/r/wg4M74'
+                  target='_blank'
+                  rel='noreferrer noopener'
+                >
+                  문의 <ArrowUpRight className='size-3 ml-0.5' />
+                </Link>
+              </Button>
+            </div>
+            {data.pages[0][0].date && (
+              <p className='text-sm sm:text-base space-x-2 text-muted-foreground items-center flex'>
+                <span>마지막 업데이트</span>
+                <span>{format(data.pages[0][0].date, 'yyyy-LL-dd HH:mm')}</span>
+              </p>
+            )}
+          </div>
         </div>
       </div>
 

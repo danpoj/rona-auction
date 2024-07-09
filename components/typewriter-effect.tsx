@@ -79,9 +79,9 @@ export const TypewriterEffectSmooth = ({
           width: 'fit-content',
         }}
         transition={{
-          duration: 0.7,
+          duration: 0.3,
           ease: 'linear',
-          delay: 0.2,
+          delay: 0,
         }}
       >
         <div
@@ -107,7 +107,7 @@ export const TypewriterEffectSmooth = ({
           repeatType: 'reverse',
         }}
         className={cn(
-          'block rounded-sm w-[3px] h-6 md:h-7 xl:h-8 bg-muted-foreground',
+          'block rounded-sm w-[3px] h-6 md:h-7 xl:h-8 bg-muted-foreground/60',
           cursorClassName
         )}
       ></motion.span>

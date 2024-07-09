@@ -6,6 +6,9 @@ import { TypewriterEffectSmooth } from '@/components/typewriter-effect';
 import { words } from '@/constants';
 import { Suspense } from 'react';
 import { HomeLists } from './home-lists';
+import { db } from '@/db/drizzle';
+import { transactionTable } from '@/db/schema';
+import { sql } from 'drizzle-orm';
 
 export default function Page() {
   return (
@@ -25,7 +28,29 @@ export default function Page() {
 }
 
 const HomeListsWrapper = async () => {
-  const initialLists = await fetchTransactions({ pageParam: 0 });
+  const [initialLists, transactionsCountPerDay] = await Promise.all([
+    fetchTransactions({ pageParam: 0 }),
 
-  return <HomeLists initialLists={initialLists} />;
+    db
+      .select({
+        date: sql<string>`DATE(${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul')`.as(
+          'date'
+        ),
+        count: sql<number>`count(*)`.mapWith(Number),
+      })
+      .from(transactionTable)
+      .groupBy(
+        sql`DATE(${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul')`
+      )
+      .orderBy(
+        sql`DATE(${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul')`
+      ),
+  ]);
+
+  return (
+    <HomeLists
+      initialLists={initialLists}
+      transactionsCountPerDay={transactionsCountPerDay}
+    />
+  );
 };

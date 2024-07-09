@@ -33,6 +33,8 @@ export const LineCharts = ({ datas }: Props) => {
         colors={['blue']}
         showYAxis={false}
         valueFormatter={(value) => `${value.toLocaleString('ko-KR')} 메소`}
+        showAnimation
+        animationDuration={700}
       />
 
       <LineChart
@@ -43,6 +45,8 @@ export const LineCharts = ({ datas }: Props) => {
         colors={['violet']}
         showYAxis={false}
         valueFormatter={(value) => `${value.toLocaleString('ko-KR')} 개`}
+        showAnimation
+        animationDuration={700}
       />
     </div>
   );
