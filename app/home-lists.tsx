@@ -25,7 +25,6 @@ import {
   Loader,
   Pause,
   RotateCcw,
-  Star,
   Triangle,
 } from 'lucide-react';
 import Image from 'next/image';
@@ -52,23 +51,21 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           transactionsCountPerDay={transactionsCountPerDay}
         />
 
-        <div className='flex items-center justify-between'>
-          <div className='space-y-2'>
-            <div className='flex items-center'>
+        <div className='flex items-center justify-between w-full'>
+          <div className='space-y-2 w-full'>
+            <div className='flex items-center justify-end w-full'>
               <CounterModal />
               <Button
-                className='rounded-full w-fit font-semibold'
+                className='rounded-full w-fit text-xs font-semibold'
                 variant='linkHover2'
                 Icon={ArrowRightIcon}
                 iconPlacement='right'
                 asChild
               >
-                <Link href='/liked'>
-                  즐겨찾기
-                  <Star className='size-3 stroke-yellow-400 fill-yellow-400 ml-1' />
-                </Link>
+                <Link href='/liked'>즐겨찾기</Link>
               </Button>
             </div>
+
             <div className='text-xl sm:text-2xl font-semibold flex items-center gap-2'>
               <span>거래 최신 순</span>
               <Button
@@ -240,7 +237,7 @@ function CounterModal() {
         <Button
           size='sm'
           className='rounded-full w-fit text-xs font-semibold px-4 h-8'
-          variant='gooeyRight'
+          variant='linkHover2'
         >
           경험치 계산기
         </Button>

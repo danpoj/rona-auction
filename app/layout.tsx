@@ -103,7 +103,7 @@ export default function RootLayout({
             </main>
           </QueryProvider>
         </ThemeProvider>
-        <Toaster />
+        <Toaster position='top-right' />
       </body>
       <GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_GAID!} />
     </html>

@@ -9,13 +9,18 @@ import { HomeLists } from './home-lists';
 import { db } from '@/db/drizzle';
 import { transactionTable } from '@/db/schema';
 import { sql } from 'drizzle-orm';
+import { InstallPWAButton } from '@/components/install-pwa-button';
 
 export default function Page() {
   return (
     <div className='max-w-[52rem] mx-auto pb-40'>
-      <div className='p-4 pb-0 flex items-center justify-between'>
-        <TypewriterEffectSmooth words={words} />
-        <ThemeButton />
+      <div className='p-4 my-2'>
+        <div className='flex items-center justify-between'>
+          <TypewriterEffectSmooth words={words} />
+          <ThemeButton />
+        </div>
+
+        <InstallPWAButton />
       </div>
 
       <Suspense fallback={<SearchBarLoading />}>
