@@ -53,15 +53,15 @@ export const InstallPWAButton = () => {
   return (
     <Button
       onClick={() => {
-        const isUnSupportedPWA = checkUnsupportedBrowser();
+        // const isUnSupportedPWA = checkUnsupportedBrowser();
 
-        if (isUnSupportedPWA) {
-          toast('알림', {
-            description: '앱 설치를 지원하지않는 브라우저입니다.',
-          });
+        // if (isUnSupportedPWA) {
+        //   toast('알림', {
+        //     description: '앱 설치를 지원하지않는 브라우저입니다.',
+        //   });
 
-          return;
-        }
+        //   return;
+        // }
 
         if (pwa) {
           pwa.prompt();

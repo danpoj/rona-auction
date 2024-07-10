@@ -75,7 +75,7 @@ export default async function Page() {
         </Suspense>
 
         <p className='text-2xl font-semibold flex items-center'>
-          <span>날짜별 인기 매물</span>
+          <span>인기 매물</span>
         </p>
       </div>
 
