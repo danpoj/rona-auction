@@ -50,19 +50,11 @@ export const InstallPWAButton = () => {
     };
   }, []);
 
+  if (!pwa) return null;
+
   return (
     <Button
       onClick={() => {
-        // const isUnSupportedPWA = checkUnsupportedBrowser();
-
-        // if (isUnSupportedPWA) {
-        //   toast('알림', {
-        //     description: '앱 설치를 지원하지않는 브라우저입니다.',
-        //   });
-
-        //   return;
-        // }
-
         if (pwa) {
           pwa.prompt();
 
@@ -73,7 +65,8 @@ export const InstallPWAButton = () => {
           });
         } else {
           toast('알림', {
-            description: '모바일 | 데스크톱 앱이 이미 설치되었습니다 🎉',
+            description:
+              '모바일 | 데스크톱 앱이 이미 설치되었거나 지원하지않는 환경입니다.',
           });
         }
       }}
