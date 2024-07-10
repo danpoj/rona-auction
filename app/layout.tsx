@@ -7,7 +7,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { siteConfig } from '@/config';
 import { cn } from '@/lib/utils';
 import { GoogleAnalytics } from '@next/third-parties/google';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Gothic_A1 } from 'next/font/google';
 import './globals.css';
 
@@ -17,6 +17,17 @@ const gothic_A1 = Gothic_A1({
 });
 
 export const metadata: Metadata = {
+  applicationName: '로나오프',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: '로나오프',
+  },
+  formatDetection: {
+    telephone: false,
+  },
+
   title: {
     default: siteConfig.name,
     template: `%s - ${siteConfig.name}`,
@@ -59,6 +70,10 @@ export const metadata: Metadata = {
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#FFFFFF',
 };
 
 export default function RootLayout({
