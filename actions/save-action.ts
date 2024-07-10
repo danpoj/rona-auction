@@ -212,7 +212,7 @@ export const delete7_7_transactions = async () => {
 };
 
 export const getTransactionsAction = async () => {
-  const fullPath = path.join(process.cwd(), '/data/07.08.txt');
+  const fullPath = path.join(process.cwd(), '/data/07.09.txt');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const arr = fileContents.split('\n\n');
@@ -250,7 +250,7 @@ export const saveTransactionsAction = async () => {
 
   const transactions = await getTransactionsAction();
 
-  // console.log(transactions);
+  console.log(transactions);
 
   const batchSize = 1000;
   for (let i = 0; i < transactions.length; i += batchSize) {
