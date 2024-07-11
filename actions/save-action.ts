@@ -212,7 +212,7 @@ export const delete7_7_transactions = async () => {
 };
 
 export const getTransactionsAction = async () => {
-  const fullPath = path.join(process.cwd(), '/data/07.09.txt');
+  const fullPath = path.join(process.cwd(), '/data/07.10.txt');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const arr = fileContents.split('\n\n');
@@ -244,13 +244,11 @@ export const saveTransactionsAction = async () => {
   const items = await db.query.itemTable.findMany();
 
   const obj = items.reduce((acc, item) => {
-    // acc[item.trimmedName] = { ...item };
+    acc[item.trimmedName] = { ...item };
     return acc;
   }, {});
 
   const transactions = await getTransactionsAction();
-
-  console.log(transactions);
 
   const batchSize = 1000;
   for (let i = 0; i < transactions.length; i += batchSize) {
@@ -263,12 +261,12 @@ export const saveTransactionsAction = async () => {
       price: String(b?.price),
       additional: b?.additional || '',
       itemName: b?.name.trim(),
-      // ...(obj[b?.name.trim()?.replace(/\s+/g, '')] && {
-      //   itemId: obj[b?.name.trim()?.replace(/\s+/g, '')].id,
-      // }),
+      ...(obj[b?.name.trim()?.replace(/\s+/g, '')] && {
+        itemId: obj[b?.name.trim()?.replace(/\s+/g, '')].id,
+      }),
     }));
 
-    // await db.insert(transactionTable).values(batchWithItemId);
+    await db.insert(transactionTable).values(batchWithItemId);
 
     console.log(`${i} ~ ${i + 1000} success!`);
   }
