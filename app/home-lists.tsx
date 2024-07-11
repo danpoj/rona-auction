@@ -202,9 +202,32 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
             </Button>
           </div>
         )}
-
-        <ScrollTop />
       </section>
+
+      <div className='flex justify-between pl-2 pt-4'>
+        <div className='flex flex-col'>
+          <p className='text-sm font-semibold pb-1'>Built with</p>
+
+          <Link
+            className='hover:underline underline-offset-4 text-xs text-muted-foreground mb-0.5'
+            href={'https://discord.com/invite/pkpu2guJpE'}
+            target='_blank'
+            rel='noreferrer noopener'
+          >
+            로나월드 옥션로그
+          </Link>
+
+          <Link
+            className='hover:underline underline-offset-4 text-xs text-muted-foreground'
+            href={'https://maplestory.io/'}
+            target='_blank'
+            rel='noreferrer noopener'
+          >
+            https://maplestory.io/
+          </Link>
+        </div>
+        <ScrollTop />
+      </div>
     </>
   );
 };
