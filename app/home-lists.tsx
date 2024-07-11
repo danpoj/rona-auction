@@ -46,14 +46,14 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
 
   return (
     <>
-      <div className='flex flex-col gap-10 pl-4 pr-2 pb-6'>
+      <article className='flex flex-col gap-10 pl-4 pr-2 pb-6'>
         <TransactionsLineChart
           transactionsCountPerDay={transactionsCountPerDay}
         />
 
         <div className='flex items-center justify-between w-full'>
           <div className='space-y-2 w-full'>
-            <div className='flex items-center justify-end w-full'>
+            <section className='flex items-center justify-end w-full'>
               <CounterModal />
               <Button
                 className='rounded-full w-fit text-xs font-semibold'
@@ -64,10 +64,10 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
               >
                 <Link href='/liked'>즐겨찾기</Link>
               </Button>
-            </div>
+            </section>
 
             <div className='text-xl sm:text-2xl font-semibold flex items-center gap-2'>
-              <span>거래 최신 순</span>
+              <h2>거래 최신 순</h2>
               <Button
                 size='sm'
                 variant='ringHover'
@@ -100,9 +100,9 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
             )}
           </div>
         </div>
-      </div>
+      </article>
 
-      <div className='flex flex-col divide-y'>
+      <section className='flex flex-col divide-y'>
         {data.pages.map((page, i) => (
           <Fragment key={i}>
             {page.map((transaction) => (
@@ -133,9 +133,9 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
                         <CandyCane className='size-4 sm:size-5' />
                       </div>
                     )}
-                    <p className='text-sm sm:text-base font-semibold'>
+                    <h3 className='text-sm sm:text-base font-semibold'>
                       {transaction.itemName}
-                    </p>
+                    </h3>
                     <div className='text-sm flex gap-2'>
                       <span>{transaction.count}개</span>
                       <p className='flex gap-1 items-center'>
@@ -204,7 +204,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
         )}
 
         <ScrollTop />
-      </div>
+      </section>
     </>
   );
 };

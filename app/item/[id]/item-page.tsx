@@ -32,7 +32,7 @@ export const ItemPage = ({ initialLists, item, id }: Props) => {
 
   return (
     <>
-      <div className='flex flex-col divide-y'>
+      <section className='flex flex-col divide-y'>
         {data.pages.map((page, i) => (
           <Fragment key={i}>
             {page.map((transaction) => (
@@ -131,7 +131,7 @@ export const ItemPage = ({ initialLists, item, id }: Props) => {
             </Button>
           </div>
         )}
-      </div>
+      </section>
 
       <div className='mt-10 mx-2 flex justify-between'>
         <GoToHome />

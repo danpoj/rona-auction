@@ -14,14 +14,14 @@ import { InstallPWAButton } from '@/components/install-pwa-button';
 export default function Page() {
   return (
     <div className='max-w-[52rem] mx-auto pb-40'>
-      <div className='p-4 my-2'>
-        <div className='flex items-center justify-between'>
+      <header className='p-4 my-2'>
+        <section className='flex items-center justify-between'>
           <TypewriterEffectSmooth words={words} />
           <ThemeButton />
-        </div>
+        </section>
 
         <InstallPWAButton />
-      </div>
+      </header>
 
       <Suspense fallback={<SearchBarLoading />}>
         <SearchBarWrapper />

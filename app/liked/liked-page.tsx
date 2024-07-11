@@ -20,11 +20,11 @@ export default function LikedPage() {
   if (likedArray.length === 0) return NoLikedPlaceHolder();
 
   return (
-    <div className='max-w-[52rem] mx-auto h-full p-4'>
+    <section className='max-w-[52rem] mx-auto h-full p-4'>
       <div className='flex flex-col  gap-6 pb-10'>
-        <p className='text-2xl font-semibold flex items-center'>
+        <h1 className='text-2xl font-semibold flex items-center'>
           <span>즐겨찾기</span>
-        </p>
+        </h1>
       </div>
 
       <div className='flex flex-col pb-40 divide-y'>
@@ -50,7 +50,7 @@ export default function LikedPage() {
                     className='size-10 object-contain'
                   />
                 )}
-                <p>{item.name}</p>
+                <h3>{item.name}</h3>
               </div>
             </Link>
 
@@ -62,7 +62,7 @@ export default function LikedPage() {
           <GoToHome />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

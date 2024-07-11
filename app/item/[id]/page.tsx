@@ -99,7 +99,7 @@ export default async function Page({ params: { id } }: Props) {
   if (!item) notFound();
 
   return (
-    <div className='max-w-[52rem] mx-auto pb-40'>
+    <article className='max-w-[52rem] mx-auto pb-40'>
       <Suspense
         key={id}
         fallback={
@@ -116,6 +116,6 @@ export default async function Page({ params: { id } }: Props) {
       ) : (
         <ItemPage initialLists={transactions} item={item} id={idAsNumber} />
       )}
-    </div>
+    </article>
   );
 }

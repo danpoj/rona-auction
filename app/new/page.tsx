@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 export default function Page() {
   return (
-    <div className='max-w-[52rem] mx-auto h-full p-4'>
+    <section className='max-w-[52rem] mx-auto h-full p-4'>
       <div className='flex gap-4 pt-[5.8rem] pb-10'>
         <GoToHome />
 
@@ -28,7 +28,7 @@ export default function Page() {
 
       <div className='space-y-20'>
         <article className='prose dark:prose-invert'>
-          <h1>7/9(화) 업데이트</h1>
+          <h3>7/9(화) 업데이트</h3>
           <ul>
             <li>인기매물 ✨ 날짜별로 변경</li>
             <li>경험치 계산기 추가</li>
@@ -36,7 +36,7 @@ export default function Page() {
         </article>
 
         <article className='prose dark:prose-invert'>
-          <h1>7/7(일) 업데이트</h1>
+          <h3>7/7(일) 업데이트</h3>
           <ul>
             <li>장비아이템 보기 옵션 (리스트, 그리드) 추가</li>
             <li>검색바 유지</li>
@@ -44,7 +44,7 @@ export default function Page() {
         </article>
 
         <article className='prose dark:prose-invert'>
-          <h1>7/6(토) 업데이트</h1>
+          <h3>7/6(토) 업데이트</h3>
           <ul>
             <li className='font-black bg-gradient-to-r from-blue-600 via-teal-300 to-teal-400 bg-clip-text text-transparent'>
               장비아이템 옵션검색 ✨
@@ -67,7 +67,7 @@ export default function Page() {
         </article>
 
         <article className='prose dark:prose-invert'>
-          <h1>7/5(금) 업데이트</h1>
+          <h3>7/5(금) 업데이트</h3>
           <ul>
             <li>옥션 거래내역에 있는 아이템들만 검색되도록 수정</li>
             <li>검색속도 개선</li>
@@ -89,6 +89,6 @@ export default function Page() {
           </ul>
         </article>
       </div>
-    </div>
+    </section>
   );
 }

@@ -166,7 +166,7 @@ export const ItemPageWithFiltering = ({
         </div>
       )}
 
-      <div
+      <section
         className={cn(
           'grid',
           shape === 'list'
@@ -326,7 +326,7 @@ export const ItemPageWithFiltering = ({
               );
             }
           })}
-      </div>
+      </section>
 
       {ITEMS_PER_PAGE * page <= filteredTransactions.length && (
         <div className='w-full flex items-center justify-center pt-4'>
