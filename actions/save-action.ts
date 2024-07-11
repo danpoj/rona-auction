@@ -195,9 +195,9 @@ export const getItemsWithoutTransactions = async () => {
   // console.log(Object.keys(obj).length);
 };
 
-export const delete7_7_transactions = async () => {
-  const startDate = new Date('2024-07-07T00:00:00+09:00'); // 한국 시간 7월 7일 00:00:00
-  const endDate = new Date('2024-07-08T00:00:00+09:00'); // 한국 시간 7월 8일 00:00:00
+export const delete7_10_transactions = async () => {
+  const startDate = new Date('2024-07-10T00:00:00+09:00'); // 한국 시간 7월 7일 00:00:00
+  const endDate = new Date('2024-07-11T00:00:00+09:00'); // 한국 시간 7월 8일 00:00:00
 
   const result = await db
     .delete(transactionTable)
@@ -212,7 +212,7 @@ export const delete7_7_transactions = async () => {
 };
 
 export const getTransactionsAction = async () => {
-  const fullPath = path.join(process.cwd(), '/data/07.10.txt');
+  const fullPath = path.join(process.cwd(), '/data/07.11.txt');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const arr = fileContents.split('\n\n');

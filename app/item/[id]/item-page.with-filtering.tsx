@@ -82,7 +82,7 @@ export const ItemPageWithFiltering = ({
 
     setFilteredTransactions(newTransactions);
 
-    toast('검색 완료 🎉', {
+    toast(`${item.name} 🎉`, {
       description: `총 ${newTransactions.length}개의 거래내역이 검색되었습니다.`,
       position: 'top-right',
     });

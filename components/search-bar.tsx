@@ -57,7 +57,7 @@ export const SearchBar = ({ items }: Props) => {
                 className='flex gap-2 items-center p-3 hover:bg-primary/5'
               >
                 {item.id >= 666666660 ? (
-                  <NoImage className='size-7 sm:size-7' />
+                  <NoImage className='size-7 sm:size-7 rounded-xl sm:rounded-xl' />
                 ) : (
                   <Image
                     priority

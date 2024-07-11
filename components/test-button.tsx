@@ -2,7 +2,7 @@
 
 import {
   clearAction,
-  delete7_7_transactions,
+  delete7_10_transactions,
   deleteItemsWithoutTransactions,
   getItemsWithoutTransactions,
   getTransactionsAction,

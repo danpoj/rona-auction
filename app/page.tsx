@@ -14,7 +14,7 @@ import { InstallPWAButton } from '@/components/install-pwa-button';
 export default function Page() {
   return (
     <div className='max-w-[52rem] mx-auto pb-40'>
-      <header className='p-4 my-2'>
+      <header className='p-4 my-2 pt-14'>
         <section className='flex items-center justify-between'>
           <TypewriterEffectSmooth words={words} />
           <ThemeButton />

@@ -67,60 +67,63 @@ export const Top = async ({
         <SearchBarWrapper />
       </Suspense>
 
-      <div className='flex gap-4'>
-        <div className='flex flex-col items-center gap-4'>
-          {item.id && item.id >= 666666660 ? (
-            <NoImage className='size-[100px] sm:size-[140px]' />
-          ) : (
-            <Image
-              src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=3`}
-              alt={`${item.name} - ${item.desc}`}
-              width={140}
-              height={140}
-              className='size-[100px] sm:size-[140px] object-contain'
+      <div className='flex flex-col gap-4'>
+        <h1 className='text-2xl sm:text-3xl font-black'>{item.name}</h1>
+
+        <div className='flex gap-4'>
+          <div className='flex flex-col items-center gap-4'>
+            {item.id && item.id >= 666666660 ? (
+              <NoImage className='size-[100px] sm:size-[140px]' />
+            ) : (
+              <Image
+                src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=3`}
+                alt={`${item.name} - ${item.desc}`}
+                width={140}
+                height={140}
+                className='size-[100px] sm:size-[140px] object-contain'
+              />
+            )}
+
+            <Heart
+              item={{
+                id: item.id,
+                name: item.name,
+              }}
             />
-          )}
+          </div>
 
-          <Heart
-            item={{
-              id: item.id,
-              name: item.name,
-            }}
-          />
-        </div>
-        <div className='flex flex-col justify-between gap-4'>
-          <h1 className='text-2xl sm:text-3xl font-black'>{item.name}</h1>
-
-          <div className='divide-y text-sm sm:text-base'>
-            <div className='flex items-center font-semibold px-2 py-1.5'>
-              <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-16'>
-                날짜
-              </p>
-              <p className='w-24'>거래량</p>
-              <p>시세</p>
-            </div>
-            {datas.reverse().map((data) => (
-              <div key={data.date} className='flex items-center p-2'>
-                <p className='text-xs sm:text-sm text-muted-foreground tracking-tight w-16'>
-                  {format(data.date, 'L/d(iii)', { locale: ko })}
+          <div className='flex flex-col justify-between gap-4'>
+            <div className='divide-y text-sm sm:text-base'>
+              <div className='flex items-center font-semibold px-2 py-1.5'>
+                <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-16'>
+                  날짜
                 </p>
-                <p className='w-24'>
-                  {data.totalCount.toLocaleString('ko-KR')}개
-                </p>
-                <p className='flex items-center gap-1.5'>
-                  {Math.round(Number(data.averagePrice)).toLocaleString(
-                    'ko-KR'
-                  )}
-                  <Image
-                    src='/meso.png'
-                    alt='meso image'
-                    width={20}
-                    height={20}
-                    className='size-4 object-contain'
-                  />
-                </p>
+                <p className='w-24'>거래량</p>
+                <p>시세</p>
               </div>
-            ))}
+              {datas.reverse().map((data) => (
+                <div key={data.date} className='flex items-center p-2'>
+                  <p className='text-xs sm:text-sm text-muted-foreground tracking-tight w-16'>
+                    {format(data.date, 'L/d(iii)', { locale: ko })}
+                  </p>
+                  <p className='w-24'>
+                    {data.totalCount.toLocaleString('ko-KR')}개
+                  </p>
+                  <p className='flex items-center gap-1.5'>
+                    {Math.round(Number(data.averagePrice)).toLocaleString(
+                      'ko-KR'
+                    )}
+                    <Image
+                      src='/meso.png'
+                      alt='meso image'
+                      width={20}
+                      height={20}
+                      className='size-4 object-contain'
+                    />
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
