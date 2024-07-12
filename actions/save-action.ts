@@ -212,7 +212,7 @@ export const delete7_10_transactions = async () => {
 };
 
 export const getTransactionsAction = async () => {
-  const fullPath = path.join(process.cwd(), '/data/07.11.txt');
+  const fullPath = path.join(process.cwd(), '/data/07.12.txt');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const arr = fileContents.split('\n\n');
