@@ -34,8 +34,48 @@ export const ItemPageWithFiltering = ({
   id,
   addiOptions,
 }: Props) => {
-  const [filteredTransactions, setFilteredTransactions] =
-    useState(transactions);
+  const [filteredTransactions, setFilteredTransactions] = useState(
+    transactions.map((t) => {
+      const temp = { ...t };
+      temp.additional = {
+        ...('업그레이드 가능 횟수' in temp.additional && {
+          '업그레이드 가능 횟수': temp.additional['업그레이드 가능 횟수'],
+        }),
+        ...('공격력' in temp.additional && {
+          공격력: temp.additional['공격력'],
+        }),
+        ...('마력' in temp.additional && { 마력: temp.additional['마력'] }),
+
+        ...('MP' in temp.additional && { MP: temp.additional['MP'] }),
+        ...('HP' in temp.additional && { HP: temp.additional['HP'] }),
+        ...('STR' in temp.additional && { STR: temp.additional['STR'] }),
+        ...('DEX' in temp.additional && { DEX: temp.additional['DEX'] }),
+        ...('INT' in temp.additional && { INT: temp.additional['INT'] }),
+        ...('LUK' in temp.additional && { LUK: temp.additional['LUK'] }),
+        ...('명중률' in temp.additional && {
+          명중률: temp.additional['명중률'],
+        }),
+        ...('회피율' in temp.additional && {
+          회피율: temp.additional['회피율'],
+        }),
+        ...('이동속도' in temp.additional && {
+          이동속도: temp.additional['이동속도'],
+        }),
+        ...('점프력' in temp.additional && {
+          점프력: temp.additional['점프력'],
+        }),
+        ...('마법방어력' in temp.additional && {
+          마법방어력: temp.additional['마법방어력'],
+        }),
+
+        ...('물리방어력' in temp.additional && {
+          물리방어력: temp.additional['물리방어력'],
+        }),
+      };
+
+      return temp;
+    })
+  );
   const [page, setPage] = useState(1);
   const [shape, setShape] = useState<'list' | 'item'>('list');
   const [sortType, setSortType] = useState<
@@ -181,7 +221,6 @@ export const ItemPageWithFiltering = ({
 
                     return sorted;
                   });
-                  console.log('asc');
                 } else {
                   setSortType('timeDESC');
                   setFilteredTransactions((prev) => {
@@ -193,8 +232,6 @@ export const ItemPageWithFiltering = ({
 
                     return sorted;
                   });
-
-                  console.log('desc');
                 }
               }}
               variant={sortType.startsWith('time') ? 'default' : 'ghost'}
