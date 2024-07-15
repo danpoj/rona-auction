@@ -38,6 +38,9 @@ export const ItemPageWithFiltering = ({
     useState(transactions);
   const [page, setPage] = useState(1);
   const [shape, setShape] = useState<'list' | 'item'>('list');
+  const [sortType, setSortType] = useState<
+    'timeASC' | 'timeDESC' | 'priceASC' | 'priceDESC'
+  >('timeDESC');
 
   const options = useRef(
     Object.entries(addiOptions).reduce(
@@ -161,6 +164,83 @@ export const ItemPageWithFiltering = ({
               )}
             >
               <Grid2x2 className='size-4' />
+            </Button>
+          </div>
+
+          <div className='rounded-lg overflow-hidden'>
+            <Button
+              onClick={() => {
+                if (sortType === 'timeDESC') {
+                  setSortType('timeASC');
+                  setFilteredTransactions((prev) => {
+                    const sorted = prev.sort(
+                      (a, b) =>
+                        new Date(a.date!).getTime() -
+                        new Date(b.date!).getTime()
+                    );
+
+                    return sorted;
+                  });
+                  console.log('asc');
+                } else {
+                  setSortType('timeDESC');
+                  setFilteredTransactions((prev) => {
+                    const sorted = prev.sort(
+                      (a, b) =>
+                        new Date(b.date!).getTime() -
+                        new Date(a.date!).getTime()
+                    );
+
+                    return sorted;
+                  });
+
+                  console.log('desc');
+                }
+              }}
+              variant={sortType.startsWith('time') ? 'default' : 'ghost'}
+              className={cn(
+                'h-9 rounded-none transition-none border border-r-0 text-xs'
+              )}
+            >
+              {sortType === 'timeASC' ? '오래된순' : '최신순'}
+            </Button>
+            <Button
+              onClick={() => {
+                if (sortType === 'priceDESC') {
+                  setSortType('priceASC');
+                  setFilteredTransactions((prev) => {
+                    const sorted = prev.sort(
+                      (a, b) => Number(a.price) - Number(b.price)
+                    );
+
+                    return [...sorted];
+                  });
+                } else if (sortType === 'priceASC') {
+                  setSortType('priceDESC');
+                  setFilteredTransactions((prev) => {
+                    const sorted = prev.sort(
+                      (a, b) => Number(b.price) - Number(a.price)
+                    );
+
+                    return [...sorted];
+                  });
+                } else {
+                  setSortType('priceDESC');
+                  setFilteredTransactions((prev) => {
+                    const sorted = prev.sort(
+                      (a, b) => Number(b.price) - Number(a.price)
+                    );
+
+                    return [...sorted];
+                  });
+                }
+              }}
+              variant={sortType.startsWith('price') ? 'default' : 'ghost'}
+              className={cn(
+                'h-9 rounded-none transition-none border border-l-0 text-xs'
+              )}
+            >
+              {sortType === 'priceASC' ? '가격낮은순' : '가격높은순'}
             </Button>
           </div>
         </div>
