@@ -30,12 +30,10 @@ export const Top = async ({
       ),
       averagePrice: sql<number>`
       ROUND(
-        AVG(
-          CAST(${transactionTable.price} AS DECIMAL(16,2)) / 
-          NULLIF(${transactionTable.count}, 0)
-        ),
-        2
-      )
+      SUM(CAST(${transactionTable.price} AS DECIMAL(16,2))) / 
+      NULLIF(SUM(${transactionTable.count}), 0),
+    2
+  )
     `.as('average_price'),
       totalCount:
         sql<number>`CAST(SUM(${transactionTable.count}) AS INTEGER)`.as(
