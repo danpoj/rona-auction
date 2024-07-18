@@ -21,7 +21,7 @@ export const useInfiniteTransactions = ({
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) => {
       if (lastPage.length < ITEMS_PER_PAGE) {
-        return undefined; // No more pages
+        return undefined;
       }
       return pages.length;
     },
@@ -33,31 +33,28 @@ export const useInfiniteTransactions = ({
   });
 
 export const useInfiniteTransactionsPerItem = ({
-  initialLists,
   id,
+  sortType = 'timeDESC',
 }: {
-  initialLists: Pick<
-    InferSelectModel<typeof transactionTable>,
-    'date' | 'count' | 'price' | 'id' | 'additional'
-  >[];
   id: number;
-}) =>
-  useInfiniteQuery({
-    queryKey: ['infiniteTransactions', 'perItem', id],
+  sortType?: 'timeASC' | 'timeDESC' | 'priceASC' | 'priceDESC';
+}) => {
+  return useInfiniteQuery({
+    queryKey: ['infiniteTransactions', 'perItem', id, sortType],
     queryFn: async ({ pageParam }) => {
-      const transactions = fetchTransactionsPerItem({ pageParam, id });
+      const transactions = fetchTransactionsPerItem({
+        pageParam,
+        id,
+        sortType,
+      });
       return transactions;
     },
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, pages) => {
       if (lastPage.length < ITEMS_PER_PAGE) {
-        return undefined; // No more pages
+        return undefined;
       }
       return pages.length;
     },
-
-    initialData: {
-      pageParams: [0],
-      pages: [initialLists],
-    },
   });
+};

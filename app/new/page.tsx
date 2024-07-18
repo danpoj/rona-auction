@@ -28,6 +28,14 @@ export default function Page() {
 
       <div className='space-y-20'>
         <article className='prose dark:prose-invert'>
+          <h3>7/18(월) 업데이트</h3>
+          <ul>
+            <li>모든아이템 날짜 / 가격 정렬 추가</li>
+            <li>옵션 정렬 망가지던 이슈 수정</li>
+          </ul>
+        </article>
+
+        <article className='prose dark:prose-invert'>
           <h3>7/15(월) 업데이트</h3>
           <ul>
             <li>장비아이템 날짜 / 가격 정렬 추가</li>
@@ -93,7 +101,6 @@ export default function Page() {
             <li>아이템 상세페이지 로딩속도 개선</li>
             <li>날짜별 가격, 거래량 + 차트 추가</li>
             <li>
-              <span>og image 추가</span>
               <Image
                 src='/og.png'
                 alt='og image'

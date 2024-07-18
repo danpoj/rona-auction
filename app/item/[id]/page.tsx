@@ -88,7 +88,7 @@ export default async function Page({ params: { id } }: Props) {
     })
     .from(transactionTable)
     .orderBy(desc(transactionTable.date))
-    .limit(ITEMS_PER_PAGE)
+    .limit(1)
     .where(eq(transactionTable.itemId, idAsNumber));
 
   const [item, transactions] = await Promise.all([

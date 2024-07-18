@@ -34,48 +34,8 @@ export const ItemPageWithFiltering = ({
   id,
   addiOptions,
 }: Props) => {
-  const [filteredTransactions, setFilteredTransactions] = useState(
-    transactions.map((t) => {
-      const temp = { ...t };
-      temp.additional = {
-        ...('업그레이드 가능 횟수' in temp.additional && {
-          '업그레이드 가능 횟수': temp.additional['업그레이드 가능 횟수'],
-        }),
-        ...('공격력' in temp.additional && {
-          공격력: temp.additional['공격력'],
-        }),
-        ...('마력' in temp.additional && { 마력: temp.additional['마력'] }),
-
-        ...('MP' in temp.additional && { MP: temp.additional['MP'] }),
-        ...('HP' in temp.additional && { HP: temp.additional['HP'] }),
-        ...('STR' in temp.additional && { STR: temp.additional['STR'] }),
-        ...('DEX' in temp.additional && { DEX: temp.additional['DEX'] }),
-        ...('INT' in temp.additional && { INT: temp.additional['INT'] }),
-        ...('LUK' in temp.additional && { LUK: temp.additional['LUK'] }),
-        ...('명중률' in temp.additional && {
-          명중률: temp.additional['명중률'],
-        }),
-        ...('회피율' in temp.additional && {
-          회피율: temp.additional['회피율'],
-        }),
-        ...('이동속도' in temp.additional && {
-          이동속도: temp.additional['이동속도'],
-        }),
-        ...('점프력' in temp.additional && {
-          점프력: temp.additional['점프력'],
-        }),
-        ...('마법방어력' in temp.additional && {
-          마법방어력: temp.additional['마법방어력'],
-        }),
-
-        ...('물리방어력' in temp.additional && {
-          물리방어력: temp.additional['물리방어력'],
-        }),
-      };
-
-      return temp;
-    })
-  );
+  const [filteredTransactions, setFilteredTransactions] =
+    useState(transactions);
   const [page, setPage] = useState(1);
   const [shape, setShape] = useState<'list' | 'item'>('list');
   const [sortType, setSortType] = useState<
@@ -274,10 +234,17 @@ export const ItemPageWithFiltering = ({
               }}
               variant={sortType.startsWith('price') ? 'default' : 'ghost'}
               className={cn(
-                'h-9 rounded-none transition-none border border-l-0 text-xs'
+                'h-9 rounded-none transition-none border border-l-0 text-xs items-center gap-0.5'
               )}
             >
-              {sortType === 'priceASC' ? '가격낮은순' : '가격높은순'}
+              {sortType === 'priceASC' ? '가격낮은순' : '가격높은순'}{' '}
+              <Image
+                src='/meso.png'
+                alt='meso image'
+                width={20}
+                height={20}
+                className='size-4 object-contain'
+              />
             </Button>
           </div>
         </div>

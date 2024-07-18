@@ -13,7 +13,7 @@ import { InferSelectModel } from 'drizzle-orm';
 import { CandyCane, Loader } from 'lucide-react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 type Props = {
   initialLists: Pick<
@@ -24,16 +24,67 @@ type Props = {
   id: number;
 };
 
-export const ItemPage = ({ initialLists, item, id }: Props) => {
-  const { data, fetchNextPage, hasNextPage, isFetching, error } =
-    useInfiniteTransactionsPerItem({ initialLists, id });
+export const ItemPage = ({ item, id }: Props) => {
+  const [sortType, setSortType] = useState<
+    'timeASC' | 'timeDESC' | 'priceASC' | 'priceDESC'
+  >('timeDESC');
+
+  const { data, fetchNextPage, hasNextPage, isPending, isFetching, error } =
+    useInfiniteTransactionsPerItem({ id, sortType });
 
   if (error) return notFound();
 
   return (
     <>
+      <div className='rounded-lg overflow-hidden mb-6 px-3'>
+        <Button
+          onClick={() => {
+            if (sortType === 'timeDESC') {
+              setSortType('timeASC');
+            } else {
+              setSortType('timeDESC');
+            }
+          }}
+          variant={sortType.startsWith('time') ? 'default' : 'ghost'}
+          className={cn(
+            'h-9 rounded-none transition-none border border-r-0 text-xs'
+          )}
+        >
+          {sortType === 'timeASC' ? '오래된순' : '최신순'}
+        </Button>
+        <Button
+          onClick={() => {
+            if (sortType === 'priceDESC') {
+              setSortType('priceASC');
+            } else if (sortType === 'priceASC') {
+              setSortType('priceDESC');
+            } else {
+              setSortType('priceDESC');
+            }
+          }}
+          variant={sortType.startsWith('price') ? 'default' : 'ghost'}
+          className={cn(
+            'h-9 rounded-none transition-none border border-l-0 text-xs items-center gap-0.5'
+          )}
+        >
+          {sortType === 'priceASC' ? '가격낮은순' : '가격높은순'}{' '}
+          <Image
+            src='/meso.png'
+            alt='meso image'
+            width={20}
+            height={20}
+            className='size-4 object-contain'
+          />
+        </Button>
+      </div>
+
       <section className='flex flex-col divide-y'>
-        {data.pages.map((page, i) => (
+        {isPending && (
+          <div className='w-full p-2 space-y-1 flex justify-center mt-10 h-screen'>
+            <Loader className='animate-spin size-4' />
+          </div>
+        )}
+        {data?.pages.map((page, i) => (
           <Fragment key={i}>
             {page.map((transaction) => (
               <div

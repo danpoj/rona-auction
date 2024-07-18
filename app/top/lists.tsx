@@ -38,7 +38,7 @@ export const Lists = ({
                 setPage(1);
               }}
               key={date}
-              variant={date === currentDate ? 'shine' : 'secondary'}
+              variant={date === currentDate ? 'default' : 'secondary'}
             >
               {format(date, 'LL.dd (E)', { locale: ko })}
             </Button>
