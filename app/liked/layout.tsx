@@ -1,4 +1,5 @@
 import { GoToHome } from '@/components/go-to-home';
+import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 import { SearchBarLoading } from '@/components/search-bar-loading';
 import { SearchBarWrapper } from '@/components/search-bar-wrapper';
 import { ReactNode, Suspense } from 'react';
@@ -12,6 +13,13 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Suspense fallback={<SearchBarLoading />}>
         <SearchBarWrapper />
       </Suspense>
+
+      <div className='mb-6'>
+        <DisplayAD
+          key={`${String(Math.random()) + 'ads'}`}
+          adId={`ad-slot-${6874118547}`}
+        />
+      </div>
 
       {children}
     </div>

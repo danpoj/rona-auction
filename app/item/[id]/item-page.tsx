@@ -39,7 +39,7 @@ export const ItemPage = ({ item, id }: Props) => {
     <>
       <div className='mb-8'>
         <DisplayAD
-          key={`${sortType}-${id}ads`}
+          key={`${sortType}-${data?.pages.length || 0}-${id}ads`}
           adId={`ad-slot-${6874118547}`}
         />
       </div>

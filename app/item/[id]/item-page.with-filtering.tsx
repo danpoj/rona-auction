@@ -108,7 +108,7 @@ export const ItemPageWithFiltering = ({
     <>
       <div className='mb-8'>
         <DisplayAD
-          key={`${sortType}-${id}ads`}
+          key={`${sortType}-${page}-${shape}-${filteredTransactions.length}-${id}ads`}
           adId={`ad-slot-${6874118547}`}
         />
       </div>
