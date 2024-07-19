@@ -1,6 +1,7 @@
 'use client';
 
 import { GoToHome } from '@/components/go-to-home';
+import { GoogleMultiflexAD } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -10,7 +11,6 @@ import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export const Lists = ({
@@ -22,7 +22,6 @@ export const Lists = ({
     Object.keys(itemsOBJ).sort().reverse()[0]
   );
   const [page, setPage] = useState(1);
-  const router = useRouter();
 
   return (
     <div className='flex flex-col pb-40'>
@@ -43,6 +42,10 @@ export const Lists = ({
               {format(date, 'LL.dd (E)', { locale: ko })}
             </Button>
           ))}
+      </div>
+
+      <div className='mt-8'>
+        <GoogleMultiflexAD key={currentDate} />
       </div>
 
       {Object.entries(itemsOBJ).map(([date, items]) => (

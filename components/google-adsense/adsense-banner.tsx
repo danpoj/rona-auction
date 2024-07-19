@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
 declare global {
@@ -36,7 +36,7 @@ export const AdsenseBanner = ({
       data-ad-slot={dataAdSlot}
       data-ad-format={dataAdFormat}
       data-full-width-responsive={dataFullWidthResponsive.toString()}
-    ></ins>
+    />
   );
 };
 
@@ -51,8 +51,7 @@ export const BannerExample = () => {
   );
 };
 
-const GoogleAdPcItem = ({ adId }: { adId: string }) => {
-  const router = useRouter();
+const DisplayAD = ({ adId }: { adId: string }) => {
   const adsLoaded = useRef<any>(false);
 
   useEffect(() => {
@@ -64,28 +63,70 @@ const GoogleAdPcItem = ({ adId }: { adId: string }) => {
       }
     };
 
-    if (router.query && !adsLoaded.current) {
+    if (adId && !adsLoaded.current) {
       setTimeout(loadAd, 0);
     }
-  }, [router.query]);
+  }, [adId]);
 
   return (
-    <div
-      className='googleAd-container flex items-center justify-center border rounded-md'
-      style={{ maxWidth: '282px', maxHeight: '282px' }}
-    >
+    <div className='rounded-md bg-black h-full w-[300px] shrink-0'>
       <ins
         key={adId}
         ref={adsLoaded}
         id={adId}
-        className='adsbygoogle h-full'
-        style={{ display: 'inline-block', width: '282px', height: '282px' }}
-        data-ad-client='ca-pub-1111111'
+        className='adsbygoogle w-full h-full'
+        style={{ display: 'block' }}
+        data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+        data-ad-slot='6874118547'
+        data-ad-format='auto'
         data-full-width-responsive='true'
-        data-ad-slot='11111111'
       />
     </div>
   );
 };
 
-export default GoogleAdPcItem;
+const MultiFlexAD = ({ adId }: { adId: string }) => {
+  const adsLoaded = useRef<any>(false);
+
+  useEffect(() => {
+    const loadAd = () => {
+      if (typeof window !== 'undefined' && window.adsbygoogle) {
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adsbygoogle.push({});
+        adsLoaded.current = true;
+      }
+    };
+
+    if (adId && !adsLoaded.current) {
+      setTimeout(loadAd, 0);
+    }
+  }, [adId]);
+
+  return (
+    <div className='rounded-lg h-52 w-full'>
+      <ins
+        key={adId}
+        ref={adsLoaded}
+        id={adId}
+        className='adsbygoogle w-full h-full'
+        style={{ display: 'block' }}
+        data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+        data-ad-slot='3465340664'
+        data-ad-format='autorelaxed'
+        data-full-width-responsive='true'
+      />
+    </div>
+  );
+};
+
+export const GoogleDisplayAD = () => {
+  const pathname = usePathname();
+
+  return <DisplayAD key={pathname} adId={pathname} />;
+};
+
+export const GoogleMultiflexAD = () => {
+  const pathname = usePathname();
+
+  return <MultiFlexAD key={pathname} adId={pathname} />;
+};

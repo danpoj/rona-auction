@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import { SearchBarLoading } from '@/components/search-bar-loading';
 import { SearchBarWrapper } from '@/components/search-bar-wrapper';
+import { GoogleMultiflexAD } from '@/components/google-adsense/adsense-banner';
 const Heart = dynamic(() => import('@/components/heart'), { ssr: false });
 
 export const Top = async ({
@@ -125,6 +126,8 @@ export const Top = async ({
           </div>
         </div>
       </div>
+
+      <GoogleMultiflexAD />
 
       <LineCharts datas={datas} />
 

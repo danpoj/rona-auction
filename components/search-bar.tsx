@@ -31,7 +31,7 @@ export const SearchBar = ({ items }: Props) => {
   useOnClickOutside(ref, () => show && setShow(false));
 
   return (
-    <div className='px-4 pb-8'>
+    <div className='px-4 pb-6'>
       <div ref={ref} className='max-w-[24rem] relative'>
         <Input
           onKeyDown={(e) => {

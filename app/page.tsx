@@ -10,25 +10,32 @@ import { db } from '@/db/drizzle';
 import { transactionTable } from '@/db/schema';
 import { sql } from 'drizzle-orm';
 import { InstallPWAButton } from '@/components/install-pwa-button';
+import { GoogleMultiflexAD } from '@/components/google-adsense/adsense-banner';
 
 export default function Page() {
   return (
-    <div className='max-w-[52rem] mx-auto pb-40'>
-      <header className='p-4 my-2 pt-14'>
-        <section className='flex items-center justify-between'>
-          <TypewriterEffectSmooth words={words} />
-          <ThemeButton />
-        </section>
+    <>
+      <div className='pb-40 w-full'>
+        <header className='p-4 my-2 pt-14'>
+          <section className='flex items-center justify-between'>
+            <TypewriterEffectSmooth words={words} />
+            <ThemeButton />
+          </section>
 
-        <InstallPWAButton />
-      </header>
+          <InstallPWAButton />
+        </header>
 
-      <Suspense fallback={<SearchBarLoading />}>
-        <SearchBarWrapper />
-      </Suspense>
+        <Suspense fallback={<SearchBarLoading />}>
+          <SearchBarWrapper />
+        </Suspense>
 
-      <HomeListsWrapper />
-    </div>
+        <div className='mb-6'>
+          <GoogleMultiflexAD />
+        </div>
+
+        <HomeListsWrapper />
+      </div>
+    </>
   );
 }
 

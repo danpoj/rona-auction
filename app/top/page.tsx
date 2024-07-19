@@ -7,6 +7,7 @@ import { and, eq, gte, sql } from 'drizzle-orm';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { Lists } from './lists';
+import { GoogleMultiflexAD } from '@/components/google-adsense/adsense-banner';
 
 export const metadata: Metadata = {
   title: '인기매물',
