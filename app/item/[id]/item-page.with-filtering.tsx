@@ -70,18 +70,30 @@ export const ItemPageWithFiltering = ({
       values[key] = { min: minValue, max: maxValue };
     }
 
-    const newTransactions = transactions.filter((t) => {
-      for (const [key] of ops) {
-        if (
-          (t.additional[key] || 0) < values[key].min ||
-          (t.additional[key] || 0) > values[key].max
-        ) {
-          return false;
+    const newTransactions = transactions
+      .filter((t) => {
+        for (const [key] of ops) {
+          if (
+            (t.additional[key] || 0) < values[key].min ||
+            (t.additional[key] || 0) > values[key].max
+          ) {
+            return false;
+          }
         }
-      }
 
-      return true;
-    });
+        return true;
+      })
+      .sort((a, b) => {
+        if (sortType === 'priceASC') {
+          return Number(a.price) - Number(b.price);
+        } else if (sortType === 'priceDESC') {
+          return Number(b.price) - Number(a.price);
+        } else if (sortType === 'timeASC') {
+          return new Date(a.date!).getTime() - new Date(b.date!).getTime();
+        } else {
+          return new Date(b.date!).getTime() - new Date(a.date!).getTime();
+        }
+      });
 
     setFilteredTransactions(newTransactions);
 
