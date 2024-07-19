@@ -60,7 +60,7 @@ export const DisplayAD = ({ adId }: { adId: string }) => {
   }, []);
 
   return (
-    <div className='aspect-[16/8]' style={{ width: '100%' }}>
+    <div style={{ width: '100%', height: '220px' }}>
       <ins
         key={adId}
         id={adId}
