@@ -1,6 +1,7 @@
 'use client';
 
 import { GoToHome } from '@/components/go-to-home';
+import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -105,6 +106,13 @@ export const ItemPageWithFiltering = ({
 
   return (
     <>
+      <div className='mb-8'>
+        <DisplayAD
+          key={`${sortType}-${id}ads`}
+          adId={`ad-slot-${6874118547}`}
+        />
+      </div>
+
       <div className='flex flex-col md:flex-row-reverse'>
         <div className='p-4 flex flex-col gap-5'>
           <p className='text-xl font-bold'>아이템 옵션 검색</p>

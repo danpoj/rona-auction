@@ -1,17 +1,16 @@
 import { GoToHome } from '@/components/go-to-home';
 import { NoImage } from '@/components/no-image';
+import { SearchBarLoading } from '@/components/search-bar-loading';
+import { SearchBarWrapper } from '@/components/search-bar-wrapper';
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { InferSelectModel, and, eq, gte, sql } from 'drizzle-orm';
-import Image from 'next/image';
-import { LineCharts } from './line-charts';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { Suspense } from 'react';
-import { SearchBarLoading } from '@/components/search-bar-loading';
-import { SearchBarWrapper } from '@/components/search-bar-wrapper';
-import { GoogleMultiflexAD } from '@/components/google-adsense/adsense-banner';
+import { LineCharts } from './line-charts';
 const Heart = dynamic(() => import('@/components/heart'), { ssr: false });
 
 export const Top = async ({
@@ -126,8 +125,6 @@ export const Top = async ({
           </div>
         </div>
       </div>
-
-      <GoogleMultiflexAD />
 
       <LineCharts datas={datas} />
 

@@ -7,7 +7,6 @@ import { and, eq, gte, sql } from 'drizzle-orm';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { Lists } from './lists';
-import { GoogleMultiflexAD } from '@/components/google-adsense/adsense-banner';
 
 export const metadata: Metadata = {
   title: '인기매물',
@@ -67,7 +66,7 @@ export default async function Page() {
   }
 
   return (
-    <div className='max-w-[52rem] mx-auto h-full p-4'>
+    <div className='max-w-[48rem] mx-auto h-full p-4'>
       <div className='flex flex-col  gap-6 pt-[5.8rem] pb-10'>
         <GoToHome />
 

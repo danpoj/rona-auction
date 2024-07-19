@@ -51,31 +51,22 @@ export const BannerExample = () => {
   );
 };
 
-const DisplayAD = ({ adId }: { adId: string }) => {
-  const adsLoaded = useRef<any>(false);
-
+export const DisplayAD = ({ adId }: { adId: string }) => {
   useEffect(() => {
-    const loadAd = () => {
-      if (typeof window !== 'undefined' && window.adsbygoogle) {
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adsbygoogle.push({});
-        adsLoaded.current = true;
-      }
-    };
-
-    if (adId && !adsLoaded.current) {
-      setTimeout(loadAd, 0);
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (error) {
+      console.log((error as Error).message);
     }
-  }, [adId]);
+  }, []);
 
   return (
-    <div className='rounded-md bg-black h-full w-[300px] shrink-0'>
+    <div style={{ width: '100%', height: '160px' }}>
       <ins
         key={adId}
-        ref={adsLoaded}
         id={adId}
-        className='adsbygoogle w-full h-full'
-        style={{ display: 'block' }}
+        className='adsbygoogle'
+        style={{ display: 'block', width: '100%', height: '100%' }}
         data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
         data-ad-slot='6874118547'
         data-ad-format='auto'
@@ -85,29 +76,19 @@ const DisplayAD = ({ adId }: { adId: string }) => {
   );
 };
 
-const MultiFlexAD = ({ adId }: { adId: string }) => {
-  const adsLoaded = useRef<any>(false);
-
+export const MultiFlexAD = ({ adId }: { adId: string }) => {
   useEffect(() => {
-    const loadAd = () => {
-      if (typeof window !== 'undefined' && window.adsbygoogle) {
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adsbygoogle.push({});
-        adsLoaded.current = true;
-      }
-    };
-
-    if (adId && !adsLoaded.current) {
-      setTimeout(loadAd, 0);
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (error) {
+      console.log((error as Error).message);
     }
-  }, [adId]);
+  }, []);
 
   return (
-    <div className='rounded-lg h-52 w-full'>
+    <div className='w-full aspect-video bg-black'>
       <ins
         key={adId}
-        ref={adsLoaded}
-        id={adId}
         className='adsbygoogle w-full h-full'
         style={{ display: 'block' }}
         data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
@@ -117,16 +98,4 @@ const MultiFlexAD = ({ adId }: { adId: string }) => {
       />
     </div>
   );
-};
-
-export const GoogleDisplayAD = () => {
-  const pathname = usePathname();
-
-  return <DisplayAD key={pathname} adId={pathname} />;
-};
-
-export const GoogleMultiflexAD = () => {
-  const pathname = usePathname();
-
-  return <MultiFlexAD key={pathname} adId={pathname} />;
 };

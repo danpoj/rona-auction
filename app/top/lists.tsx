@@ -1,7 +1,7 @@
 'use client';
 
 import { GoToHome } from '@/components/go-to-home';
-import { GoogleMultiflexAD } from '@/components/google-adsense/adsense-banner';
+import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -45,7 +45,7 @@ export const Lists = ({
       </div>
 
       <div className='mt-8'>
-        <GoogleMultiflexAD key={currentDate} />
+        <DisplayAD key={`${currentDate}-ads`} adId={`ad-slot-${6874118547}`} />
       </div>
 
       {Object.entries(itemsOBJ).map(([date, items]) => (

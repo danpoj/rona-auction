@@ -20,7 +20,7 @@ export default function LikedPage() {
   if (likedArray.length === 0) return NoLikedPlaceHolder();
 
   return (
-    <section className='max-w-[52rem] mx-auto h-full p-4'>
+    <section className='max-w-[48rem] mx-auto h-full p-4'>
       <div className='flex flex-col  gap-6 pb-10'>
         <h1 className='text-2xl font-semibold flex items-center'>
           <span>즐겨찾기</span>

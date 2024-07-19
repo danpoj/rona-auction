@@ -10,7 +10,7 @@ import { db } from '@/db/drizzle';
 import { transactionTable } from '@/db/schema';
 import { sql } from 'drizzle-orm';
 import { InstallPWAButton } from '@/components/install-pwa-button';
-import { GoogleMultiflexAD } from '@/components/google-adsense/adsense-banner';
+import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 
 export default function Page() {
   return (
@@ -30,7 +30,10 @@ export default function Page() {
         </Suspense>
 
         <div className='mb-6'>
-          <GoogleMultiflexAD />
+          <DisplayAD
+            key={`${String(Math.random()) + 'ads'}`}
+            adId={`ad-slot-${6874118547}`}
+          />
         </div>
 
         <HomeListsWrapper />
