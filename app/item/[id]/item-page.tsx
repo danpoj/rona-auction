@@ -1,7 +1,10 @@
 'use client';
 
 import { GoToHome } from '@/components/go-to-home';
-import { DisplayAD } from '@/components/google-adsense/adsense-banner';
+import {
+  DisplayAD,
+  DisplayADSmall,
+} from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -94,87 +97,95 @@ export const ItemPage = ({ item, id }: Props) => {
         )}
         {data?.pages.map((page, i) => (
           <Fragment key={i}>
-            {page.map((transaction) => (
-              <div
-                key={transaction.id}
-                className={cn(
-                  'p-2 space-y-1',
-                  item.id ? 'hover:bg-primary/5' : 'cursor-default'
+            {page.map((transaction, index) => (
+              <Fragment key={transaction.id}>
+                {index === 8 && i % 2 === 1 && (
+                  <DisplayADSmall
+                    key={`${i}-${index} + 'ads'}`}
+                    adId={`ad-slot-${7695782604}`}
+                  />
                 )}
-              >
-                <div className='flex items-center justify-between'>
-                  <div className='flex items-center gap-2'>
-                    {item.id ? (
-                      item.id >= 666666660 ? (
-                        <NoImage />
+                <div
+                  className={cn(
+                    'p-2 space-y-1',
+                    item.id ? 'hover:bg-primary/5' : 'cursor-default'
+                  )}
+                >
+                  <div className='flex items-center justify-between'>
+                    <div className='flex items-center gap-2'>
+                      {item.id ? (
+                        item.id >= 666666660 ? (
+                          <NoImage />
+                        ) : (
+                          <Image
+                            src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=2`}
+                            alt={item.name}
+                            width={100}
+                            height={100}
+                            className='size-8 sm:size-10 object-contain'
+                          />
+                        )
                       ) : (
-                        <Image
-                          src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=2`}
-                          alt={item.name}
-                          width={100}
-                          height={100}
-                          className='size-8 sm:size-10 object-contain'
-                        />
-                      )
-                    ) : (
-                      <div className='size-8 sm:size-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center'>
-                        <CandyCane className='size-4 sm:size-5' />
-                      </div>
-                    )}
-                    <p className='text-sm sm:text-base font-semibold'>
-                      {item.name}
-                    </p>
-                    <div className='text-sm flex gap-2'>
-                      <span>{transaction.count}개</span>
-                      <p className='flex gap-1 items-center'>
-                        <span>개당</span>
-                        <span className='font-bold'>
-                          {Math.round(
-                            Number(transaction.price) / transaction.count
-                          ).toLocaleString('ko-KR')}
-                        </span>
-                        <Image
-                          src='/meso.png'
-                          alt='meso image'
-                          width={20}
-                          height={20}
-                          className='size-4 object-contain'
-                        />
+                        <div className='size-8 sm:size-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center'>
+                          <CandyCane className='size-4 sm:size-5' />
+                        </div>
+                      )}
+                      <p className='text-sm sm:text-base font-semibold'>
+                        {item.name}
                       </p>
+                      <div className='text-sm flex gap-2'>
+                        <span>{transaction.count}개</span>
+                        <p className='flex gap-1 items-center'>
+                          <span>개당</span>
+                          <span className='font-bold'>
+                            {Math.round(
+                              Number(transaction.price) / transaction.count
+                            ).toLocaleString('ko-KR')}
+                          </span>
+                          <Image
+                            src='/meso.png'
+                            alt='meso image'
+                            width={20}
+                            height={20}
+                            className='size-4 object-contain'
+                          />
+                        </p>
+                      </div>
                     </div>
+
+                    {transaction.date && (
+                      <p className='text-sm hidden sm:block text-muted-foreground'>
+                        {format(transaction.date, 'LL-dd HH:mm')}
+                      </p>
+                    )}
                   </div>
 
-                  {transaction.date && (
-                    <p className='text-sm hidden sm:block text-muted-foreground'>
-                      {format(transaction.date, 'LL-dd HH:mm')}
-                    </p>
-                  )}
+                  <div className='flex justify-between'>
+                    {transaction.additional ? (
+                      <div className='space-x-1 mt-1'>
+                        {transaction.additional
+                          .split(',')
+                          .map((addi) => addi.split(':'))
+                          .map(([key, value]) => (
+                            <Badge
+                              variant='secondary'
+                              key={`${key}-${value}`}
+                              className='rounded'
+                            >
+                              {key} {value}
+                            </Badge>
+                          ))}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
                 </div>
-
-                <div className='flex justify-between'>
-                  {transaction.additional ? (
-                    <div className='space-x-1 mt-1'>
-                      {transaction.additional
-                        .split(',')
-                        .map((addi) => addi.split(':'))
-                        .map(([key, value]) => (
-                          <Badge
-                            variant='secondary'
-                            key={`${key}-${value}`}
-                            className='rounded'
-                          >
-                            {key} {value}
-                          </Badge>
-                        ))}
-                    </div>
-                  ) : (
-                    <div />
-                  )}
-                </div>
-              </div>
+              </Fragment>
             ))}
           </Fragment>
         ))}
+
         {hasNextPage && (
           <div className='w-full flex items-center justify-center pt-4'>
             <Button

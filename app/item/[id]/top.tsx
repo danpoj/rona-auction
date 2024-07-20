@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { Suspense } from 'react';
 import { LineCharts } from './line-charts';
+
 const Heart = dynamic(() => import('@/components/heart'), { ssr: false });
 
 export const Top = async ({
@@ -69,7 +70,7 @@ export const Top = async ({
         <h1 className='text-2xl sm:text-3xl font-black'>{item.name}</h1>
 
         <div className='flex gap-4'>
-          <div className='flex flex-col items-center gap-4'>
+          <div className='flex flex-col items-center gap-4 shrink-0'>
             {item.id && item.id >= 666666660 ? (
               <NoImage className='size-[100px] sm:size-[140px]' />
             ) : (
@@ -90,7 +91,7 @@ export const Top = async ({
             />
           </div>
 
-          <div className='flex flex-col justify-between gap-4'>
+          <div className='flex flex-col justify-between gap-4 shrink-0'>
             <div className='divide-y text-sm sm:text-base'>
               <div className='flex items-center font-semibold px-2 py-1.5'>
                 <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-16'>

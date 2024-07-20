@@ -75,6 +75,56 @@ export const DisplayAD = ({ adId }: { adId: string }) => {
   );
 };
 
+export const DisplayADSmall = ({ adId }: { adId: string }) => {
+  useEffect(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  }, []);
+
+  return (
+    <div style={{ width: '100%', height: '100%' }}>
+      <ins
+        key={adId}
+        id={adId}
+        className='adsbygoogle'
+        style={{ display: 'block' }}
+        data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+        data-ad-slot='7695782604'
+        data-ad-format='auto'
+        data-full-width-responsive='true'
+      />
+    </div>
+  );
+};
+
+export default function DisplayADVertical({ adId }: { adId: string }) {
+  useEffect(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  }, []);
+
+  return (
+    <div className='bg-black w-full hidden md:block'>
+      <ins
+        key={adId}
+        id={adId}
+        className='adsbygoogle'
+        style={{ display: 'block' }}
+        data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+        data-ad-slot='9490379884'
+        data-ad-format='auto'
+        data-full-width-responsive='true'
+      />
+    </div>
+  );
+}
+
 export const MultiFlexAD = ({ adId }: { adId: string }) => {
   useEffect(() => {
     try {

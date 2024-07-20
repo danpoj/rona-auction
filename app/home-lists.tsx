@@ -32,6 +32,10 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 import { TransactionsLineChart } from './charts';
+import {
+  DisplayAD,
+  DisplayADSmall,
+} from '@/components/google-adsense/adsense-banner';
 
 type Props = {
   initialLists: InferSelectModel<typeof transactionTable>[];
@@ -105,85 +109,94 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
       <section className='flex flex-col divide-y'>
         {data.pages.map((page, i) => (
           <Fragment key={i}>
-            {page.map((transaction) => (
-              <Link
-                href={transaction.itemId ? `/item/${transaction.itemId}` : '#'}
-                key={transaction.id}
-                className={cn(
-                  'p-2 space-y-1',
-                  transaction.itemId ? 'hover:bg-primary/5' : 'cursor-default'
+            {page.map((transaction, index) => (
+              <Fragment key={transaction.id}>
+                {index === 8 && i % 2 === 1 && (
+                  <DisplayADSmall
+                    key={`${i}-${index} + 'ads'}`}
+                    adId={`ad-slot-${7695782604}`}
+                  />
                 )}
-              >
-                <div className='flex items-center justify-between'>
-                  <div className='flex items-center gap-2'>
-                    {transaction.itemId ? (
-                      transaction.itemId >= 666666660 ? (
-                        <NoImage />
+                <Link
+                  href={
+                    transaction.itemId ? `/item/${transaction.itemId}` : '#'
+                  }
+                  className={cn(
+                    'p-2 space-y-1',
+                    transaction.itemId ? 'hover:bg-primary/5' : 'cursor-default'
+                  )}
+                >
+                  <div className='flex items-center justify-between'>
+                    <div className='flex items-center gap-2'>
+                      {transaction.itemId ? (
+                        transaction.itemId >= 666666660 ? (
+                          <NoImage />
+                        ) : (
+                          <Image
+                            src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${transaction.itemId}/icon?resize=2`}
+                            alt={transaction.itemName}
+                            width={100}
+                            height={100}
+                            className='size-8 sm:size-10 object-contain'
+                          />
+                        )
                       ) : (
-                        <Image
-                          src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${transaction.itemId}/icon?resize=2`}
-                          alt={transaction.itemName}
-                          width={100}
-                          height={100}
-                          className='size-8 sm:size-10 object-contain'
-                        />
-                      )
-                    ) : (
-                      <div className='size-8 sm:size-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center'>
-                        <CandyCane className='size-4 sm:size-5' />
+                        <div className='size-8 sm:size-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center'>
+                          <CandyCane className='size-4 sm:size-5' />
+                        </div>
+                      )}
+                      <h3 className='text-sm sm:text-base font-semibold'>
+                        {transaction.itemName}
+                      </h3>
+                      <div className='text-sm flex gap-2'>
+                        <span>{transaction.count}개</span>
+                        <p className='flex gap-1 items-center'>
+                          <span>개당</span>
+                          <span className='font-bold'>
+                            {Math.round(
+                              Number(transaction.price) / transaction.count
+                            ).toLocaleString('ko-KR')}
+                          </span>
+                          <Image
+                            src='/meso.png'
+                            alt='meso image'
+                            width={20}
+                            height={20}
+                            className='size-4 object-contain'
+                          />
+                        </p>
                       </div>
-                    )}
-                    <h3 className='text-sm sm:text-base font-semibold'>
-                      {transaction.itemName}
-                    </h3>
-                    <div className='text-sm flex gap-2'>
-                      <span>{transaction.count}개</span>
-                      <p className='flex gap-1 items-center'>
-                        <span>개당</span>
-                        <span className='font-bold'>
-                          {Math.round(
-                            Number(transaction.price) / transaction.count
-                          ).toLocaleString('ko-KR')}
-                        </span>
-                        <Image
-                          src='/meso.png'
-                          alt='meso image'
-                          width={20}
-                          height={20}
-                          className='size-4 object-contain'
-                        />
-                      </p>
                     </div>
+
+                    {transaction.date && (
+                      <p className='text-sm hidden sm:block text-muted-foreground'>
+                        {format(transaction.date, 'LL-dd HH:mm')}
+                      </p>
+                    )}
                   </div>
 
-                  {transaction.date && (
-                    <p className='text-sm hidden sm:block text-muted-foreground'>
-                      {format(transaction.date, 'LL-dd HH:mm')}
-                    </p>
-                  )}
-                </div>
-
-                <div className='flex justify-between'>
-                  {transaction.additional ? (
-                    <div className='space-x-1 mt-1'>
-                      {transaction.additional
-                        .split(',')
-                        .map((addi) => addi.split(':'))
-                        .map(([key, value]) => (
-                          <Badge
-                            variant='secondary'
-                            key={`${key}-${value}`}
-                            className='rounded'
-                          >
-                            {key} {value}
-                          </Badge>
-                        ))}
-                    </div>
-                  ) : (
-                    <div />
-                  )}
-                </div>
-              </Link>
+                  <div className='flex justify-between'>
+                    {transaction.additional ? (
+                      <div className='space-x-1 mt-1'>
+                        {transaction.additional
+                          .split(',')
+                          .map((addi) => addi.split(':'))
+                          .map(([key, value]) => (
+                            <Badge
+                              variant='secondary'
+                              key={`${key}-${value}`}
+                              className='rounded'
+                            >
+                              {key} {value}
+                            </Badge>
+                          ))}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
+                </Link>
+              </Fragment>
             ))}
           </Fragment>
         ))}
