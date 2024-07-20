@@ -72,14 +72,14 @@ export const Top = async ({
         <div className='flex gap-4'>
           <div className='flex flex-col items-center gap-4 shrink-0'>
             {item.id && item.id >= 666666660 ? (
-              <NoImage className='size-[100px] sm:size-[140px]' />
+              <NoImage className='size-[76px] sm:size-[140px]' />
             ) : (
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=3`}
                 alt={`${item.name} - ${item.desc}`}
                 width={140}
                 height={140}
-                className='size-[100px] sm:size-[140px] object-contain'
+                className='size-[76px] sm:size-[140px] object-contain'
               />
             )}
 
