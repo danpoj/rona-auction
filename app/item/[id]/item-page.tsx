@@ -41,10 +41,7 @@ export const ItemPage = ({ item, id }: Props) => {
   return (
     <>
       <div className='mb-8'>
-        <DisplayAD
-          key={`${sortType}-${data?.pages.length || 0}-${id}ads`}
-          adId={`ad-slot-${6874118547}`}
-        />
+        <DisplayAD adId={`ad-slot-${6874118547}`} />
       </div>
 
       <div className='rounded-lg overflow-hidden mb-6 px-3'>
@@ -100,10 +97,7 @@ export const ItemPage = ({ item, id }: Props) => {
             {page.map((transaction, index) => (
               <Fragment key={transaction.id}>
                 {index === 8 && i % 3 === 1 && (
-                  <DisplayADSmall
-                    key={`${i}-${index} + 'ads'}`}
-                    adId={`ad-slot-${7695782604}`}
-                  />
+                  <DisplayADSmall adId={`ad-slot-${7695782604}`} />
                 )}
                 <div
                   className={cn(

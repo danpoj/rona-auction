@@ -45,7 +45,7 @@ export const Lists = ({
       </div>
 
       <div className='mt-8'>
-        <DisplayAD key={`${currentDate}-ads`} adId={`ad-slot-${6874118547}`} />
+        <DisplayAD adId={`ad-slot-${6874118547}`} />
       </div>
 
       {Object.entries(itemsOBJ).map(([date, items]) => (

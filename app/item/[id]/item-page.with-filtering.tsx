@@ -110,10 +110,7 @@ export const ItemPageWithFiltering = ({
   return (
     <>
       <div className='mb-8'>
-        <DisplayAD
-          key={`${sortType}-${page}-${shape}-${filteredTransactions.length}-${id}ads`}
-          adId={`ad-slot-${6874118547}`}
-        />
+        <DisplayAD adId={`ad-slot-${6874118547}`} />
       </div>
 
       <div className='flex flex-col md:flex-row-reverse'>
@@ -288,10 +285,7 @@ export const ItemPageWithFiltering = ({
               return (
                 <Fragment key={transaction.id}>
                   {index > 20 && (index + 8) % 60 === 0 && (
-                    <DisplayADSmall
-                      key={`${index} + 'ads'}`}
-                      adId={`ad-slot-${7695782604}`}
-                    />
+                    <DisplayADSmall adId={`ad-slot-${7695782604}`} />
                   )}
                   <div className={cn('p-2 space-y-1')}>
                     <div className='flex items-center justify-between'>

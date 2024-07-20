@@ -30,10 +30,7 @@ export default function Page() {
         </Suspense>
 
         <div className='mb-6'>
-          <DisplayAD
-            key={`${String(Math.random()) + 'ads'}`}
-            adId={`ad-slot-${6874118547}`}
-          />
+          <DisplayAD adId={`ad-slot-${6874118547}`} />
         </div>
 
         <HomeListsWrapper />

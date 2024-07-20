@@ -112,10 +112,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
             {page.map((transaction, index) => (
               <Fragment key={transaction.id}>
                 {index === 8 && i % 3 === 1 && (
-                  <DisplayADSmall
-                    key={`${i}-${index} + 'ads'}`}
-                    adId={`ad-slot-${7695782604}`}
-                  />
+                  <DisplayADSmall adId={`ad-slot-${7695782604}`} />
                 )}
                 <Link
                   href={
