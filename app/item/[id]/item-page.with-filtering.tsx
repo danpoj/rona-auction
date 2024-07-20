@@ -287,7 +287,7 @@ export const ItemPageWithFiltering = ({
             if (shape === 'list') {
               return (
                 <Fragment key={transaction.id}>
-                  {index > 20 && (index + 8) % 20 === 0 && (
+                  {index > 20 && (index + 8) % 60 === 0 && (
                     <DisplayADSmall
                       key={`${index} + 'ads'}`}
                       adId={`ad-slot-${7695782604}`}
