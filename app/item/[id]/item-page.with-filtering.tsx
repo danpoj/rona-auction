@@ -1,7 +1,10 @@
 'use client';
 
 import { GoToHome } from '@/components/go-to-home';
-import { DisplayAD } from '@/components/google-adsense/adsense-banner';
+import {
+  DisplayAD,
+  DisplayADSmall,
+} from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -280,10 +283,16 @@ export const ItemPageWithFiltering = ({
       >
         {filteredTransactions
           .slice(0, page * ITEMS_PER_PAGE)
-          .map((transaction) => {
+          .map((transaction, index) => {
             if (shape === 'list') {
               return (
                 <div key={transaction.id} className={cn('p-2 space-y-1')}>
+                  {index > 20 && index % 40 === 0 && (
+                    <DisplayADSmall
+                      key={`${index} + 'ads'}`}
+                      adId={`ad-slot-${7695782604}`}
+                    />
+                  )}
                   <div className='flex items-center justify-between'>
                     <div className='flex items-center gap-2'>
                       {item.id ? (
