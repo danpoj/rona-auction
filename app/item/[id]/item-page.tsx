@@ -96,9 +96,6 @@ export const ItemPage = ({ item, id }: Props) => {
           <Fragment key={i}>
             {page.map((transaction, index) => (
               <Fragment key={transaction.id}>
-                {index === 8 && i % 3 === 1 && (
-                  <DisplayADSmall adId={`ad-slot-${7695782604}`} />
-                )}
                 <div
                   className={cn(
                     'p-2 space-y-1',

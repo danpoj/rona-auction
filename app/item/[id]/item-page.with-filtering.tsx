@@ -284,9 +284,6 @@ export const ItemPageWithFiltering = ({
             if (shape === 'list') {
               return (
                 <Fragment key={transaction.id}>
-                  {index > 20 && (index + 8) % 60 === 0 && (
-                    <DisplayADSmall adId={`ad-slot-${7695782604}`} />
-                  )}
                   <div className={cn('p-2 space-y-1')}>
                     <div className='flex items-center justify-between'>
                       <div className='flex items-center gap-2'>
