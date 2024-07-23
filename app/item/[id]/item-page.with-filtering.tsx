@@ -285,7 +285,7 @@ export const ItemPageWithFiltering = ({
               return (
                 <Fragment key={transaction.id}>
                   <div className={cn('p-2 space-y-1')}>
-                    <div className='flex items-center justify-between'>
+                    <div className='flex items-center justify-between relative'>
                       <div className='flex items-center gap-2'>
                         {item.id ? (
                           item.id >= 666666660 ? (
@@ -328,9 +328,14 @@ export const ItemPageWithFiltering = ({
                       </div>
 
                       {transaction.date && (
-                        <p className='text-sm hidden sm:block text-muted-foreground'>
-                          {format(transaction.date, 'LL-dd HH:mm')}
-                        </p>
+                        <>
+                          <p className='text-sm hidden sm:block text-muted-foreground'>
+                            {format(transaction.date, 'LL-dd HH:mm')}
+                          </p>
+                          <p className='text-xs block sm:hidden text-muted-foreground absolute -top-4 right-0'>
+                            {format(transaction.date, 'L.dd HH:mm')}
+                          </p>
+                        </>
                       )}
                     </div>
 

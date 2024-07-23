@@ -28,7 +28,14 @@ export default function Page() {
 
       <div className='space-y-20'>
         <article className='prose dark:prose-invert'>
-          <h3>7/18(월) 업데이트</h3>
+          <h3>7/24(수)</h3>
+          <ul>
+            <li>모바일에서도 거래날짜 보이게 수정</li>
+          </ul>
+        </article>
+
+        <article className='prose dark:prose-invert'>
+          <h3>7/18(월)</h3>
           <ul>
             <li>모든아이템 날짜 / 가격 정렬 추가</li>
             <li>옵션 정렬 망가지던 이슈 수정</li>
@@ -36,7 +43,7 @@ export default function Page() {
         </article>
 
         <article className='prose dark:prose-invert'>
-          <h3>7/15(월) 업데이트</h3>
+          <h3>7/15(월)</h3>
           <ul>
             <li>장비아이템 날짜 / 가격 정렬 추가</li>
             <li>장비아이템 옵션 정렬</li>
@@ -44,7 +51,7 @@ export default function Page() {
         </article>
 
         <article className='prose dark:prose-invert'>
-          <h3>7/11(일) 업데이트</h3>
+          <h3>7/11(일)</h3>
           <ul>
             <li>장비아이템 보기 옵션 (리스트, 그리드) 추가</li>
             <li>검색바 유지</li>
@@ -52,15 +59,15 @@ export default function Page() {
         </article>
 
         <article className='prose dark:prose-invert'>
-          <h3>7/9(화) 업데이트</h3>
+          <h3>7/9(화)</h3>
           <ul>
-            <li>인기매물 ✨ 날짜별로 변경</li>
+            <li>인기매물 날짜별로 변경</li>
             <li>경험치 계산기 추가</li>
           </ul>
         </article>
 
         <article className='prose dark:prose-invert'>
-          <h3>7/7(일) 업데이트</h3>
+          <h3>7/7(일)</h3>
           <ul>
             <li>장비아이템 보기 옵션 (리스트, 그리드) 추가</li>
             <li>검색바 유지</li>
@@ -68,7 +75,7 @@ export default function Page() {
         </article>
 
         <article className='prose dark:prose-invert'>
-          <h3>7/6(토) 업데이트</h3>
+          <h3>7/6(토)</h3>
           <ul>
             <li className='font-black bg-gradient-to-r from-blue-600 via-teal-300 to-teal-400 bg-clip-text text-transparent'>
               장비아이템 옵션검색 ✨
@@ -91,7 +98,7 @@ export default function Page() {
         </article>
 
         <article className='prose dark:prose-invert'>
-          <h3>7/5(금) 업데이트</h3>
+          <h3>7/5(금)</h3>
           <ul>
             <li>옥션 거래내역에 있는 아이템들만 검색되도록 수정</li>
             <li>검색속도 개선</li>

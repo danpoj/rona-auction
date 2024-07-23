@@ -99,10 +99,10 @@ export const ItemPage = ({ item, id }: Props) => {
                 <div
                   className={cn(
                     'p-2 space-y-1',
-                    item.id ? 'hover:bg-primary/5' : 'cursor-default'
+                    item.id ? '' : 'cursor-default'
                   )}
                 >
-                  <div className='flex items-center justify-between'>
+                  <div className='flex items-center justify-between relative'>
                     <div className='flex items-center gap-2'>
                       {item.id ? (
                         item.id >= 666666660 ? (
@@ -145,9 +145,14 @@ export const ItemPage = ({ item, id }: Props) => {
                     </div>
 
                     {transaction.date && (
-                      <p className='text-sm hidden sm:block text-muted-foreground'>
-                        {format(transaction.date, 'LL-dd HH:mm')}
-                      </p>
+                      <>
+                        <p className='text-sm hidden sm:block text-muted-foreground'>
+                          {format(transaction.date, 'LL-dd HH:mm')}
+                        </p>
+                        <p className='text-xs block sm:hidden text-muted-foreground absolute -top-4 right-0'>
+                          {format(transaction.date, 'L.dd HH:mm')}
+                        </p>
+                      </>
                     )}
                   </div>
 
