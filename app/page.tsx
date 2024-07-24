@@ -29,10 +29,6 @@ export default function Page() {
           <SearchBarWrapper />
         </Suspense>
 
-        <div className='mb-6'>
-          <DisplayAD adId={`ad-slot-${6874118547}`} />
-        </div>
-
         <HomeListsWrapper />
       </div>
     </>

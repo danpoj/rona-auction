@@ -1,5 +1,6 @@
 'use client';
 
+import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -32,10 +33,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 import { TransactionsLineChart } from './charts';
-import {
-  DisplayAD,
-  DisplayADSmall,
-} from '@/components/google-adsense/adsense-banner';
 
 type Props = {
   initialLists: InferSelectModel<typeof transactionTable>[];
@@ -54,6 +51,10 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
         <TransactionsLineChart
           transactionsCountPerDay={transactionsCountPerDay}
         />
+
+        <div className='mb-6'>
+          <DisplayAD adId={`ad-slot-${6874118547}`} />
+        </div>
 
         <div className='flex items-center justify-between w-full'>
           <div className='space-y-2 w-full'>
