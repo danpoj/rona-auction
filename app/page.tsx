@@ -10,7 +10,6 @@ import { db } from '@/db/drizzle';
 import { transactionTable } from '@/db/schema';
 import { sql } from 'drizzle-orm';
 import { InstallPWAButton } from '@/components/install-pwa-button';
-import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 
 export default function Page() {
   return (
