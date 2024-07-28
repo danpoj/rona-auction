@@ -133,12 +133,14 @@ export const ItemPageWithFiltering = ({
               <div key={key} className='flex items-center gap-4'>
                 <div className='flex items-center gap-2'>
                   <Input
+                  type='number'
                     name={`${key}-min`}
                     className='w-24'
                     defaultValue={0}
                   />
                   <span className='text-muted-foreground'>-</span>
                   <Input
+                  type='number'
                     name={`${key}-max`}
                     className='w-24'
                     defaultValue={max}
