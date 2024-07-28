@@ -24,7 +24,7 @@ export const ItemPageWithFilteringWrapper = async ({ id, item }: Props) => {
         eq(transactionTable.itemId, id),
         gte(
           sql`${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul'`,
-          sql`DATE(NOW() AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul' - INTERVAL '30 days')`
+          sql`DATE(NOW() AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul' - INTERVAL '60 days')`
         )
       )
     );
