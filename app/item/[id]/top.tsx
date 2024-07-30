@@ -11,6 +11,10 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { Suspense } from 'react';
 import { LineCharts } from './line-charts';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+import { DisplayADFlexRowSmall } from '@/components/google-adsense/adsense-banner';
 
 const Heart = dynamic(() => import('@/components/heart'), { ssr: false });
 
@@ -66,6 +70,8 @@ export const Top = async ({
         <SearchBarWrapper />
       </Suspense>
 
+      <DisplayADFlexRowSmall />
+
       <div className='flex flex-col gap-4'>
         <h1 className='text-2xl sm:text-3xl font-black'>{item.name}</h1>
 
@@ -74,13 +80,25 @@ export const Top = async ({
             {item.id && item.id >= 666666660 ? (
               <NoImage className='size-[76px] sm:size-[140px]' />
             ) : (
-              <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=3`}
-                alt={`${item.name} - ${item.desc}`}
-                width={140}
-                height={140}
-                className='size-[76px] sm:size-[140px] object-contain'
-              />
+              <>
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_API_BASE}/item/${item.id}/icon?resize=3`}
+                  alt={`${item.name} - ${item.desc}`}
+                  width={140}
+                  height={140}
+                  className='size-[76px] sm:size-[140px] object-contain'
+                />
+
+                <Button variant='linkHover2' asChild>
+                  <Link
+                    href={`https://maple.inven.co.kr/dataninfo/item/detail.php?code=${item.id}`}
+                    target='_blank'
+                    rel='noreferrer noopener'
+                  >
+                    인벤 <ArrowUpRight className='size-4' />
+                  </Link>
+                </Button>
+              </>
             )}
 
             <Heart

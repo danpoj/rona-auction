@@ -75,6 +75,25 @@ export const DisplayAD = ({ adId }: { adId: string }) => {
   );
 };
 
+export const DisplayADFlexRowSmall = ({ adId }: { adId?: string }) => {
+  useEffect(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  }, []);
+
+  return (
+    <ins
+      className='adsbygoogle'
+      style={{ display: 'inline-block', width: '100%', height: '140px' }}
+      data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+      data-ad-slot='4744634878'
+    />
+  );
+};
+
 export const DisplayADSmall = ({ adId }: { adId: string }) => {
   useEffect(() => {
     try {

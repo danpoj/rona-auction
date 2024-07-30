@@ -3,6 +3,7 @@
 import { GoToHome } from '@/components/go-to-home';
 import {
   DisplayAD,
+  DisplayADFlexRowSmall,
   DisplayADSmall,
 } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
@@ -41,7 +42,7 @@ export const ItemPage = ({ item, id }: Props) => {
   return (
     <>
       <div className='mb-8'>
-        <DisplayAD adId={`ad-slot-${6874118547}`} />
+        <DisplayADFlexRowSmall />
       </div>
 
       <div className='rounded-lg overflow-hidden mb-6 px-3'>

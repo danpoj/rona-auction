@@ -3,6 +3,7 @@
 import { GoToHome } from '@/components/go-to-home';
 import {
   DisplayAD,
+  DisplayADFlexRowSmall,
   DisplayADSmall,
 } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
@@ -110,7 +111,7 @@ export const ItemPageWithFiltering = ({
   return (
     <>
       <div className='mb-8'>
-        <DisplayAD adId={`ad-slot-${6874118547}`} />
+        <DisplayADFlexRowSmall />
       </div>
 
       <div className='flex flex-col md:flex-row-reverse'>
@@ -133,14 +134,14 @@ export const ItemPageWithFiltering = ({
               <div key={key} className='flex items-center gap-4'>
                 <div className='flex items-center gap-2'>
                   <Input
-                  type='number'
+                    type='number'
                     name={`${key}-min`}
                     className='w-24'
                     defaultValue={0}
                   />
                   <span className='text-muted-foreground'>-</span>
                   <Input
-                  type='number'
+                    type='number'
                     name={`${key}-max`}
                     className='w-24'
                     defaultValue={max}

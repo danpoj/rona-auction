@@ -1,7 +1,10 @@
 'use client';
 
 import { GoToHome } from '@/components/go-to-home';
-import { DisplayAD } from '@/components/google-adsense/adsense-banner';
+import {
+  DisplayAD,
+  DisplayADFlexRowSmall,
+} from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -45,7 +48,7 @@ export const Lists = ({
       </div>
 
       <div className='mt-8'>
-        <DisplayAD adId={`ad-slot-${6874118547}`} />
+        <DisplayADFlexRowSmall />
       </div>
 
       {Object.entries(itemsOBJ).map(([date, items]) => (
