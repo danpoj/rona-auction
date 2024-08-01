@@ -1,6 +1,6 @@
 'use client';
 
-import { DisplayAD } from '@/components/google-adsense/adsense-banner';
+import { DisplayADFlexRowSmall } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -52,9 +52,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           transactionsCountPerDay={transactionsCountPerDay}
         />
 
-        <div className='mb-6'>
-          <DisplayAD adId={`ad-slot-${6874118547}`} />
-        </div>
+        <DisplayADFlexRowSmall />
 
         <div className='flex items-center justify-between w-full'>
           <div className='space-y-2 w-full'>

@@ -13,7 +13,7 @@ import { Suspense } from 'react';
 import { LineCharts } from './line-charts';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { DisplayADFlexRowSmall } from '@/components/google-adsense/adsense-banner';
 
 const Heart = dynamic(() => import('@/components/heart'), { ssr: false });
@@ -109,8 +109,9 @@ export const Top = async ({
             />
           </div>
 
-          <div className='flex flex-col justify-between gap-4 shrink-0'>
-            <div className='divide-y text-sm sm:text-base'>
+          <div className='flex flex-col justify-between gap-4 shrink-0 relative'>
+            <ChevronDown className='absolute left-1/2 -translate-x-1/2 -bottom-6 size-5 stroke-primary/40' />
+            <div className='divide-y text-sm sm:text-base max-h-[17rem] overflow-y-scroll pr-2 pb-2'>
               <div className='flex items-center font-semibold px-2 py-1.5'>
                 <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-16'>
                   날짜
