@@ -2,19 +2,17 @@ import { GoToHome } from '@/components/go-to-home';
 import { NoImage } from '@/components/no-image';
 import { SearchBarLoading } from '@/components/search-bar-loading';
 import { SearchBarWrapper } from '@/components/search-bar-wrapper';
+import { Button } from '@/components/ui/button';
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
-import { format } from 'date-fns';
-import { ko } from 'date-fns/locale';
 import { InferSelectModel, and, eq, gte, sql } from 'drizzle-orm';
+import { ArrowUpRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Suspense } from 'react';
 import { LineCharts } from './line-charts';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { ArrowUpRight, ChevronDown } from 'lucide-react';
-import { DisplayADFlexRowSmall } from '@/components/google-adsense/adsense-banner';
+import { TopLists } from './top-lists';
 
 const Heart = dynamic(() => import('@/components/heart'), { ssr: false });
 
@@ -70,8 +68,6 @@ export const Top = async ({
         <SearchBarWrapper />
       </Suspense>
 
-      <DisplayADFlexRowSmall />
-
       <div className='flex flex-col gap-4'>
         <h1 className='text-2xl sm:text-3xl font-black'>{item.name}</h1>
 
@@ -109,44 +105,11 @@ export const Top = async ({
             />
           </div>
 
-          <div className='flex flex-col justify-between gap-4 shrink-0 relative'>
-            <ChevronDown className='absolute left-1/2 -translate-x-1/2 -bottom-6 size-5 stroke-primary/40' />
-            <div className='divide-y text-sm sm:text-base max-h-[17rem] overflow-y-scroll pr-2 pb-2'>
-              <div className='flex items-center font-semibold px-2 py-1.5'>
-                <p className='text-sm sm:text-base text-muted-foreground tracking-tight w-16'>
-                  날짜
-                </p>
-                <p className='w-24'>거래량</p>
-                <p>시세</p>
-              </div>
-              {datas.reverse().map((data) => (
-                <div key={data.date} className='flex items-center p-2'>
-                  <p className='text-xs sm:text-sm text-muted-foreground tracking-tight w-16'>
-                    {format(data.date, 'L/d(iii)', { locale: ko })}
-                  </p>
-                  <p className='w-24'>
-                    {data.totalCount.toLocaleString('ko-KR')}개
-                  </p>
-                  <p className='flex items-center gap-1.5'>
-                    {Math.round(Number(data.averagePrice)).toLocaleString(
-                      'ko-KR'
-                    )}
-                    <Image
-                      src='/meso.png'
-                      alt='meso image'
-                      width={20}
-                      height={20}
-                      className='size-4 object-contain'
-                    />
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <TopLists datas={datas} />
         </div>
       </div>
 
-      <LineCharts datas={datas} />
+      <LineCharts datas={datas.reverse()} />
 
       <h2
         className='text-muted-foreground'
