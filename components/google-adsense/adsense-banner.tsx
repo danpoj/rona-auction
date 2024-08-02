@@ -89,16 +89,19 @@ export const DisplayADFlexRowSmall = ({
   }, []);
 
   return (
-    <ins
-      className='adsbygoogle'
-      style={{
-        display: 'inline-block',
-        width: '100%',
-        height: size === 'sm' ? '180px' : '220px',
-      }}
-      data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
-      data-ad-slot='4744634878'
-    />
+    <div className='w-full h-full max-h-[24rem]'>
+      <ins
+        className='adsbygoogle'
+        style={{
+          display: 'inline-block',
+          width: '100%',
+          minHeight: '140px',
+          height: '100%',
+        }}
+        data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+        data-ad-slot='4744634878'
+      />
+    </div>
   );
 };
 
