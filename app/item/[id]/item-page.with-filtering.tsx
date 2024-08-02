@@ -110,8 +110,8 @@ export const ItemPageWithFiltering = ({
 
   return (
     <>
-      <div className='mb-8'>
-        <DisplayADFlexRowSmall />
+      <div className='mb-4'>
+        <DisplayADFlexRowSmall size='lg' />
       </div>
 
       <div className='flex flex-col md:flex-row-reverse'>

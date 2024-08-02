@@ -75,7 +75,11 @@ export const DisplayAD = ({ adId }: { adId: string }) => {
   );
 };
 
-export const DisplayADFlexRowSmall = ({ adId }: { adId?: string }) => {
+export const DisplayADFlexRowSmall = ({
+  size = 'sm',
+}: {
+  size?: 'sm' | 'lg';
+}) => {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -87,7 +91,11 @@ export const DisplayADFlexRowSmall = ({ adId }: { adId?: string }) => {
   return (
     <ins
       className='adsbygoogle'
-      style={{ display: 'inline-block', width: '100%', height: '140px' }}
+      style={{
+        display: 'inline-block',
+        width: '100%',
+        height: size === 'sm' ? '180px' : '220px',
+      }}
       data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
       data-ad-slot='4744634878'
     />

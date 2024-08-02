@@ -41,8 +41,8 @@ export const ItemPage = ({ item, id }: Props) => {
 
   return (
     <>
-      <div className='mb-8'>
-        <DisplayADFlexRowSmall />
+      <div className='mb-4'>
+        <DisplayADFlexRowSmall size='lg' />
       </div>
 
       <div className='rounded-lg overflow-hidden mb-6 px-3'>

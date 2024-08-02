@@ -52,7 +52,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           transactionsCountPerDay={transactionsCountPerDay}
         />
 
-        <DisplayADFlexRowSmall />
+        <DisplayADFlexRowSmall size='lg' />
 
         <div className='flex items-center justify-between w-full'>
           <div className='space-y-2 w-full'>
