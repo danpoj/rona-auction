@@ -52,6 +52,22 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           transactionsCountPerDay={transactionsCountPerDay}
         />
 
+        <div className='prose dark:prose-invert w-full mb-6 max-w-full'>
+          <pre className='w-full max-w-full text-xs leading-6'>
+            {`
+✔ 8.3 (토) 23:10 검색 안되던 아이템 추가
+
+적 흑일모자, 메탈 완드, 묘목, 루이넬의 꼬리, 불독의 송곳니, 버크의 씹던 풀, 파란색 수련복 바지, 다크 길티언, 
+스틸 브리스트, 갈색 가죽 모자, 블랙 루티아, 산양 석궁, 에메랄드 배틀 그리브, 파이어보어의 송곳니, 
+아쿠아 플라티나 바지, 다크 네펜데스의 씨앗, 반월 자마다르, 황월 바지, 버드빌, 아이보리 숄더메일, 골드 브레이스, 
+브라운 피에뜨, 뱀가죽, 옐로우 피에르슈즈, 뱀방울, 블루 스타드, 적일, 다크 잉그리트, 아쿠아 골든서클릿, 
+미스릴 노르만 헬름, 비급의 낱장, 블러드 발퀴레 치마, 블랙 너클베스트 바지, 브라운 피에뜨 바지, 회색 노가다 목장갑, 
+아이언 체인슈즈, 적월 바지, MT-09의 연료, 우드 레전드 실드, 흑룡포, 하드우드 완드, 블루 브레이스룩, 레드 고어부츠, 
+젝커, 블루 카운터, 사파이어 카멜부츠, [마스터리북]쇼다운 30, [마스터리북]닌자 스톰 30, 블루 키튼서클렛, 
+[마스터리북]속성강화 30, 피스톨, 크로노, 오리할콘 플라틴 바지, 메이플 너클, 스틸 슬레인, 파란 달팽이의 껍질, 다크 너클, 다크 세라피스`.trim()}
+          </pre>
+        </div>
+
         <DisplayADFlexRowSmall size='lg' />
 
         <div className='flex items-center justify-between w-full'>
