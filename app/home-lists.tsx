@@ -1,6 +1,9 @@
 'use client';
 
-import { DisplayADFlexRowSmall } from '@/components/google-adsense/adsense-banner';
+import {
+  DisplayAD,
+  DisplayADFlexRowSmall,
+} from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -47,12 +50,12 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
 
   return (
     <>
-      <article className='flex flex-col gap-10 pl-4 pr-2 pb-6'>
+      <article className='flex flex-col gap-4 pl-4 pr-2 pb-6'>
         <TransactionsLineChart
           transactionsCountPerDay={transactionsCountPerDay}
         />
 
-        <div className='prose dark:prose-invert w-full mb-6 max-w-full'>
+        <div className='prose dark:prose-invert w-full max-w-full'>
           <pre className='w-full max-w-full text-xs leading-6'>
             {`
 ✔ 8.3 (토) 23:10 검색 안되던 아이템 추가
@@ -68,7 +71,9 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           </pre>
         </div>
 
-        <DisplayADFlexRowSmall size='lg' />
+        <div className='flex flex-col gap-1 sm:flex-row'>
+          <DisplayADFlexRowSmall />
+        </div>
 
         <div className='flex items-center justify-between w-full'>
           <div className='space-y-2 w-full'>
@@ -232,6 +237,10 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           </div>
         )}
       </section>
+
+      <div className='my-10'>
+        <DisplayADFlexRowSmall />
+      </div>
 
       <div className='flex justify-between pl-2 pt-4'>
         <div className='flex flex-col'>

@@ -115,21 +115,12 @@ export const ItemPageWithFiltering = ({
       </div>
 
       <div className='flex flex-col md:flex-row-reverse'>
-        <div className='p-4 flex flex-col gap-5'>
-          <p className='text-xl font-bold'>아이템 옵션 검색</p>
-          <div className='prose dark:prose-invert'>
-            <pre className='py-0'>
-              <ul>
-                <li>모든 거래내역의 최대값으로 기본값이 채워져있습니다.</li>
-              </ul>
-            </pre>
-          </div>
-        </div>
+        <div className='p-4 flex flex-col gap-5  w-full'></div>
         <form
           onSubmit={onFilter}
           className='mb-10 space-y-6 w-fit flex flex-col p-4'
         >
-          <div className='space-y-3 flex flex-col'>
+          <div className='space-y-3 flex flex-col shrink-0'>
             {Object.entries(options.current).map(([key, { min, max }]) => (
               <div key={key} className='flex items-center gap-4'>
                 <div className='flex items-center gap-2'>
@@ -147,7 +138,7 @@ export const ItemPageWithFiltering = ({
                     defaultValue={max}
                   />
                 </div>
-                <span className='text-sm font-semibold'>{key}</span>
+                <span className='text-sm font-semibold shrink-0'>{key}</span>
               </div>
             ))}
           </div>

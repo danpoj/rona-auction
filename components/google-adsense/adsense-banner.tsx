@@ -50,7 +50,7 @@ export const BannerExample = () => {
   );
 };
 
-export const DisplayAD = ({ adId }: { adId: string }) => {
+export const DisplayAD = () => {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -60,16 +60,15 @@ export const DisplayAD = ({ adId }: { adId: string }) => {
   }, []);
 
   return (
-    <div style={{ width: '100%', height: '220px' }}>
+    <div className='w-full aspect-[3/1] sm:aspect-[1/1] bg-black rounded-xl overflow-hidden'>
       <ins
-        key={adId}
-        id={adId}
-        className='adsbygoogle'
-        style={{ display: 'block', width: '100%', height: '100%' }}
+        style={{
+          display: 'block',
+          width: '100%',
+          height: '100%',
+        }}
         data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
         data-ad-slot='6874118547'
-        data-ad-format='auto'
-        data-full-width-responsive='true'
       />
     </div>
   );
@@ -130,7 +129,7 @@ export const DisplayADSmall = ({ adId }: { adId: string }) => {
   );
 };
 
-export default function DisplayADVertical({ adId }: { adId: string }) {
+export default function DisplayADVertical() {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -140,16 +139,16 @@ export default function DisplayADVertical({ adId }: { adId: string }) {
   }, []);
 
   return (
-    <div className='bg-black w-full hidden md:block'>
+    <div className='w-full h-screen'>
       <ins
-        key={adId}
-        id={adId}
         className='adsbygoogle'
-        style={{ display: 'block' }}
+        style={{
+          display: 'inline-block',
+          width: '100%',
+          height: '100%',
+        }}
         data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
         data-ad-slot='9490379884'
-        data-ad-format='auto'
-        data-full-width-responsive='true'
       />
     </div>
   );
