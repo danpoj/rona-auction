@@ -1,9 +1,6 @@
 'use client';
 
-import {
-  DisplayAD,
-  DisplayADFlexRowSmall,
-} from '@/components/google-adsense/adsense-banner';
+import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -72,7 +69,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
         </div>
 
         <div className='flex flex-col gap-1 sm:flex-row'>
-          <DisplayADFlexRowSmall />
+          <DisplayAD />
         </div>
 
         <div className='flex items-center justify-between w-full'>
@@ -239,7 +236,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
       </section>
 
       <div className='my-10'>
-        <DisplayADFlexRowSmall />
+        <DisplayAD />
       </div>
 
       <div className='flex justify-between pl-2 pt-4'>

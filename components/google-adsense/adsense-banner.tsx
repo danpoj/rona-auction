@@ -60,17 +60,18 @@ export const DisplayAD = () => {
   }, []);
 
   return (
-    <div className='w-full aspect-[3/1] sm:aspect-[1/1] bg-black rounded-xl overflow-hidden'>
-      <ins
-        style={{
-          display: 'block',
-          width: '100%',
-          height: '100%',
-        }}
-        data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
-        data-ad-slot='6874118547'
-      />
-    </div>
+    <ins
+      className='adsbygoogle'
+      style={{
+        display: 'inline-block',
+        width: '100%',
+        minHeight: '160px',
+      }}
+      data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+      data-ad-slot='6874118547'
+      data-ad-format='auto'
+      data-full-width-responsive='true'
+    />
   );
 };
 
@@ -139,13 +140,13 @@ export default function DisplayADVertical() {
   }, []);
 
   return (
-    <div className='w-full h-screen'>
+    <div className='w-full h-screen pt-20'>
       <ins
         className='adsbygoogle'
         style={{
           display: 'inline-block',
           width: '100%',
-          height: '100%',
+          minHeight: '300px',
         }}
         data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
         data-ad-slot='9490379884'

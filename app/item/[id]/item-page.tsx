@@ -1,11 +1,7 @@
 'use client';
 
 import { GoToHome } from '@/components/go-to-home';
-import {
-  DisplayAD,
-  DisplayADFlexRowSmall,
-  DisplayADSmall,
-} from '@/components/google-adsense/adsense-banner';
+import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -42,7 +38,7 @@ export const ItemPage = ({ item, id }: Props) => {
   return (
     <>
       <div className='mb-4'>
-        <DisplayADFlexRowSmall size='lg' />
+        <DisplayAD />
       </div>
 
       <div className='rounded-lg overflow-hidden mb-6 px-3'>
