@@ -10,6 +10,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 import { Gothic_A1 } from 'next/font/google';
 import './globals.css';
+import { SidebarAdWrapper } from './sidebar-ad-wrapper';
 
 const gothic_A1 = Gothic_A1({
   subsets: ['latin'],
@@ -100,13 +101,7 @@ export default function RootLayout({
           <QueryProvider>
             <main className='h-full max-h-full dark:text-primary/80'>
               <TracingBeam>
-                {/* <div className='hidden xl:block min-h-full w-[22rem] shrink-0 absolute top-0 -left-[22rem]'>
-                  <DisplayADVertical />
-                </div> */}
-                {children}
-                {/* <div className='hidden xl:block min-h-full w-[22rem] shrink-0 absolute top-0 -right-[22rem]'>
-                  <DisplayADVertical />
-                </div> */}
+                <SidebarAdWrapper>{children}</SidebarAdWrapper>
               </TracingBeam>
             </main>
           </QueryProvider>
