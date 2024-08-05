@@ -131,7 +131,7 @@ export const DisplayADSmall = ({ adId }: { adId: string }) => {
 };
 
 export default function DisplayADVertical({
-  height = '800px',
+  height = '900px',
 }: {
   height?: string;
 }) {
