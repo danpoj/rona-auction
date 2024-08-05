@@ -130,11 +130,7 @@ export const DisplayADSmall = ({ adId }: { adId: string }) => {
   );
 };
 
-export default function DisplayADVertical({
-  height = '900px',
-}: {
-  height?: string;
-}) {
+export default function DisplayADVertical() {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -144,13 +140,13 @@ export default function DisplayADVertical({
   }, []);
 
   return (
-    <div className='w-full pt-2'>
+    <div className='w-full pt-2 h-screen'>
       <ins
         className='adsbygoogle'
         style={{
           display: 'inline-block',
           width: '100%',
-          height: height,
+          height: '800px',
         }}
         data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
         data-ad-slot='9490379884'
