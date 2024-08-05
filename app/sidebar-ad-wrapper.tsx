@@ -10,14 +10,15 @@ export const SidebarAdWrapper = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
 
   return (
-    <Fragment>
-      <div className='hidden xl:block w-[18rem] shrink-0 absolute top-0 -left-[19rem]'>
-        <DisplayADVertical key={pathname} />
+    <>
+      <div className='hidden lg:block w-[20rem] shrink-0 sticky bg-black bottom-0'>
+        <DisplayADVertical />
       </div>
+
       {children}
-      <div className='hidden xl:block w-[18rem] shrink-0 absolute top-0 -right-[19rem]'>
-        <DisplayADVertical key={pathname} />
+      <div className='hidden lg:block w-[20rem] shrink-0 absolute top-0 -right-[21rem]'>
+        <DisplayADVertical />
       </div>
-    </Fragment>
+    </>
   );
 };

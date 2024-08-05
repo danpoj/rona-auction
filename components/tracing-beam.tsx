@@ -8,7 +8,9 @@ import {
   useSpring,
 } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import DisplayADVertical from './google-adsense/adsense-banner';
+import DisplayADVertical, {
+  DisplayADVertical2,
+} from './google-adsense/adsense-banner';
 
 export const TracingBeam = ({
   children,
@@ -50,8 +52,22 @@ export const TracingBeam = ({
   return (
     <motion.div
       ref={ref}
-      className={cn('relative w-full max-w-[49rem] mx-auto h-full', className)}
+      className={cn('relative w-full max-w-[46rem] mx-auto h-full', className)}
     >
+      <div className='absolute top-0 -left-[22rem] h-full'>
+        <div className='hidden lg:block w-[20rem] shrink-0 sticky top-0'>
+          <DisplayADVertical />
+          <DisplayADVertical2 />
+        </div>
+      </div>
+
+      <div className='absolute top-0 -right-[22rem] h-full'>
+        <div className='hidden lg:block w-[20rem] shrink-0 sticky top-0'>
+          <DisplayADVertical2 />
+          <DisplayADVertical />
+        </div>
+      </div>
+
       <div className='absolute -left-4 md:-left-20 top-3 hidden md:block'>
         <motion.div
           transition={{
@@ -123,7 +139,9 @@ export const TracingBeam = ({
           </defs>
         </svg>
       </div>
-      <div ref={contentRef}>{children}</div>
+      <div ref={contentRef} className=''>
+        {children}
+      </div>
     </motion.div>
   );
 };

@@ -50,7 +50,7 @@ export const BannerExample = () => {
   );
 };
 
-export const DisplayAD = ({ height = '300px' }: { height?: string }) => {
+export const DisplayAD = () => {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -66,12 +66,11 @@ export const DisplayAD = ({ height = '300px' }: { height?: string }) => {
         // backgroundColor: '#000',
         display: 'inline-block',
         width: '100%',
-        height: height,
       }}
       data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
       data-ad-slot='6874118547'
-      // data-ad-format='auto'
-      // data-full-width-responsive='true'
+      data-ad-format='auto'
+      data-full-width-responsive='true'
     />
   );
 };
@@ -90,19 +89,17 @@ export const DisplayADFlexRowSmall = ({
   }, []);
 
   return (
-    <div className='w-full h-full max-h-[24rem]'>
-      <ins
-        className='adsbygoogle'
-        style={{
-          display: 'inline-block',
-          width: '100%',
-          minHeight: '140px',
-          height: '100%',
-        }}
-        data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
-        data-ad-slot='4744634878'
-      />
-    </div>
+    <ins
+      className='adsbygoogle'
+      style={{
+        display: 'inline-block',
+        width: '100%',
+      }}
+      data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+      data-ad-slot='4744634878'
+      data-ad-format='auto'
+      data-full-width-responsive='true'
+    />
   );
 };
 
@@ -141,18 +138,16 @@ export default function DisplayADVertical() {
   }, []);
 
   return (
-    <div className='w-full pt-2 h-screen'>
-      <ins
-        className='adsbygoogle'
-        style={{
-          display: 'inline-block',
-          width: '100%',
-          height: '800px',
-        }}
-        data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
-        data-ad-slot='9490379884'
-      />
-    </div>
+    <ins
+      className='adsbygoogle '
+      style={{
+        display: 'inline-block',
+        width: '100%',
+        height: '560px',
+      }}
+      data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+      data-ad-slot='9490379884'
+    />
   );
 }
 
@@ -166,18 +161,16 @@ export function DisplayADVertical2() {
   }, []);
 
   return (
-    <div className='w-full h-screen pt-20'>
-      <ins
-        className='adsbygoogle'
-        style={{
-          display: 'inline-block',
-          width: '100%',
-          height: '800px',
-        }}
-        data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
-        data-ad-slot='9490379884'
-      />
-    </div>
+    <ins
+      className='adsbygoogle '
+      style={{
+        display: 'inline-block',
+        width: '100%',
+        height: '300px',
+      }}
+      data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+      data-ad-slot='9490379884'
+    />
   );
 }
 

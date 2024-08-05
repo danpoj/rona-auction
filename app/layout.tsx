@@ -10,7 +10,6 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 import { Gothic_A1 } from 'next/font/google';
 import './globals.css';
-import { SidebarAdWrapper } from './sidebar-ad-wrapper';
 
 const gothic_A1 = Gothic_A1({
   subsets: ['latin'],

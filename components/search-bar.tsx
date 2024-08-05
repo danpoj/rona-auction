@@ -9,7 +9,10 @@ import Link from 'next/link';
 import { useMemo, useRef, useState } from 'react';
 import { useDebounceValue, useOnClickOutside } from 'usehooks-ts';
 import { NoImage } from './no-image';
-import { DisplayAD } from './google-adsense/adsense-banner';
+import {
+  DisplayAD,
+  DisplayADFlexRowSmall,
+} from './google-adsense/adsense-banner';
 
 type Props = {
   items: InferSelectModel<typeof itemTable>[];
@@ -78,7 +81,7 @@ export const SearchBar = ({ items }: Props) => {
         )}
       </div>
 
-      <DisplayAD height='130px' />
+      <DisplayADFlexRowSmall />
     </div>
   );
 };
