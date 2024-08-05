@@ -61,7 +61,7 @@ export const DisplayAD = () => {
 
   return (
     <ins
-      className='adsbygoogle'
+      className='adsbygoogle rounded-xl'
       style={{
         display: 'inline-block',
         width: '100%',
@@ -146,7 +146,32 @@ export default function DisplayADVertical() {
         style={{
           display: 'inline-block',
           width: '100%',
-          minHeight: '300px',
+          height: '300px',
+        }}
+        data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
+        data-ad-slot='9490379884'
+      />
+    </div>
+  );
+}
+
+export function DisplayADVertical2() {
+  useEffect(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  }, []);
+
+  return (
+    <div className='w-full h-screen pt-20'>
+      <ins
+        className='adsbygoogle'
+        style={{
+          display: 'inline-block',
+          width: '100%',
+          height: '800px',
         }}
         data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
         data-ad-slot='9490379884'
