@@ -50,7 +50,7 @@ export const BannerExample = () => {
   );
 };
 
-export const DisplayAD = () => {
+export const DisplayAD = ({ height = '300px' }: { height?: string }) => {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -61,16 +61,17 @@ export const DisplayAD = () => {
 
   return (
     <ins
-      className='adsbygoogle rounded-xl'
+      className='adsbygoogle'
       style={{
+        // backgroundColor: '#000',
         display: 'inline-block',
         width: '100%',
-        minHeight: '160px',
+        height: height,
       }}
       data-ad-client={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
       data-ad-slot='6874118547'
-      data-ad-format='auto'
-      data-full-width-responsive='true'
+      // data-ad-format='auto'
+      // data-full-width-responsive='true'
     />
   );
 };

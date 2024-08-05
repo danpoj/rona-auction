@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useMemo, useRef, useState } from 'react';
 import { useDebounceValue, useOnClickOutside } from 'usehooks-ts';
 import { NoImage } from './no-image';
+import { DisplayAD } from './google-adsense/adsense-banner';
 
 type Props = {
   items: InferSelectModel<typeof itemTable>[];
@@ -31,7 +32,7 @@ export const SearchBar = ({ items }: Props) => {
   useOnClickOutside(ref, () => show && setShow(false));
 
   return (
-    <div className='px-4 pb-6'>
+    <div className='px-4 pb-6 space-y-4'>
       <div ref={ref} className='max-w-[24rem] relative'>
         <Input
           onKeyDown={(e) => {
@@ -76,6 +77,8 @@ export const SearchBar = ({ items }: Props) => {
           </div>
         )}
       </div>
+
+      <DisplayAD height='130px' />
     </div>
   );
 };

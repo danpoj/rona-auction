@@ -100,9 +100,7 @@ export default function RootLayout({
           <BackgroundPattern />
           <QueryProvider>
             <main className='h-full max-h-full dark:text-primary/80'>
-              <TracingBeam>
-                <SidebarAdWrapper>{children}</SidebarAdWrapper>
-              </TracingBeam>
+              <TracingBeam>{children}</TracingBeam>
             </main>
           </QueryProvider>
         </ThemeProvider>

@@ -235,10 +235,6 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
         )}
       </section>
 
-      <div className='my-10'>
-        <DisplayAD />
-      </div>
-
       <div className='flex justify-between pl-2 pt-4'>
         <div className='flex flex-col'>
           <p className='text-sm font-semibold pb-1'>Built with</p>
