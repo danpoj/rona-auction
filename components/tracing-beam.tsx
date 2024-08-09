@@ -61,12 +61,12 @@ export const TracingBeam = ({
         </div>
       </div>
 
-      <div className='absolute top-0 -right-[22rem] h-full'>
+      {/* <div className='absolute top-0 -right-[22rem] h-full'>
         <div className='hidden lg:block w-[20rem] shrink-0 sticky top-0'>
           <DisplayADVertical2 />
           <DisplayADVertical />
         </div>
-      </div>
+      </div> */}
 
       <div className='absolute -left-4 md:-left-20 top-3 hidden md:block'>
         <motion.div

@@ -55,7 +55,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
         <div className='prose dark:prose-invert w-full max-w-full'>
           <pre className='w-full max-w-full text-xs leading-6'>
             {`
-✔ 8.3 (토) 23:10 검색 안되던 아이템 추가
+✔ 8.3 (토) 23:10
 
 적 흑일모자, 메탈 완드, 묘목, 루이넬의 꼬리, 불독의 송곳니, 버크의 씹던 풀, 파란색 수련복 바지, 다크 길티언, 
 스틸 브리스트, 갈색 가죽 모자, 블랙 루티아, 산양 석궁, 에메랄드 배틀 그리브, 파이어보어의 송곳니, 
