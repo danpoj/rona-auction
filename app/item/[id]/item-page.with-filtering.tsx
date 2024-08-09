@@ -106,9 +106,9 @@ export const ItemPageWithFiltering = ({
 
   return (
     <>
-      <div className='mb-4'>
+      {/* <div className='mb-4'>
         <DisplayAD />
-      </div>
+      </div> */}
 
       <div className='flex flex-col md:flex-row-reverse'>
         <div className='p-4 flex flex-col gap-5  w-full'></div>

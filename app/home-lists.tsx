@@ -77,9 +77,9 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           </pre>
         </div>
 
-        <div className='flex flex-col gap-1 sm:flex-row'>
+        {/* <div className='flex flex-col gap-1 sm:flex-row'>
           <DisplayAD />
-        </div>
+        </div> */}
 
         <div className='flex items-center justify-between w-full'>
           <div className='space-y-2 w-full'>

@@ -44,9 +44,9 @@ export const Lists = ({
           ))}
       </div>
 
-      <div className='mt-4'>
+      {/* <div className='mt-4'>
         <DisplayAD />
-      </div>
+      </div> */}
 
       {Object.entries(itemsOBJ).map(([date, items]) => (
         <div

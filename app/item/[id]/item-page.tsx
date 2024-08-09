@@ -37,9 +37,9 @@ export const ItemPage = ({ item, id }: Props) => {
 
   return (
     <>
-      <div className='mb-4'>
+      {/* <div className='mb-4'>
         <DisplayAD />
-      </div>
+      </div> */}
 
       <div className='rounded-lg overflow-hidden mb-6 px-3'>
         <Button
