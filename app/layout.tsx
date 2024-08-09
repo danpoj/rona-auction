@@ -10,6 +10,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 import { Gothic_A1 } from 'next/font/google';
 import './globals.css';
+import { NaverAnalytics } from './naver-analytics';
 
 const gothic_A1 = Gothic_A1({
   subsets: ['latin'],
@@ -105,6 +106,8 @@ export default function RootLayout({
         </ThemeProvider>
         <Toaster position='top-right' />
       </body>
+
+      <NaverAnalytics />
       <GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_GAID!} />
     </html>
   );
