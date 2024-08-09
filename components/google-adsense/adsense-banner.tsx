@@ -139,7 +139,7 @@ export default function DisplayADVertical() {
 
   return (
     <ins
-      className='adsbygoogle '
+      className='adsbygoogle'
       style={{
         display: 'inline-block',
         width: '100%',
