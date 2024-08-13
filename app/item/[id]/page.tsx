@@ -1,14 +1,13 @@
-import { ITEMS_PER_PAGE } from '@/constants';
+import { siteConfig } from '@/config';
 import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { desc, eq } from 'drizzle-orm';
-import { Loader } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { ItemPage } from './item-page';
 import { ItemPageWithFilteringWrapper } from './item-page-with-filtering-wrapper';
 import { Top } from './top';
-import { siteConfig } from '@/config';
 
 type Props = {
   params: {
@@ -61,15 +60,15 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export async function generateStaticParams() {
-  const items = await db.query.itemTable.findMany({
-    columns: { id: true },
-  });
+// export async function generateStaticParams() {
+//   const items = await db.query.itemTable.findMany({
+//     columns: { id: true },
+//   });
 
-  return items.map((item) => ({
-    id: String(item.id),
-  }));
-}
+//   return items.map((item) => ({
+//     id: String(item.id),
+//   }));
+// }
 
 export default async function Page({ params: { id } }: Props) {
   const idAsNumber = Number(id);
@@ -104,7 +103,7 @@ export default async function Page({ params: { id } }: Props) {
         key={id}
         fallback={
           <header className='px-4 py-10 space-y-6 flex items-center justify-center h-80'>
-            <Loader className='animate-spin w-5 h-5' />
+            <Loader2 className='animate-spin w-5 h-5' />
           </header>
         }
       >
