@@ -1,7 +1,6 @@
 'use client';
 
 import { GoToHome } from '@/components/go-to-home';
-import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -11,7 +10,7 @@ import { useInfiniteTransactionsPerItem } from '@/hooks/use-infinite-transaction
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
-import { CandyCane, Loader } from 'lucide-react';
+import { CandyCane, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Fragment, useState } from 'react';
@@ -86,7 +85,7 @@ export const ItemPage = ({ item, id }: Props) => {
       <section className='flex flex-col divide-y'>
         {isPending && (
           <div className='w-full p-2 space-y-1 flex justify-center mt-10 h-screen'>
-            <Loader className='animate-spin size-4' />
+            <Loader2 className='animate-spin size-4' />
           </div>
         )}
         {data?.pages.map((page, i) => (
@@ -187,7 +186,7 @@ export const ItemPage = ({ item, id }: Props) => {
               disabled={isFetching}
             >
               {isFetching ? (
-                <Loader className='size-4 animate-spin' />
+                <Loader2 className='size-4 animate-spin' />
               ) : (
                 '더 보기'
               )}

@@ -1,6 +1,5 @@
 'use client';
 
-import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
@@ -23,7 +22,7 @@ import {
   ArrowRightIcon,
   ArrowUpRight,
   CandyCane,
-  Loader,
+  Loader2,
   Pause,
   RotateCcw,
   Triangle,
@@ -235,7 +234,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
               disabled={isFetching}
             >
               {isFetching ? (
-                <Loader className='size-4 animate-spin' />
+                <Loader2 className='size-4 animate-spin' />
               ) : (
                 '더 보기'
               )}
