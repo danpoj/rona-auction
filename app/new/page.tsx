@@ -28,6 +28,16 @@ export default function Page() {
 
       <div className='space-y-20'>
         <article className='prose dark:prose-invert'>
+          <h3>8/13(화)</h3>
+          <ul>
+            <li>
+              거래내역이 계속 추가되며 연산량이 많아지고 있어, *최근 60일* 의
+              거래량, 시세 내역이 보여지도록 수정되었습니다.
+            </li>
+          </ul>
+        </article>
+
+        <article className='prose dark:prose-invert'>
           <h3>7/26(금)</h3>
           <ul>
             <li>검색안되는 아이템들 추가</li>
