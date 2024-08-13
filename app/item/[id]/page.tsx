@@ -60,15 +60,15 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-// export async function generateStaticParams() {
-//   const items = await db.query.itemTable.findMany({
-//     columns: { id: true },
-//   });
+export async function generateStaticParams() {
+  const items = await db.query.itemTable.findMany({
+    columns: { id: true },
+  });
 
-//   return items.map((item) => ({
-//     id: String(item.id),
-//   }));
-// }
+  return items.map((item) => ({
+    id: String(item.id),
+  }));
+}
 
 export default async function Page({ params: { id } }: Props) {
   const idAsNumber = Number(id);
