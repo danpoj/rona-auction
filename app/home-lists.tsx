@@ -97,16 +97,16 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
 
             <div className='text-xl sm:text-2xl font-semibold flex items-center gap-2'>
               <h2>거래 최신 순</h2>
-              <Button
+              {/* <Button
                 size='sm'
                 variant='ringHover'
                 className='rounded-full h-6 text-xs bg-secondary text-primary hover:text-primary-foreground'
                 asChild
               >
                 <Link href='/new'>New</Link>
-              </Button>
+              </Button> */}
 
-              <Button
+              {/* <Button
                 size='sm'
                 variant='ringHover'
                 className='rounded-full h-6 text-xs bg-secondary text-primary hover:text-primary-foreground'
@@ -119,7 +119,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
                 >
                   문의 <ArrowUpRight className='size-3 ml-0.5' />
                 </Link>
-              </Button>
+              </Button> */}
             </div>
             {data.pages[0][0].date && (
               <p className='text-sm sm:text-base space-x-2 text-muted-foreground items-center flex'>
