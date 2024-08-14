@@ -71,6 +71,7 @@ export async function generateMetadata({ params }: Props) {
 // }
 
 export const dynamic = 'force-dynamic';
+export const fetchCache = 'default-no-store';
 
 export default async function Page({ params: { id } }: Props) {
   const idAsNumber = Number(id);
