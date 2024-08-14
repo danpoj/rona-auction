@@ -1,13 +1,12 @@
 'use client';
 
 import { GoToHome } from '@/components/go-to-home';
-import { DisplayAD } from '@/components/google-adsense/adsense-banner';
 import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ITEMS_PER_PAGE } from '@/constants';
+import { ITEMS_PER_PAGE, topItems } from '@/constants';
 import { itemTable, transactionTable } from '@/db/schema';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
@@ -110,43 +109,51 @@ export const ItemPageWithFiltering = ({
         <DisplayAD />
       </div> */}
 
-      <div className='flex flex-col md:flex-row-reverse'>
-        <div className='p-4 flex flex-col gap-5  w-full'></div>
-        <form
-          onSubmit={onFilter}
-          className='mb-10 space-y-6 w-fit flex flex-col p-4'
-        >
-          <div className='space-y-3 flex flex-col shrink-0'>
-            {Object.entries(options.current).map(([key, { min, max }]) => (
-              <div key={key} className='flex items-center gap-4'>
-                <div className='flex items-center gap-2'>
-                  <Input
-                    type='number'
-                    name={`${key}-min`}
-                    className='w-24'
-                    defaultValue={0}
-                  />
-                  <span className='text-muted-foreground'>-</span>
-                  <Input
-                    type='number'
-                    name={`${key}-max`}
-                    className='w-24'
-                    defaultValue={max}
-                  />
-                </div>
-                <span className='text-sm font-semibold shrink-0'>{key}</span>
-              </div>
-            ))}
-          </div>
-          <Button
-            type='submit'
-            variant='shine'
-            className='rounded-full hover:hue-rotate-60'
+      {filteredTransactions.length > 0 && (
+        <div className='flex flex-col md:flex-row-reverse'>
+          <div className='p-4 flex flex-col gap-5 w-full'></div>
+          <form
+            onSubmit={onFilter}
+            className='mb-10 space-y-6 w-fit flex flex-col p-4'
           >
-            검색
-          </Button>
-        </form>
-      </div>
+            <div className='space-y-3 flex flex-col shrink-0'>
+              {Object.entries(options.current).map(([key, { min, max }]) => (
+                <div key={key} className='flex items-center gap-4'>
+                  <div className='flex items-center gap-2'>
+                    <Input
+                      type='number'
+                      name={`${key}-min`}
+                      className='w-24'
+                      defaultValue={0}
+                    />
+                    <span className='text-muted-foreground'>-</span>
+                    <Input
+                      type='number'
+                      name={`${key}-max`}
+                      className='w-24'
+                      defaultValue={max}
+                    />
+                  </div>
+                  <span className='text-sm font-semibold shrink-0'>{key}</span>
+                </div>
+              ))}
+            </div>
+            <Button
+              type='submit'
+              variant='shine'
+              className='rounded-full hover:hue-rotate-60'
+            >
+              검색
+            </Button>
+          </form>
+        </div>
+      )}
+
+      <p className='text-xs text-violet-600 dark:text-violet-300 mb-2'>
+        {!!topItems.find((item) => item.id === id)
+          ? '최근 30일 거래내역'
+          : '최근 45일 거래내역'}
+      </p>
 
       {filteredTransactions.length === 0 ? (
         <p className='text-2xl p-4 font-bold'>검색 결과가 없습니다</p>

@@ -2,6 +2,7 @@ import { db } from '@/db/drizzle';
 import { itemTable, transactionTable } from '@/db/schema';
 import { InferSelectModel, and, desc, eq, gte, sql } from 'drizzle-orm';
 import { ItemPageWithFiltering } from './item-page.with-filtering';
+import { topItems } from '@/constants';
 
 type Props = {
   id: number;
@@ -9,25 +10,47 @@ type Props = {
 };
 
 export const ItemPageWithFilteringWrapper = async ({ id, item }: Props) => {
-  const transactions = await db
-    .select({
-      date: transactionTable.date,
-      price: transactionTable.price,
-      count: transactionTable.count,
-      id: transactionTable.id,
-      additional: transactionTable.additional,
-    })
-    .from(transactionTable)
-    .orderBy(desc(transactionTable.date))
-    .where(
-      and(
-        eq(transactionTable.itemId, id),
-        gte(
-          sql`${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul'`,
-          sql`DATE(NOW() AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul' - INTERVAL '60 days')`
+  const isTopItem = topItems.find((item) => item.id === id);
+
+  const transactions = isTopItem
+    ? await db
+        .select({
+          date: transactionTable.date,
+          price: transactionTable.price,
+          count: transactionTable.count,
+          id: transactionTable.id,
+          additional: transactionTable.additional,
+        })
+        .from(transactionTable)
+        .orderBy(desc(transactionTable.date))
+        .where(
+          and(
+            eq(transactionTable.itemId, id),
+            gte(
+              sql`${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul'`,
+              sql`DATE(NOW() AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul' - INTERVAL '30 days')`
+            )
+          )
         )
-      )
-    );
+    : await db
+        .select({
+          date: transactionTable.date,
+          price: transactionTable.price,
+          count: transactionTable.count,
+          id: transactionTable.id,
+          additional: transactionTable.additional,
+        })
+        .from(transactionTable)
+        .orderBy(desc(transactionTable.date))
+        .where(
+          and(
+            eq(transactionTable.itemId, id),
+            gte(
+              sql`${transactionTable.date} AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul'`,
+              sql`DATE(NOW() AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul' - INTERVAL '45 days')`
+            )
+          )
+        );
 
   const addiOptions: Record<string, number[]> = {};
 

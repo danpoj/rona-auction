@@ -32,6 +32,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 import { TransactionsLineChart } from './charts';
+import { topItems } from '@/constants';
 
 type Props = {
   initialLists: InferSelectModel<typeof transactionTable>[];
@@ -47,34 +48,22 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
   return (
     <>
       <article className='flex flex-col gap-4 pl-4 pr-2 pb-6'>
-        <TransactionsLineChart
-          transactionsCountPerDay={transactionsCountPerDay}
-        />
-
-        <div className='prose dark:prose-invert w-full max-w-full'>
+        <div className='prose dark:prose-invert w-full max-w-full mb-4'>
           <pre className='w-full max-w-full text-xs leading-6 max-h-[14rem]'>
             {`
-✔ 8.9 (금)
+🚧 거래량이 많은 일부 장비 아이템의 경우, 최근 30일 내역만 보여지도록 수정했습니다.
+- ${topItems.map((item) => item.name).join(', ')}
 
-장난감 북, [마스터리북]이프리트 30, 청일, 적월, 다크 숄더메일 바지, 초록색 자일즈의 망토, 쇠 도끼, 웨어울프의 발톱,
-블루 피에르슈즈, 레드 루티드 바지, 버섯의 포자, 지저분한 대걸레, 브론즈 플라틴 바지, 
-팥죽, 카노푸스 부츠, 골드 노르만 헬름, 레드 바즈라, 천도복숭아, 베이지 플레로브, 다크 웨어캡, 
-다크 하이드후드, 몽둥이, 베이지 리넥스, 레드 버글러, 퍼플 미스트슈트, 강철 반장갑, 다크 가너, 
-석궁전용 화살, 블러드 카멜부츠, 미스릴 플레닛, 다크 숄더메일, 황진일갑주 바지, 두손도끼 명중률 주문서 100%, 쇠도끼
-
-✔ 8.3 (토)
-
-적 흑일모자, 메탈 완드, 묘목, 루이넬의 꼬리, 불독의 송곳니, 버크의 씹던 풀, 파란색 수련복 바지, 다크 길티언, 
-스틸 브리스트, 갈색 가죽 모자, 블랙 루티아, 산양 석궁, 에메랄드 배틀 그리브, 파이어보어의 송곳니, 
-아쿠아 플라티나 바지, 다크 네펜데스의 씨앗, 반월 자마다르, 황월 바지, 버드빌, 아이보리 숄더메일, 골드 브레이스, 
-브라운 피에뜨, 뱀가죽, 옐로우 피에르슈즈, 뱀방울, 블루 스타드, 적일, 다크 잉그리트, 아쿠아 골든서클릿, 
-미스릴 노르만 헬름, 비급의 낱장, 블러드 발퀴레 치마, 블랙 너클베스트 바지, 브라운 피에뜨 바지, 회색 노가다 목장갑, 
-아이언 체인슈즈, 적월 바지, MT-09의 연료, 우드 레전드 실드, 흑룡포, 하드우드 완드, 블루 브레이스룩, 레드 고어부츠, 
-젝커, 블루 카운터, 사파이어 카멜부츠, [마스터리북]쇼다운 30, [마스터리북]닌자 스톰 30, 블루 키튼서클렛, 
-[마스터리북]속성강화 30, 피스톨, 크로노, 오리할콘 플라틴 바지, 메이플 너클, 스틸 슬레인, 파란 달팽이의 껍질, 다크 너클, 다크 세라피스
+그 외의 장비 아이템들은 최근 45일 의 거래내역만 보여집니다.
+장비 아이템의 경우 모든 내역을 한번에 불러오는 구조라 생각보다 서버 사용량이 많네요
++ 광고 수입 물어보시는 분들이 많았는데 하루 유저 350명 / 페이지뷰 4000회 / 수입 0.5$ 정도 입니다
 `.trim()}
           </pre>
         </div>
+
+        <TransactionsLineChart
+          transactionsCountPerDay={transactionsCountPerDay}
+        />
 
         {/* <div className='flex flex-col gap-1 sm:flex-row'>
           <DisplayAD />
