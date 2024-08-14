@@ -151,111 +151,113 @@ export const ItemPageWithFiltering = ({
       {filteredTransactions.length === 0 ? (
         <p className='text-2xl p-4 font-bold'>검색 결과가 없습니다</p>
       ) : (
-        <div className='flex items-center p-4 pt-0 pb-6 gap-4'>
+        <div className='flex flex-col sm:flex-row sm:items-center p-4 pt-0 pb-6 gap-4'>
           <p className='text-xl font-bold'>
             총 {filteredTransactions.length}개
           </p>
 
-          <div className='rounded-lg overflow-hidden'>
-            <Button
-              onClick={() => setShape('list')}
-              variant={shape === 'list' ? 'default' : 'ghost'}
-              className={cn(
-                'p-0 h-9 w-10 rounded-none transition-none border border-r-0'
-              )}
-            >
-              <Rows3 className='size-4' />
-            </Button>
-            <Button
-              onClick={() => setShape('item')}
-              variant={shape === 'item' ? 'default' : 'ghost'}
-              className={cn(
-                'p-0 h-9 w-10 rounded-none transition-none border border-l-0'
-              )}
-            >
-              <Grid2x2 className='size-4' />
-            </Button>
-          </div>
+          <div className='flex gap-4'>
+            <div className='rounded-lg overflow-hidden'>
+              <Button
+                onClick={() => setShape('list')}
+                variant={shape === 'list' ? 'default' : 'ghost'}
+                className={cn(
+                  'p-0 h-9 w-10 rounded-none transition-none border border-r-0'
+                )}
+              >
+                <Rows3 className='size-4' />
+              </Button>
+              <Button
+                onClick={() => setShape('item')}
+                variant={shape === 'item' ? 'default' : 'ghost'}
+                className={cn(
+                  'p-0 h-9 w-10 rounded-none transition-none border border-l-0'
+                )}
+              >
+                <Grid2x2 className='size-4' />
+              </Button>
+            </div>
 
-          <div className='rounded-lg overflow-hidden'>
-            <Button
-              onClick={() => {
-                if (sortType === 'timeDESC') {
-                  setSortType('timeASC');
-                  setFilteredTransactions((prev) => {
-                    const sorted = prev.sort(
-                      (a, b) =>
-                        new Date(a.date!).getTime() -
-                        new Date(b.date!).getTime()
-                    );
+            <div className='rounded-lg overflow-hidden'>
+              <Button
+                onClick={() => {
+                  if (sortType === 'timeDESC') {
+                    setSortType('timeASC');
+                    setFilteredTransactions((prev) => {
+                      const sorted = prev.sort(
+                        (a, b) =>
+                          new Date(a.date!).getTime() -
+                          new Date(b.date!).getTime()
+                      );
 
-                    return sorted;
-                  });
-                } else {
-                  setSortType('timeDESC');
-                  setFilteredTransactions((prev) => {
-                    const sorted = prev.sort(
-                      (a, b) =>
-                        new Date(b.date!).getTime() -
-                        new Date(a.date!).getTime()
-                    );
+                      return sorted;
+                    });
+                  } else {
+                    setSortType('timeDESC');
+                    setFilteredTransactions((prev) => {
+                      const sorted = prev.sort(
+                        (a, b) =>
+                          new Date(b.date!).getTime() -
+                          new Date(a.date!).getTime()
+                      );
 
-                    return sorted;
-                  });
-                }
-              }}
-              variant={sortType.startsWith('time') ? 'default' : 'ghost'}
-              className={cn(
-                'h-9 rounded-none transition-none border border-r-0 text-xs'
-              )}
-            >
-              {sortType === 'timeASC' ? '오래된순' : '최신순'}
-            </Button>
-            <Button
-              onClick={() => {
-                if (sortType === 'priceDESC') {
-                  setSortType('priceASC');
-                  setFilteredTransactions((prev) => {
-                    const sorted = prev.sort(
-                      (a, b) => Number(a.price) - Number(b.price)
-                    );
+                      return sorted;
+                    });
+                  }
+                }}
+                variant={sortType.startsWith('time') ? 'default' : 'ghost'}
+                className={cn(
+                  'h-9 rounded-none transition-none border border-r-0 text-xs'
+                )}
+              >
+                {sortType === 'timeASC' ? '오래된순' : '최신순'}
+              </Button>
+              <Button
+                onClick={() => {
+                  if (sortType === 'priceDESC') {
+                    setSortType('priceASC');
+                    setFilteredTransactions((prev) => {
+                      const sorted = prev.sort(
+                        (a, b) => Number(a.price) - Number(b.price)
+                      );
 
-                    return [...sorted];
-                  });
-                } else if (sortType === 'priceASC') {
-                  setSortType('priceDESC');
-                  setFilteredTransactions((prev) => {
-                    const sorted = prev.sort(
-                      (a, b) => Number(b.price) - Number(a.price)
-                    );
+                      return [...sorted];
+                    });
+                  } else if (sortType === 'priceASC') {
+                    setSortType('priceDESC');
+                    setFilteredTransactions((prev) => {
+                      const sorted = prev.sort(
+                        (a, b) => Number(b.price) - Number(a.price)
+                      );
 
-                    return [...sorted];
-                  });
-                } else {
-                  setSortType('priceDESC');
-                  setFilteredTransactions((prev) => {
-                    const sorted = prev.sort(
-                      (a, b) => Number(b.price) - Number(a.price)
-                    );
+                      return [...sorted];
+                    });
+                  } else {
+                    setSortType('priceDESC');
+                    setFilteredTransactions((prev) => {
+                      const sorted = prev.sort(
+                        (a, b) => Number(b.price) - Number(a.price)
+                      );
 
-                    return [...sorted];
-                  });
-                }
-              }}
-              variant={sortType.startsWith('price') ? 'default' : 'ghost'}
-              className={cn(
-                'h-9 rounded-none transition-none border border-l-0 text-xs items-center gap-0.5'
-              )}
-            >
-              {sortType === 'priceASC' ? '가격낮은순' : '가격높은순'}{' '}
-              <Image
-                src='/meso.png'
-                alt='meso image'
-                width={20}
-                height={20}
-                className='size-4 object-contain'
-              />
-            </Button>
+                      return [...sorted];
+                    });
+                  }
+                }}
+                variant={sortType.startsWith('price') ? 'default' : 'ghost'}
+                className={cn(
+                  'h-9 rounded-none transition-none border border-l-0 text-xs items-center gap-0.5'
+                )}
+              >
+                {sortType === 'priceASC' ? '가격낮은순' : '가격높은순'}{' '}
+                <Image
+                  src='/meso.png'
+                  alt='meso image'
+                  width={20}
+                  height={20}
+                  className='size-4 object-contain'
+                />
+              </Button>
+            </div>
           </div>
         </div>
       )}
