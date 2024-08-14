@@ -48,22 +48,21 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
   return (
     <>
       <article className='flex flex-col gap-4 pl-4 pr-2 pb-6'>
-        <div className='prose dark:prose-invert w-full max-w-full mb-4'>
+        <TransactionsLineChart
+          transactionsCountPerDay={transactionsCountPerDay}
+        />
+
+        <div className='prose dark:prose-invert w-full max-w-full'>
           <pre className='w-full max-w-full text-xs leading-6 max-h-[14rem]'>
             {`
 🚧 거래량이 많은 일부 장비 아이템의 경우, 최근 30일 내역만 보여지도록 수정했습니다.
 - ${topItems.map((item) => item.name).join(', ')}
 
 그 외의 장비 아이템들은 최근 45일 의 거래내역만 보여집니다.
-장비 아이템의 경우 모든 내역을 한번에 불러오는 구조라 생각보다 서버 사용량이 많네요
 + 광고 수입 물어보시는 분들이 많았는데 하루 유저 350명 / 페이지뷰 4000회 / 수입 0.5$ 정도 입니다
 `.trim()}
           </pre>
         </div>
-
-        <TransactionsLineChart
-          transactionsCountPerDay={transactionsCountPerDay}
-        />
 
         {/* <div className='flex flex-col gap-1 sm:flex-row'>
           <DisplayAD />
