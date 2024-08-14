@@ -59,7 +59,6 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
 - ${topItems.map((item) => item.name).join(', ')}
 
 그 외의 장비 아이템들은 최근 45일 의 거래내역만 보여집니다.
-+ 광고 수입 물어보시는 분들이 많았는데 하루 유저 350명 / 페이지뷰 4000회 / 수입 0.5$ 정도 입니다
 `.trim()}
           </pre>
         </div>
