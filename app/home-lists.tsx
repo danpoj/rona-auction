@@ -52,7 +52,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           transactionsCountPerDay={transactionsCountPerDay}
         />
 
-        <div className='prose dark:prose-invert w-full max-w-full'>
+        {/* <div className='prose dark:prose-invert w-full max-w-full'>
           <pre className='w-full max-w-full text-xs leading-6 max-h-[14rem]'>
             {`
 🚧 거래량이 많은 일부 장비 아이템의 경우, 최근 30일 내역만 보여지도록 수정했습니다.
@@ -61,7 +61,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
 그 외의 장비 아이템들은 최근 45일 의 거래내역만 보여집니다.
 `.trim()}
           </pre>
-        </div>
+        </div> */}
 
         {/* <div className='flex flex-col gap-1 sm:flex-row'>
           <DisplayAD />
