@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 export default function Page() {
   return (
-    <section className='max-w-[46rem] mx-auto h-full p-4'>
+    <section className='max-w-[52rem] mx-auto h-full p-4'>
       <div className='flex gap-4 pt-[5.8rem] pb-10'>
         <GoToHome />
 

@@ -66,7 +66,7 @@ export default async function Page() {
   }
 
   return (
-    <div className='max-w-[46rem] mx-auto h-full p-4'>
+    <div className='max-w-[52rem] mx-auto h-full p-4'>
       <div className='flex flex-col  gap-6 pt-[5.8rem]'>
         <GoToHome />
 

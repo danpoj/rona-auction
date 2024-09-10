@@ -235,7 +235,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           <p className='text-sm font-semibold pb-1'>Built with</p>
 
           <Link
-            className='hover:underline underline-offset-4 text-xs text-muted-foreground mb-0.5'
+            className='hover:underline underline-offset-4 text-[10px] text-muted-foreground mb-0.5'
             href={'https://discord.com/invite/pkpu2guJpE'}
             target='_blank'
             rel='noreferrer noopener'
@@ -244,13 +244,17 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           </Link>
 
           <Link
-            className='hover:underline underline-offset-4 text-xs text-muted-foreground'
+            className='hover:underline underline-offset-4 text-[10px] text-muted-foreground'
             href={'https://maplestory.io/'}
             target='_blank'
             rel='noreferrer noopener'
           >
             https://maplestory.io/
           </Link>
+          <p className='text-[8px] text-primary/90 mt-1'>
+            본 웹사이트는 쿠팡 파트너스 활동의 일환으로 운영되며, 이를 통해
+            수익을 얻을 수 있습니다.
+          </p>
         </div>
         <ScrollTop />
       </div>
