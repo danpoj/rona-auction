@@ -251,10 +251,10 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
           >
             https://maplestory.io/
           </Link>
-          <p className='text-[8px] text-primary/90 mt-1'>
+          {/* <p className='text-[8px] text-primary/90 mt-1'>
             본 웹사이트는 쿠팡 파트너스 활동의 일환으로 운영되며, 이를 통해
             수익을 얻을 수 있습니다.
-          </p>
+          </p> */}
         </div>
         <ScrollTop />
       </div>

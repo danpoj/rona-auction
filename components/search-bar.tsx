@@ -36,11 +36,11 @@ export const SearchBar = ({ items }: Props) => {
 
   return (
     <div className='px-4 pb-6 space-y-8'>
-      <iframe
+      {/* <iframe
         src='https://ads-partners.coupang.com/widgets.html?id=807035&template=carousel&trackingCode=AF0905237&subId=&width=680&height=140&tsource='
         referrerPolicy='unsafe-url'
         className='w-full'
-      />
+      /> */}
 
       <div ref={ref} className='max-w-[24rem] relative'>
         <Input
