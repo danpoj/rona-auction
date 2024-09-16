@@ -111,12 +111,12 @@ export const Top = async ({
 
       <LineCharts datas={datas.reverse()} />
 
-      <h2
+      {/* <h2
         className='text-muted-foreground'
         dangerouslySetInnerHTML={{
           __html: item.desc.replace(/\\r\\n|\\n|\\r/gm, '<br/>'),
         }}
-      />
+      /> */}
     </header>
   );
 };
