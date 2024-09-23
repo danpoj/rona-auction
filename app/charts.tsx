@@ -37,7 +37,7 @@ export const TransactionsLineChart = ({ transactionsCountPerDay }: Props) => {
           iconPlacement='right'
           asChild
         >
-          <Link href='/top'>인기 매물 ✨</Link>
+          <Link href='/top'>거래량 순</Link>
         </Button>
       </div>
       <AreaChart
