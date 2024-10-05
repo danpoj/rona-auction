@@ -74,7 +74,7 @@ export const InstallPWAButton = () => {
       variant='ringHover'
       className='rounded-full h-6 text-xs'
     >
-      모바일 | 데스크톱 앱 설치
+      데스크톱 앱 추가
       <Download className='size-3 ml-1' />
     </Button>
   );

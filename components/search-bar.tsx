@@ -41,7 +41,7 @@ export const SearchBar = ({ items }: Props) => {
         referrerPolicy='unsafe-url'
         className='w-full'
       /> */}
-      <DisplayADFlexRowSmall />
+      {/* <DisplayADFlexRowSmall /> */}
 
       <div ref={ref} className='max-w-[24rem] relative'>
         <Input
