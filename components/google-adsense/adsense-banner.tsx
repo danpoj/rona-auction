@@ -90,7 +90,7 @@ export const DisplayADFlexRowSmall = ({
 
   return (
     <ins
-      className='adsbygoogle'
+      className='adsbygoogle bg-background'
       style={{
         display: 'inline-block',
         width: '100%',
