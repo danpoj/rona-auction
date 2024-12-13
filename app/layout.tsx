@@ -8,11 +8,11 @@ import { siteConfig } from '@/config';
 import { cn } from '@/lib/utils';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
-import { Gothic_A1 } from 'next/font/google';
 import './globals.css';
 import { NaverAnalytics } from './naver-analytics';
+import { Inter } from 'next/font/google';
 
-const gothic_A1 = Gothic_A1({
+const inter = Inter({
   subsets: ['latin'],
   weight: ['500', '700'],
 });
@@ -90,7 +90,7 @@ export default function RootLayout({
         content={`ca-pub-${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_PID}`}
       />
 
-      <body className={cn(gothic_A1.className, 'overscroll-none')}>
+      <body className={cn(inter.className, 'overscroll-none')}>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
