@@ -113,7 +113,7 @@ export default async function Page({ params: { id } }: Props) {
         <Top id={idAsNumber} item={item} />
       </Suspense>
 
-      {!!transactions[0].additional ? (
+      {transactions.length > 0 && !!transactions[0].additional ? (
         <ItemPageWithFilteringWrapper id={idAsNumber} item={item} />
       ) : (
         <ItemPage initialLists={transactions} item={item} id={idAsNumber} />
