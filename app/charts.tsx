@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { AreaChart, LineChart } from '@tremor/react';
-import { format } from 'date-fns';
+import { AreaChart } from '@tremor/react';
+import { format, getDate, getDay, getMonth } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -20,7 +20,7 @@ export const TransactionsLineChart = ({ transactionsCountPerDay }: Props) => {
       <div className='flex justify-between'>
         <div>
           <h3 className='text-tremor-default text-tremor-content dark:text-dark-tremor-content'>
-            옥션 총 거래량
+            최근 거래량 8.31 - {getMonth(Date.now()) + 1}.{getDate(Date.now())}
           </h3>
           <p className='text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold'>
             {trans
