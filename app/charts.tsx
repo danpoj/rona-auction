@@ -20,7 +20,7 @@ export const TransactionsLineChart = ({ transactionsCountPerDay }: Props) => {
       <div className='flex justify-between'>
         <div>
           <h3 className='text-tremor-default text-tremor-content dark:text-dark-tremor-content'>
-            최근 거래량 8.31 - {getMonth(Date.now()) + 1}.{getDate(Date.now())}
+            최근 거래량
           </h3>
           <p className='text-tremor-metric text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold'>
             {trans
