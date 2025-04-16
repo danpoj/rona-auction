@@ -35,7 +35,7 @@ export const TypewriterEffectSmooth = ({
                 key={`word-${idx}`}
                 target='_blank'
                 rel='noreferrer noopener'
-                className='inline-flex bg-gradient-to-r from-sky-500 to-violet-400 bg-clip-text text-transparent underline underline-offset-8 mr-2'
+                className='inline-flex bg-gradient-to-r from-sky-600 to-violet-500 brightness-125 bg-clip-text text-transparent underline underline-offset-8 mr-2'
               >
                 {word.text.map((char, index) => (
                   <span
