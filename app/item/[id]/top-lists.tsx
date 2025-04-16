@@ -59,7 +59,7 @@ export const TopLists = ({ datas }: Props) => {
           className='text-xs hover:bg-primary/5 transition-none'
           variant='secondary'
         >
-          <span>{isExpanded ? '닫기' : '모든 내역'}</span>
+          <span>{isExpanded ? '닫기' : '더보기'}</span>
           <ChevronDown
             className={cn(
               'size-4 ml-0.5',

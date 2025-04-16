@@ -16,9 +16,22 @@ export const getTransWithoutItemId = async () => {
 };
 
 export const getTransactionsWithoutItemId = async () => {
-  const itemsFromAPI = await fetch(
-    `https://maplestory.io/api/kms/384/item`
-  ).then((res) => res.json());
+  const res = await db
+    .update(transactionTable)
+    .set({ itemId: 666666829 })
+    .where(
+      and(
+        isNull(transactionTable.itemId),
+        eq(transactionTable.itemName, '리버스 그라베')
+      )
+    );
+
+  console.log(res);
+  console.log('done');
+
+  // const itemsFromAPI = await fetch(
+  //   `https://maplestory.io/api/kms/384/item`
+  // ).then((res) => res.json());
 
   // const itemsWithName = itemsFromAPI.filter(
   //   (d) => !(!d.name || !d.name.trim())
@@ -41,9 +54,9 @@ export const getTransactionsWithoutItemId = async () => {
   //   };
   // }
 
-  const items = await db.query.transactionTable.findMany({
-    where: isNull(transactionTable.itemId),
-  });
+  // const items = await db.query.transactionTable.findMany({
+  //   where: isNull(transactionTable.itemId),
+  // });
 
   // console.log(items);
 
@@ -62,7 +75,13 @@ export const getTransactionsWithoutItemId = async () => {
   //     trimmedName: obj[l.replace(/\s+/g, '')].name.replace(/\s+/g, ''),
   //   }));
 
-  // await db.insert(itemTable).values(dd);
+  // for (const el of dd) {
+  //   try {
+  //     await db.insert(itemTable).values(el);
+  //   } catch (error) {
+  //     console.log(el);
+  //   }
+  // }
 
   // for await (const transaction of itemsLinkedSet) {
   //   await db
@@ -195,9 +214,9 @@ export const getItemsWithoutTransactions = async () => {
   // console.log(Object.keys(obj).length);
 };
 
-export const delete7_10_transactions = async () => {
-  const startDate = new Date('2024-07-10T00:00:00+09:00'); // 한국 시간 7월 7일 00:00:00
-  const endDate = new Date('2024-07-11T00:00:00+09:00'); // 한국 시간 7월 8일 00:00:00
+export const deleteTransactions = async () => {
+  const startDate = new Date('2024-06-29T00:00:00+09:00'); // 한국 시간 7월 7일 00:00:00
+  const endDate = new Date('2024-10-01T00:00:00+09:00'); // 한국 시간 7월 8일 00:00:00
 
   const result = await db
     .delete(transactionTable)
@@ -208,11 +227,21 @@ export const delete7_10_transactions = async () => {
       )
     );
 
+  // const result = await db
+  //   .select()
+  //   .from(transactionTable)
+  //   .where(
+  //     and(
+  //       gte(transactionTable.date, startDate),
+  //       lt(transactionTable.date, endDate)
+  //     )
+  //   );
+
   console.log(`Deleted ${result.rowCount} rows`);
 };
 
 export const getTransactionsAction = async () => {
-  const fullPath = path.join(process.cwd(), '/data/07.12.txt');
+  const fullPath = path.join(process.cwd(), '/data/4.15.txt');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const arr = fileContents.split('\n\n');
@@ -244,7 +273,8 @@ export const saveTransactionsAction = async () => {
   const items = await db.query.itemTable.findMany();
 
   const obj = items.reduce((acc, item) => {
-    // acc[item.trimmedName] = { ...item };
+    // @ts-ignore
+    acc[item.trimmedName] = { ...item };
     return acc;
   }, {});
 
@@ -261,12 +291,14 @@ export const saveTransactionsAction = async () => {
       price: String(b?.price),
       additional: b?.additional || '',
       itemName: b?.name.trim(),
-      // ...(obj[b?.name.trim()?.replace(/\s+/g, '')] && {
-      //   itemId: obj[b?.name.trim()?.replace(/\s+/g, '')].id,
-      // }),
+      // @ts-ignore
+      ...(obj[b?.name.trim()?.replace(/\s+/g, '')] && {
+        // @ts-ignore
+        itemId: obj[b?.name.trim()?.replace(/\s+/g, '')].id,
+      }),
     }));
 
-    // await db.insert(transactionTable).values(batchWithItemId);
+    await db.insert(transactionTable).values(batchWithItemId);
 
     console.log(`${i} ~ ${i + 1000} success!`);
   }

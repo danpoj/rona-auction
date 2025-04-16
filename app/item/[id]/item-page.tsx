@@ -5,12 +5,17 @@ import { NoImage } from '@/components/no-image';
 import { ScrollTop } from '@/components/scroll-top';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { itemTable, transactionTable } from '@/db/schema';
 import { useInfiniteTransactionsPerItem } from '@/hooks/use-infinite-transactions';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
-import { CandyCane, Loader2 } from 'lucide-react';
+import { CandyCane, HelpCircleIcon, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Fragment, useState } from 'react';
@@ -40,7 +45,7 @@ export const ItemPage = ({ item, id }: Props) => {
         <DisplayAD />
       </div> */}
 
-      <div className='rounded-lg overflow-hidden mb-6 px-3'>
+      <div className='rounded-lg overflow-hidden mb-6 px-3 flex items-center'>
         <Button
           onClick={() => {
             if (sortType === 'timeDESC') {
@@ -80,6 +85,23 @@ export const ItemPage = ({ item, id }: Props) => {
             className='size-4 object-contain'
           />
         </Button>
+
+        <Popover>
+          <PopoverTrigger className='ml-2'>
+            <HelpCircleIcon className='size-4 stroke-primary/40 hover:stroke-primary/70' />
+          </PopoverTrigger>
+          <PopoverContent
+            className='text-sm text-muted-foreground w-fit'
+            align='start'
+          >
+            ✔ 최신순
+            <br />
+            ✔ 오래된순
+            <br />
+            ✔ 가격높은순
+            <br />✔ 가격낮은순
+          </PopoverContent>
+        </Popover>
       </div>
 
       <section className='flex flex-col divide-y'>

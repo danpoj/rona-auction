@@ -28,31 +28,6 @@ export default function Page() {
 
       <div className='space-y-20'>
         <article className='prose dark:prose-invert'>
-          <h3>8/13(화)</h3>
-          <ul>
-            <li>
-              거래내역이 계속 추가되며 연산량이 많아지고 있어, *최근 60일* 의
-              거래량, 시세 내역이 보여지도록 수정되었습니다.
-            </li>
-          </ul>
-        </article>
-
-        <article className='prose dark:prose-invert'>
-          <h3>7/26(금)</h3>
-          <ul>
-            <li>검색안되는 아이템들 추가</li>
-            <pre>
-              {`
-- [마스터리북]메이플용사 20
-- 쥬얼 쿠아다라
-- 차가운 소다
-- 은
-- ... 약 30개정도의 아이템`.trim()}
-            </pre>
-          </ul>
-        </article>
-
-        <article className='prose dark:prose-invert'>
           <h3>7/24(수)</h3>
           <ul>
             <li>모바일에서도 거래날짜 보이게 수정</li>
