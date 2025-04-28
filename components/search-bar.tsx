@@ -1,53 +1,48 @@
-'use client';
+'use client'
 
-import { Input } from '@/components/ui/input';
-import { itemTable } from '@/db/schema';
-import { InferSelectModel } from 'drizzle-orm';
-import { Search } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useMemo, useRef, useState } from 'react';
-import { useDebounceValue, useOnClickOutside } from 'usehooks-ts';
-import { NoImage } from './no-image';
-import {
-  DisplayAD,
-  DisplayADFlexRowSmall,
-} from './google-adsense/adsense-banner';
+import { Input } from '@/components/ui/input'
+import { itemTable } from '@/db/schema'
+import { InferSelectModel } from 'drizzle-orm'
+import { Search } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useMemo, useRef, useState } from 'react'
+import { useDebounceValue, useOnClickOutside } from 'usehooks-ts'
+import { NoImage } from './no-image'
+import { DisplayAD, DisplayADFlexRowSmall } from './google-adsense/adsense-banner'
 
 type Props = {
-  items: InferSelectModel<typeof itemTable>[];
-};
+  items: InferSelectModel<typeof itemTable>[]
+}
 
 export const SearchBar = ({ items }: Props) => {
-  const [value, setValue] = useState('');
-  const [debouncedValue] = useDebounceValue(value, 100);
-  const [show, setShow] = useState(false);
-  const ref = useRef<HTMLDivElement>(null!);
+  const [value, setValue] = useState('')
+  const [debouncedValue] = useDebounceValue(value, 100)
+  const [show, setShow] = useState(false)
+  const ref = useRef<HTMLDivElement>(null!)
 
   const matchedLists = useMemo(() => {
-    if (debouncedValue.trim() === '') return [];
+    if (debouncedValue.trim() === '') return []
 
-    return items.filter((item) =>
-      item.trimmedName.includes(debouncedValue.replace(/\s+/g, ''))
-    );
-  }, [debouncedValue, items]);
+    return items.filter((item) => item.trimmedName.includes(debouncedValue.replace(/\s+/g, '')))
+  }, [debouncedValue, items])
 
-  useOnClickOutside(ref, () => show && setShow(false));
+  useOnClickOutside(ref, () => show && setShow(false))
 
   return (
     <div className='px-4 pb-6 space-y-8'>
-      <DisplayADFlexRowSmall />
+      {/* <DisplayADFlexRowSmall /> */}
 
       <div ref={ref} className='max-w-[24rem] relative'>
         <Input
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && !show) setShow(true);
-            else if (e.key === 'Escape') setShow(false);
+            if (e.key === 'Enter' && !show) setShow(true)
+            else if (e.key === 'Escape') setShow(false)
           }}
           value={value}
           onChange={(e) => {
-            setValue(e.target.value);
-            if (!show) setShow(true);
+            setValue(e.target.value)
+            if (!show) setShow(true)
           }}
           placeholder='아이템 검색...'
           className='h-14 border-primary/50 w-full rounded-full pl-11 font-semibold'
@@ -74,14 +69,12 @@ export const SearchBar = ({ items }: Props) => {
                     className='size-7 object-contain'
                   />
                 )}
-                <p className='text-sm font-semibold text-primary/80'>
-                  {item.name}
-                </p>
+                <p className='text-sm font-semibold text-primary/80'>{item.name}</p>
               </Link>
             ))}
           </div>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
