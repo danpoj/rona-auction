@@ -32,7 +32,7 @@ export const TransactionsLineChart = ({ transactionsCountPerDay }: Props) => {
         <Button
           size='sm'
           className='rounded-full w-fit text-xs font-semibold px-4 h-8'
-          variant='shine'
+          variant='expandIcon'
           Icon={ArrowRightIcon}
           iconPlacement='right'
           asChild

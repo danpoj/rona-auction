@@ -20,7 +20,6 @@ import { format } from 'date-fns';
 import { InferSelectModel } from 'drizzle-orm';
 import {
   ArrowRightIcon,
-  ArrowUpRight,
   CandyCane,
   Loader2,
   Pause,
@@ -32,7 +31,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 import { TransactionsLineChart } from './charts';
-import { topItems } from '@/constants';
 
 type Props = {
   initialLists: InferSelectModel<typeof transactionTable>[];
@@ -41,7 +39,9 @@ type Props = {
 
 export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
   const { data, fetchNextPage, hasNextPage, isFetching, error } =
-    useInfiniteTransactions({ initialLists });
+    useInfiniteTransactions({
+      initialLists,
+    });
 
   if (error) return notFound();
 
@@ -51,17 +51,6 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
         <TransactionsLineChart
           transactionsCountPerDay={transactionsCountPerDay}
         />
-
-        {/* <div className='prose dark:prose-invert w-full max-w-full'>
-          <pre className='w-full max-w-full text-xs leading-6 max-h-[14rem]'>
-            {`
-🚧 거래량이 많은 일부 장비 아이템의 경우, 최근 30일 내역만 보여지도록 수정했습니다.
-- ${topItems.map((item) => item.name).join(', ')}
-
-그 외의 장비 아이템들은 최근 45일 의 거래내역만 보여집니다.
-`.trim()}
-          </pre>
-        </div> */}
 
         {/* <div className='flex flex-col gap-1 sm:flex-row'>
           <DisplayAD />
@@ -121,7 +110,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
       <section className='flex flex-col divide-y'>
         {data.pages.map((page, i) => (
           <Fragment key={i}>
-            {page.map((transaction, index) => (
+            {page.map((transaction) => (
               <Fragment key={transaction.id}>
                 <Link
                   href={
@@ -219,6 +208,7 @@ export const HomeLists = ({ initialLists, transactionsCountPerDay }: Props) => {
               className='w-40 rounded-full'
               onClick={() => fetchNextPage()}
               disabled={isFetching}
+              variant='secondary'
             >
               {isFetching ? (
                 <Loader2 className='size-4 animate-spin' />

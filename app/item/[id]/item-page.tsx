@@ -206,6 +206,7 @@ export const ItemPage = ({ item, id }: Props) => {
               className='w-40 rounded-full'
               onClick={() => fetchNextPage()}
               disabled={isFetching}
+              variant='secondary'
             >
               {isFetching ? (
                 <Loader2 className='size-4 animate-spin' />

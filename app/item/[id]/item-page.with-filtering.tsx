@@ -445,6 +445,7 @@ export const ItemPageWithFiltering = ({
             onClick={() => {
               setPage((prev) => prev + 1);
             }}
+            variant='secondary'
           >
             더 보기
           </Button>

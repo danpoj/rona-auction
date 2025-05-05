@@ -1,6 +1,6 @@
 'use client';
 
-import { Moon, Sun } from 'lucide-react';
+import { ComputerIcon, Moon, MoonIcon, Sun, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 import { Button } from '@/components/ui/button';
@@ -28,14 +28,23 @@ export function ThemeButton() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          밝게
+        <DropdownMenuItem
+          className='font-light'
+          onClick={() => setTheme('light')}
+        >
+          <SunIcon className='size-4 mr-1' /> Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          어둡게
+        <DropdownMenuItem
+          className='font-light'
+          onClick={() => setTheme('dark')}
+        >
+          <MoonIcon className='size-4 mr-1' /> Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          시스템
+        <DropdownMenuItem
+          className='font-light'
+          onClick={() => setTheme('system')}
+        >
+          <ComputerIcon className='size-4 mr-1' /> System
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

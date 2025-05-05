@@ -2,15 +2,15 @@ import { BackgroundPattern } from '@/components/background-pattern';
 import AdsenseScript from '@/components/google-adsense/adsense-script';
 import { QueryProvider } from '@/components/provider/query-provider';
 import { ThemeProvider } from '@/components/provider/theme-provider';
-import { TracingBeam } from '@/components/tracing-beam';
+import { TestButton } from '@/components/test-button';
 import { Toaster } from '@/components/ui/sonner';
 import { siteConfig } from '@/config';
 import { cn } from '@/lib/utils';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { NaverAnalytics } from './naver-analytics';
-import { Inter } from 'next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -100,7 +100,9 @@ export default function RootLayout({
           <BackgroundPattern />
           <QueryProvider>
             <main className='h-full max-h-full dark:text-primary/80'>
-              <TracingBeam>{children}</TracingBeam>
+              <section className='relative w-full max-w-[52rem] mx-auto h-full'>
+                {children}
+              </section>
             </main>
           </QueryProvider>
         </ThemeProvider>
