@@ -9,7 +9,10 @@ import Link from 'next/link'
 import { useMemo, useRef, useState } from 'react'
 import { useDebounceValue, useOnClickOutside } from 'usehooks-ts'
 import { NoImage } from './no-image'
-import { DisplayAD, DisplayADFlexRowSmall } from './google-adsense/adsense-banner'
+import {
+  DisplayAD,
+  DisplayADFlexRowSmall,
+} from './google-adsense/adsense-banner'
 
 type Props = {
   items: InferSelectModel<typeof itemTable>[]
@@ -24,14 +27,16 @@ export const SearchBar = ({ items }: Props) => {
   const matchedLists = useMemo(() => {
     if (debouncedValue.trim() === '') return []
 
-    return items.filter((item) => item.trimmedName.includes(debouncedValue.replace(/\s+/g, '')))
+    return items.filter((item) =>
+      item.trimmedName.includes(debouncedValue.replace(/\s+/g, ''))
+    )
   }, [debouncedValue, items])
 
   useOnClickOutside(ref, () => show && setShow(false))
 
   return (
     <div className='px-4 pb-6 space-y-8'>
-      <DisplayADFlexRowSmall />
+      {/* <DisplayADFlexRowSmall /> */}
 
       <div ref={ref} className='max-w-[24rem] relative'>
         <Input
@@ -69,7 +74,9 @@ export const SearchBar = ({ items }: Props) => {
                     className='size-7 object-contain'
                   />
                 )}
-                <p className='text-sm font-semibold text-primary/80'>{item.name}</p>
+                <p className='text-sm font-semibold text-primary/80'>
+                  {item.name}
+                </p>
               </Link>
             ))}
           </div>
