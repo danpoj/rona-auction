@@ -36,7 +36,7 @@ export const SearchBar = ({ items }: Props) => {
 
   return (
     <div className='px-4 pb-6 space-y-8'>
-      {/* <DisplayADFlexRowSmall /> */}
+      <DisplayADFlexRowSmall />
 
       <div ref={ref} className='max-w-[24rem] relative'>
         <Input
