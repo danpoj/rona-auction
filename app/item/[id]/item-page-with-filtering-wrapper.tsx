@@ -1,16 +1,16 @@
-import { db } from '@/db/drizzle';
-import { itemTable, transactionTable } from '@/db/schema';
-import { InferSelectModel, and, desc, eq, gte, sql } from 'drizzle-orm';
-import { ItemPageWithFiltering } from './item-page.with-filtering';
-import { topItems } from '@/constants';
+import { db } from '@/db/drizzle'
+import { itemTable, transactionTable } from '@/db/schema'
+import { InferSelectModel, and, desc, eq, gte, sql } from 'drizzle-orm'
+import { ItemPageWithFiltering } from './item-page.with-filtering'
+import { topItems } from '@/constants'
 
 type Props = {
-  id: number;
-  item: InferSelectModel<typeof itemTable>;
-};
+  id: number
+  item: InferSelectModel<typeof itemTable>
+}
 
 export const ItemPageWithFilteringWrapper = async ({ id, item }: Props) => {
-  const isTopItem = topItems.find((item) => item.id === id);
+  const isTopItem = topItems.find((item) => item.id === id)
 
   const transactions = isTopItem
     ? await db
@@ -50,9 +50,9 @@ export const ItemPageWithFilteringWrapper = async ({ id, item }: Props) => {
               sql`DATE(NOW() AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Seoul' - INTERVAL '45 days')`
             )
           )
-        );
+        )
 
-  const addiOptions: Record<string, number[]> = {};
+  const addiOptions: Record<string, number[]> = {}
 
   const transactionsWithTransformedAddis = transactions.map((t) => ({
     ...t,
@@ -61,24 +61,24 @@ export const ItemPageWithFilteringWrapper = async ({ id, item }: Props) => {
       .map((addi) => addi.split(':'))
       .reduce((acc: Record<string, number>, [key, value]) => {
         if (!addiOptions[key.trim()]) {
-          addiOptions[key.trim()] = [Number(value)];
+          addiOptions[key.trim()] = [Number(value)]
         } else {
           if (!addiOptions[key.trim()].includes(Number(value))) {
-            addiOptions[key.trim()].push(Number(value));
+            addiOptions[key.trim()].push(Number(value))
           }
         }
 
-        acc[key.trim()] = Number(value);
-        return acc;
+        acc[key.trim()] = Number(value)
+        return acc
       }, {}),
-  }));
+  }))
 
   return (
     <ItemPageWithFiltering
       id={id}
       item={item}
       transactions={transactionsWithTransformedAddis.map((t) => {
-        const temp = { ...t };
+        const temp = { ...t }
         temp.additional = {
           ...('업그레이드 가능 횟수' in temp.additional && {
             '업그레이드 가능 횟수': temp.additional['업그레이드 가능 횟수'],
@@ -113,11 +113,15 @@ export const ItemPageWithFilteringWrapper = async ({ id, item }: Props) => {
           ...('물리방어력' in temp.additional && {
             물리방어력: temp.additional['물리방어력'],
           }),
-        };
 
-        return temp;
+          ...('incSTAT' in temp.additional && {
+            incSTAT: temp.additional['incSTAT'],
+          }),
+        }
+
+        return temp
       })}
       addiOptions={addiOptions}
     />
-  );
-};
+  )
+}
